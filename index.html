@@ -1,0 +1,286 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Cocos2d-HTML5 Hello World</title>
+</head>
+<style type="text/css">
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .msg {
+        position: fixed;
+        top: 60px;
+        z-index: 2;
+        border-collapse: collapse;
+        background: rgba(255%, 255%, 255%, 0);
+        opacity: 0;
+    }
+
+    body {
+        font-family: Verdana, Geneva, sans-serif;
+        font-size: 16px;
+    }
+
+    #popup_bg {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        z-index: 1;
+        background: #000000;
+        opacity: 0;
+    }
+
+    .top_left {
+        background: url(images/pop_dialog_top_left.png) no-repeat scroll 0 0;
+    }
+
+    .top_right {
+        background: url(images/pop_dialog_top_right.png) no-repeat scroll 0 0;
+    }
+
+    .border {
+        background: url(images/pop_dialog_border.png) scroll 0 0;
+    }
+
+    .bot_left {
+        background: url(images/pop_dialog_bottom_left.png) no-repeat scroll 0 0;
+    }
+
+    .bot_right {
+        background: url(images/pop_dialog_bottom_right.png) no-repeat scroll 0 0;
+    }
+
+    .top_left, .top_right, .bot_left, .bot_right {
+        height: 10px;
+        width: 10px;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    .content {
+        background: #FFF;
+        padding: 0;
+    }
+
+    .popup {
+        width: 600px;
+        border: 1px solid #669bb7;
+        margin: auto;
+        position: relative;
+    }
+
+    .popup_top {
+        background: #FF9bb7;
+        color: #FFF;
+    }
+
+    h4 {
+        border: 1px solid #88b8d2;
+        padding: 8px 10px;
+    }
+
+    h5 {
+        border: 1px solid #000000;
+        padding: 8px 10px;
+    }
+
+    #popup_close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        height: 15px;
+        width: 15px;
+        background: url(images/close.png) no-repeat scroll 0 0;
+        cursor: pointer;
+    }
+
+    #popup_close:hover {
+        background: url(images/close.png) no-repeat scroll 0 -25px;
+    }
+
+    .popup_content {
+        padding: 10px;
+        line-height: 30px;
+        background: #FFF;
+    }
+
+    .popup_bot {
+        background: #E6EFF3;
+        border-top: 1px solid #E0E0E0;
+        padding: 8px;
+        text-align: right;
+    }
+
+    .submit {
+        background: #669bb7;
+        color: #FFF;
+        padding: 3px 8px;
+        border-color: #B8D4E8 #124680 #124680 #B8D4E8;
+        border-style: solid;
+        border-width: 1px;
+        margin: 0 5px;
+        cursor: pointer;
+    }
+
+    .cancel {
+        background: #F0F0F0;
+        color: #333;
+        padding: 3px 8px;
+        border-color: #FFFFFF #848484 #848484 #FFFFFF;
+        border-style: solid;
+        border-width: 1px;
+        margin: 0 5px;
+        cursor: pointer;
+    }
+</style>
+<body style="text-align: center;background: #f2f6f8;">
+
+<script src="jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#table1').hide();
+        $('#popup_bg').hide();
+        center();
+        showInput();
+    });
+    function center() {
+        var item = $('#table1');
+        var winWidth = $(window).width();
+        var winHeight = $(window).height();
+        var popwidth = $(".popup").width();
+        var popheight = $(item).height();
+        var left = winWidth / 2 - popwidth / 2;
+        var top = winHeight / 2 - popheight / 2;
+        $(item).css("left", left);
+        $(item).css("top", top);
+    }
+    function show() {
+        $(".popup").width(600);
+        $('#popup_bg').css("opacity", "0.7");
+        $('#table1').css("opacity", "1");
+        $('#table1').show();
+        $('#popup_bg').show();
+        //$('#table1').fadeIn(800);
+        //$('#popup_bg').fadeIn(500);
+        $("#ISBN").show();
+        $("#form").hide();
+        center();
+        document.getElementsByTagName("h4")[0].innerText = "什麼是ISBN";
+        $('#popup_close,#popup_bg').unbind("click");
+        $('#popup_close,#popup_bg').click(FadeOut);
+    }
+    function showInput() {
+        alert("查無資料，請輸入書籍資訊。");
+        $(".popup").width(260);
+        $('#popup_bg').css("opacity", "0.7");
+        $('#table1').css("opacity", "1");
+        //$('#table1').css("opacity","1");
+        //$('#popup_bg').css("opacity","0.5");
+        $('#table1').show();
+        $('#popup_bg').show();
+        //$('#table1').fadeIn(800);
+        //$('#popup_bg').fadeIn(500);
+        $("#form").show();
+        $("#ISBN").hide();
+        center();
+        document.getElementsByTagName("h4")[0].innerText = "請輸入書籍資訊";
+        $('#popup_close,#popup_bg').unbind("click");
+        $('#popup_close').click(FadeOut);
+
+    }
+    function FadeOut() {
+        $('#table1').hide();
+        $('#popup_bg').hide();
+    }
+    function Submit() {
+        var book = $("#book_NAME").val();
+        if (book == "") {
+            alert("請輸入書名！");
+            return;
+        }
+        book = $("#Barcode").val();
+        if (book.length < 10) {
+            alert("請檢察ISBN有無輸入錯誤！");
+            return;
+        }
+
+        $.post('bin/Update.php?type=1&id=' + getID(), {
+            book_NAME:$("#book_NAME").val(),
+            book_AUTHOR:$("#book_AUTHOR").val(),
+            book_info:$("#book_info").val(),
+            book_Publisher:$("#book_Publisher").val(),
+            book_ISBN:$("#Barcode").val()
+        }, request);
+    }
+    function request(msg) {
+        //alert(msg);
+        if (msg == 1) {
+            alert("ISBN錯誤，請檢察ISBN有無輸入錯誤！");
+            return;
+        }
+        FadeOut();
+        $("#book_NAME").val("");
+        $("#book_AUTHOR").val("");
+        $("#book_info").val("");
+        $("#book_Publisher").val("");
+        $("#Barcode").val("");
+        sendToActionScript(msg);
+    }
+
+</script>
+<div style="display:inline-block;width:auto; margin: auto auto; border:5px solid black; border-radius: 10px; box-shadow: 0 5px 50px #333">
+    <canvas id="gameCanvas" width="550" height="550"></canvas>
+</div>
+<div id="popup_bg"></div>
+<div id="table1" class="msg">
+    <tbody>
+    <tr>
+        <td class="top_left"/>
+        <td class="border"/>
+        <td class="top_right"/>
+    </tr>
+    <tr>
+        <td class="border"/>
+        <td class="content">
+            <div class="popup"></div>
+            <div class="popup_top">
+                <h4>什麼是ISBN</h4>
+                <span id="popup_close"></span>
+            </div>
+            <div class="popup_content" align=center>
+
+                <img id="ISBN" src="images/ISBN_V2.jpg">
+
+                <div align="right">
+                    <form id="form">
+                        <h5>書名：<input id="book_NAME" type="text"/></h5>
+                        <h5>作者：<input id="book_AUTHOR" type="text"/></h5>
+                        <h5>出版社 ：<input id="book_Publisher" type="text"/></h5>
+                        <h5>頁數：<input id="book_info" type="text"/></h5>
+                        <h5>ISBN：<input id="Barcode" type="text"/></h5>
+                        <input type="button" class="submit" id="do" onclick="Submit();" value="確定"/>
+                    </form>
+                </div>
+            </div>
+            <div class="popup_bot"></div>
+        </td>
+        <td class="border"/>
+    </tr>
+    <tr>
+        <td class="bot_left"/>
+        <td class="border"/>
+        <td class="bot_right"/>
+    </tr>
+    </tbody>
+</div>
+<script src="cocos2d.js"></script>
+<script language="JavaScript">
+
+</script>
+</body>
+</html>

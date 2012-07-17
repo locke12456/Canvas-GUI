@@ -1,0 +1,980 @@
+Index: cocos2d.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- cocos2d.js	(revision )
++++ cocos2d.js	(revision )
+@@ -0,0 +1,100 @@
++/****************************************************************************
++ Copyright (c) 2010-2012 cocos2d-x.org
++ Copyright (c) 2008-2010 Ricardo Quesada
++ Copyright (c) 2011      Zynga Inc.
++
++ http://www.cocos2d-x.org
++
++ Created by JetBrains WebStorm.
++ User: wuhao
++ Date: 12-3-8
++
++ Permission is hereby granted, free of charge, to any person obtaining a copy
++ of this software and associated documentation files (the "Software"), to deal
++ in the Software without restriction, including without limitation the rights
++ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
++ copies of the Software, and to permit persons to whom the Software is
++ furnished to do so, subject to the following conditions:
++
++ The above copyright notice and this permission notice shall be included in
++ all copies or substantial portions of the Software.
++
++ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
++ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
++ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
++ THE SOFTWARE.
++ ****************************************************************************/
++
++var cc = cc = cc || {};
++//Cocos2d directory
++cc.Dir = './';//in relate to the html file or use absolute
++cc.loadQue = [];//the load que which js files are loaded
++cc.COCOS2D_DEBUG = 2;
++cc._DEBUG = 1;
++cc._IS_RETINA_DISPLAY_SUPPORTED = 0;
++//html5 selector method
++cc.$ = function (x) {
++    return document.querySelector(x);
++};
++cc.$new = function (x) {
++    return document.createElement(x);
++};
++//function to load files into html
++/*
++ cc.loadjs = function(filename)
++ {
++ //get a ref to header
++ var head = cc.$('head');
++ var insert = document.createElement('script');
++ insert.setAttribute('src',cc.Dir+filename);
++ head.appendChild(insert);
++ };*/
++
++cc.loadjs = function (filename) {
++    //add the file to the que
++    var script = cc.$new('script');
++    script.src = cc.Dir + filename;
++    script.order = cc.loadQue.length;
++    cc.loadQue.push(script);
++	
++
++    script.onload = function () {
++        //file have finished loading,
++        //if there is more file to load, we should put the next file on the head
++        if (this.order + 1 < cc.loadQue.length) {
++            cc.$('head').appendChild(cc.loadQue[this.order + 1]);
++            //console.log(this.order);
++        }
++        else {
++            cc.setup("gameCanvas");
++            //we are ready to run the game
++            cc.Loader.shareLoader().onloading = function () {
++                cc.LoaderScene.shareLoaderScene().draw();
++            };
++            cc.Loader.shareLoader().onload = function () {
++                cc.AppController.shareAppController().didFinishLaunchingWithOptions();
++            };
++            //preload ressources
++            cc.Loader.shareLoader().preload([
++                {type:"image", src:"Resources/HelloWorld.png"},
++                {type:"image", src:"Resources/grossini_dance_07.png"},
++                {type:"image", src:"Resources/cocos64.png"}
++            ]);
++        }
++    };
++    if (script.order === 0)//if the first file to load, then we put it on the head
++    {
++        cc.$('head').appendChild(script);
++    }
++};
++
++include = function(path)
++{
++    cc.loadjs(path);
++};
++
++include('lib/cocos2d-html5-alpha-canvasmenu-min.js');
++include('Main.js');//19
+Index: Graphic/Class.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Graphic/Class.js	(revision )
++++ Graphic/Class.js	(revision )
+@@ -0,0 +1,99 @@
++/**
++ * @author cocos2d-x
++ */
++/****************************************************************************
++ Copyright (c) 2010-2012 cocos2d-x.org
++ Copyright (c) 2008-2010 Ricardo Quesada
++ Copyright (c) 2011      Zynga Inc.
++
++ http://www.cocos2d-x.org
++
++ Permission is hereby granted, free of charge, to any person obtaining a copy
++ of this software and associated documentation files (the "Software"), to deal
++ in the Software without restriction, including without limitation the rights
++ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
++ copies of the Software, and to permit persons to whom the Software is
++ furnished to do so, subject to the following conditions:
++
++ The above copyright notice and this permission notice shall be included in
++ all copies or substantial portions of the Software.
++
++ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
++ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
++ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
++ THE SOFTWARE.
++ ****************************************************************************/
++/* Simple JavaScript Inheritance
++* By John Resig http://ejohn.org/
++* MIT Licensed.
++*/
++// Inspired by base2 and Prototype
++
++(function() {
++    var initializing = false, fnTest = /xyz/.test(function() { xyz;
++    }) ? /\b_super\b/ : /.*/;
++
++    // The base Class implementation (does nothing)
++    var Class = function() {
++    };
++
++    // Create a new Class that inherits from this Class
++    Class.extend = function(prop) {
++        var _super = this.prototype;
++
++        // Instantiate a base Class (but only create the instance,
++        // don't run the init constructor)
++        initializing = true;
++        var prototype = new this();
++        initializing = false;
++
++        // Copy the properties over onto the new prototype
++        for(var name in prop) {
++            // Check if we're overwriting an existing function
++            prototype[name] = typeof prop[name] == "function" && typeof _super[name] == "function" && fnTest.test(prop[name]) ? (function(name, fn) {
++                return function() {
++                    var tmp = this._super;
++
++                    // Add a new ._super() method that is the same method
++                    // but on the super-Class
++                    this._super = _super[name];
++
++                    // The method only need to be bound temporarily, so we
++                    // remove it when we're done executing
++                    var ret = fn.apply(this, arguments);
++                    this._super = tmp;
++
++                    return ret;
++                };
++            })(name, prop[name]) : prop[name];
++        }
++
++        // The dummy Class constructor
++        function Class() {
++            // All construction is actually done in the init method
++            if(!initializing && this.ctor)
++                this.ctor.apply(this, arguments);
++        }
++
++        // Populate our constructed prototype object
++        Class.prototype = prototype;
++
++        // Enforce the constructor to be what we expect
++        Class.prototype.constructor = Class;
++
++        // And make this Class extendable
++        Class.extend = arguments.callee;
++
++        //add implementation method
++        Class.implement = function(prop) {
++            for(var name in prop) {
++                prototype[name] = prop[name];
++            }
++        };
++        return Class;
++    };
++})();
++
+Index: Graphic/Event/MouseEvent.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Graphic/Event/MouseEvent.js	(revision )
++++ Graphic/Event/MouseEvent.js	(revision )
+@@ -0,0 +1,35 @@
++/**
++ * @author Locke
++ */
++
++var Graphic = Graphic = Graphic || {};
++Graphic.MouseEvent = Graphic.Event.extend({
++    type : "MouseEvent",
++    triggerType : null
++});
++Graphic.MouseEvent.TriggerType = {};
++Graphic.MouseEvent.TriggerType.MOVE = "move";
++Graphic.MouseEvent.TriggerType.MOVE_IN = "move_in";
++Graphic.MouseEvent.TriggerType.MOVE_OUT = "move_out";
++Graphic.MouseEvent.TriggerType.CLICK_UP = "click_up";
++Graphic.MouseEvent.TriggerType.CLICK_DOWN = "click_down";
++Graphic.MouseEvent.MOUSE_UP = {
++    type : "mouse_up",
++    triggerType : Graphic.MouseEvent.TriggerType.CLICK_UP
++};
++Graphic.MouseEvent.MOUSE_DOWN = {
++    type : "mouse_down",
++    triggerType : Graphic.MouseEvent.TriggerType.CLICK_DOWN
++};
++Graphic.MouseEvent.MOUSE_OVER = {
++    type : "mouse_over",
++    triggerType : Graphic.MouseEvent.TriggerType.MOVE_IN
++};
++Graphic.MouseEvent.MOUSE_OUT = {
++    type : "mouse_out",
++    triggerType : Graphic.MouseEvent.TriggerType.MOVE_OUT
++};
++Graphic.MouseEvent.MOUSE_MOVE = {
++    type : "mouse_move",
++    triggerType : Graphic.MouseEvent.TriggerType.MOVE
++};
+Index: Classes/AppDelegate.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Classes/AppDelegate.js	(revision )
++++ Classes/AppDelegate.js	(revision )
+@@ -0,0 +1,94 @@
++/****************************************************************************
++ Copyright (c) 2010-2012 cocos2d-x.org
++ Copyright (c) 2008-2010 Ricardo Quesada
++ Copyright (c) 2011      Zynga Inc.
++
++ http://www.cocos2d-x.org
++
++ Permission is hereby granted, free of charge, to any person obtaining a copy
++ of this software and associated documentation files (the "Software"), to deal
++ in the Software without restriction, including without limitation the rights
++ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
++ copies of the Software, and to permit persons to whom the Software is
++ furnished to do so, subject to the following conditions:
++
++ The above copyright notice and this permission notice shall be included in
++ all copies or substantial portions of the Software.
++
++ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
++ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
++ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
++ THE SOFTWARE.
++ ****************************************************************************/
++
++var cc = cc = cc || {};
++
++/**
++ @brief    The cocos2d Application.
++
++ The reason for implement as private inheritance is to hide some interface call by CCDirector.
++ */
++cc.AppDelegate = cc.Application.extend({
++    ctor:function () {
++        this._super();
++    },
++    /**
++     @brief    Implement for initialize OpenGL instance, set source path, etc...
++     */
++    initInstance:function () {
++        return true;
++    },
++
++    /**
++     @brief    Implement CCDirector and CCScene init code here.
++     @return true    Initialize success, app continue.
++     @return false   Initialize failed, app terminate.
++     */
++	
++    applicationDidFinishLaunching:function () {
++        // initialize director
++        //cc.kDefaultFPS=30;
++        
++        var pDirector = cc.Director.sharedDirector();
++
++        // enable High Resource Mode(2x, such as iphone4) and maintains low resource on other devices.
++//     pDirector->enableRetinaDisplay(true);
++
++        // turn on display FPS
++        pDirector.setDisplayFPS(true);
++        
++        pDirector._m_pFPSLabel.setColor(cc.RED());
++        
++        // pDirector->setDeviceOrientation(kCCDeviceOrientationLandscapeLeft);
++
++        // set FPS. the default value is 1.0/60 if you don't call this
++        pDirector.setAnimationInterval(1.0 / 60);
++
++        // create a scene. it's an autorelease object
++        var pScene = Main.scene();
++
++        // run
++        pDirector.runWithScene(pScene);
++
++        return true;
++    },
++
++    /**
++     @brief  The function be called when the application enter background
++     @param  the pointer of the application
++     */
++    applicationDidEnterBackground:function () {
++        cc.Director.sharedDirector().pause();
++    },
++
++    /**
++     @brief  The function be called when the application enter foreground
++     @param  the pointer of the application
++     */
++    applicationWillEnterForeground:function () {
++        cc.Director.sharedDirector().resume();
++    }
++});
+\ No newline at end of file
+Index: build.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- build.xml	(revision )
++++ build.xml	(revision )
+@@ -0,0 +1,55 @@
++<?xml version="1.0"?>
++<project name="Javascript compress project" basedir="." default="compile">
++
++    <taskdef name="jscomp" classname="com.google.javascript.jscomp.ant.CompileTask"
++             classpath="${basedir}/../tools/compiler/compiler.jar"/>
++
++    <target name="compile">
++        <jscomp compilationLevel="simple" warning="quiet"
++                debug="false" output="cocos2d-html5-alpha-min.js">
++            <sources dir="${basedir}/../cocos2d">
++                <file name="platform/CCClass.js"/>
++                <file name="platform/CCCommon.js"/>
++                <file name="platform/platform.js"/>
++                <file name="cocoa/CCGeometry.js"/>
++                <file name="cocoa/CCSet.js"/>
++                <file name="cocoa/CCNS.js"/>
++                <file name="platform/CCTypes.js"/>
++                <file name="cocoa/CCAffineTransform.js"/>
++                <file name="support/CCPointExtension.js"/>
++                <file name="base_nodes/CCNode.js"/>
++                <file name="platform/ccMacro.js"/>
++                <file name="platform/ccConfig.js"/>
++                <file name="textures/CCTexture2D.js"/>
++                <file name="textures/CCTextureCache.js"/>
++                <file name="actions/CCAction.js"/>
++                <file name="actions/CCActionInterval.js"/>
++                <file name="actions/CCActionManager.js"/>
++                <file name="actions/CCActionEase.js"/>
++                <file name="layers_scenes_transitions_nodes/CCScene.js"/>
++                <file name="layers_scenes_transitions_nodes/CCLayer.js"/>
++                <file name="layers_scenes_transitions_nodes/CCTransition.js"/>
++                <file name="sprite_nodes/CCSprite.js"/>
++                <file name="label_nodes/CCLabelTTF.js"/>
++                <file name="text_input_node/CCIMEDispatcher.js"/>
++                <file name="touch_dispatcher/CCTouchDelegateProtocol.js"/>
++                <file name="touch_dispatcher/CCTouchHandler.js"/>
++                <file name="touch_dispatcher/CCTouchDispatcher.js"/>
++                <file name="keypad_dispatcher/CCKeypadDelegate.js"/>
++                <file name="keypad_dispatcher/CCKeypadDispatcher.js"/>
++                <file name="CCDirector.js"/>
++                <file name="CCScheduler.js"/>
++                <file name="CCLoader.js"/>
++                <file name="CCDrawingPrimitives.js"/>
++                <file name="platform/CCApplication.js"/>
++                <file name="platform/CCSAXParser.js"/>
++                <file name="platform/AppControl.js"/>
++                <file name="menu_nodes/CCMenuItem.js"/>
++                <file name="menu_nodes/CCMenu.js"/>
++            </sources>
++            <sources dir="${basedir}/../CocosDenshion">
++                <file name="SimpleAudioEngine.js"/>
++            </sources>
++        </jscomp>
++    </target>
++</project>
+\ No newline at end of file
+Index: Graphic/Basic/base.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Graphic/Basic/base.js	(revision )
++++ Graphic/Basic/base.js	(revision )
+@@ -0,0 +1,187 @@
++var Sprite = cc.Sprite.extend({
++    _x:null,
++    _y:null,
++    _position:null,
++    _parent:null,
++    _m_tBeginPos:null,
++    _m_tInRange:false,
++    _m_tOutRangeDispatched:false,
++    _m_tInRangeDispatched:false,
++    _m_tRect:null,
++    _m_tScaleX:null,
++    _m_tScaleY:null,
++    _m_tParentPosition:null,
++    _m_tCurrentPosition:null,
++    Trigger:null,
++    init:function () {
++        this._super();
++        this.setAnchorPoint(cc.ccp(0.5, 0.5));
++        this._position = this.getPosition();
++        this._m_tBeginPos = this._m_tParentPosition = cc.PointZero();
++        this._m_tRect = new cc.Rect(0, 0, this.getTextureRect().size.width, this.getTextureRect().size.height);
++        this._m_tScaleX = this._m_tScaleY = 1;
++        cc.Director.sharedDirector().getTouchDispatcher().addStandardDelegate(this, 1);
++        this.Trigger = {};
++    },
++    load:function (pFile) {
++        if (pFile != null)
++            this.initWithFile(pFile);
++        else
++            this.init();
++    },
++    addChild:function (pChild) {
++        this._super(pChild);
++        //pChild.parent = this;
++    },
++    setPosition:function (cPoint) {
++        this._position = cPoint;
++        this._super(cc.ccp(cPoint.x, cPoint.y));
++    },
++    setScaleX:function (value) {
++        this._super(value);
++        this._m_tScaleX = value;
++        this._m_tRect.size.width = Math.floor(this.getTextureRect().size.width * value);
++    },
++    setScaleY:function (value) {
++        this._super(value);
++        this._m_tScaleY = value;
++        this._m_tRect.size.height = Math.floor(this.getTextureRect().size.height * value);
++    },
++    ccTouchesBegan:function (pTouches, pEvent) {
++        if (!this.bIsMouseDown) {
++
++        }
++
++        this.bIsMouseDown = true;
++    },
++    ccTouchesMoved:function (pTouches, pEvent) {
++        var touch = cc.ccpSub(this._m_tBeginPos, this.getCurrentPosition());
++        var InRange = this.hitTest(touch);
++        if (this.bIsMouseDown) {
++            if (InRange) {
++                this.dispatchEvent(Graphic.MouseEvent.MOUSE_DOWN);
++            }
++        } else {
++
++        }
++
++        if (InRange) {
++            //if (this.hasEventListener(Graphic.MouseEvent.MOUSE_OVER))
++            this.dispatchEvent(Graphic.MouseEvent.MOUSE_OVER);
++            this.dispatchEvent(Graphic.MouseEvent.MOUSE_MOVE);
++            this._m_tOutRangeDispatched = false;
++            this._m_tInRangeDispatched = !this._m_tOutRangeDispatched;
++        }
++
++        if (this._m_tInRangeDispatched && !InRange) {
++            //if (this.hasEventListener(Graphic.MouseEvent.MOUSE_OUT))
++            this.dispatchEvent(Graphic.MouseEvent.MOUSE_OUT);
++            this._m_tOutRangeDispatched = true;
++            this._m_tInRangeDispatched = !this._m_tOutRangeDispatched;
++        }
++        this._m_tInRange = InRange;
++        this._m_tBeginPos = pTouches[0].locationInView(0);
++    },
++    ccTouchesEnded:function () {
++        if (this.bIsMouseDown) {
++
++        }
++        this.bIsMouseDown = false;
++    },
++
++    update:function () {
++    }
++});
++Sprite.prototype.position = function () {
++    return cc.ccpSub(this._position, cc.ccp(this.width / 2, this.height / 2));
++};
++Sprite.prototype.getCurrentPosition = function () {
++    //var p_parent = this.parent.getPosition();
++    //if ((this.stage == this.parent) || this._m_tParentPosition.x != p_parent.x || this._m_tParentPosition.y != p_parent.y || this._m_tCurrentPosition == null) {
++    //    this._m_tParentPosition = p_parent;
++    var point = (this.stage == this.parent) ? this._position : cc.ccpAdd(this.position(), this.parent.getCurrentPosition());
++    this._m_tCurrentPosition = cc.ccp(Math.floor(point.x), Math.floor(point.y));
++    //}
++    return this._m_tCurrentPosition;
++};
++Sprite.prototype.getChildAt = function (index) {
++    return (this._m_pChildren == null && index < this._m_pChildren.length) ? null : this._m_pChildren[index];
++};
++Sprite.prototype.dispatchEvent = function (type) {
++    if (this.hasEventListener(type))
++        Graphic.Event.dispatchEvent(type, this);
++};
++/*
++ @type
++ */
++Sprite.prototype.hasEventListener = function (type) {
++    if (this.Trigger[type.triggerType] == null)
++        return false;
++    if (this.Trigger[type.triggerType][type.type] == null)
++        return false;
++    return true;
++};
++Sprite.prototype.addEventListener = function (type, trigger) {
++    if (this.Trigger[type.triggerType] == null)
++        this.Trigger[type.triggerType] = {};
++    if (this.Trigger[type.triggerType][type.type] == null)
++        this.Trigger[type.triggerType][type.type] = function () {
++        };
++    this.Trigger[type.triggerType][type.type] = trigger;
++};
++
++Sprite.prototype.removeEventListener = function (type, trigger) {
++    if (this.hasEventListener(type) && this.Trigger[type.triggerType][type.type] == trigger)
++        this.Trigger[type.triggerType][type.type] = null;
++};
++Sprite.prototype.hitTest = function (point) {
++    var width = ((this._m_tScaleX == 1) ? this.width : this._m_tRect.size.width) / 2;
++    var height = ((this._m_tScaleY == 1) ? this.height : this._m_tRect.size.height) / 2;
++    return Math.abs(point.x) < width && Math.abs(point.y) < height;
++};
++Sprite.prototype.__defineGetter__("x", function () {
++    return this._position.x;
++});
++
++Sprite.prototype.__defineSetter__("x", function (value) {
++    this._position.x = value;
++    this.setPosition(this._position);
++});
++
++Sprite.prototype.__defineGetter__("y", function () {
++    return this._position.y;
++});
++
++Sprite.prototype.__defineSetter__("y", function (value) {
++    this._position.y = value;
++    this.setPosition(this._position);
++});
++
++Sprite.prototype.__defineGetter__("parent", function () {
++    return this.getParent();
++});
++
++Sprite.prototype.__defineGetter__("mouseX", function () {
++    return this._m_tBeginPos.x - this.getCurrentPosition().x;
++});
++
++Sprite.prototype.__defineGetter__("mouseY", function () {
++    return this._m_tBeginPos.y - this.getCurrentPosition().y;
++});
++
++Sprite.prototype.__defineGetter__("numChildren", function () {
++    return this._m_pChildren == null ? 0 : this._m_pChildren.length;
++});
++
++Sprite.prototype.__defineGetter__("width", function () {
++
++    return this._m_obRectInPixels.size.width;
++});
++
++Sprite.prototype.__defineGetter__("height", function () {
++    return this._m_obRectInPixels.size.height;
++});
++
++Sprite.prototype.__defineGetter__("stage", function () {
++    return Main.sharedLayer();
++});
+Index: .project
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .project	(revision )
++++ .project	(revision )
+@@ -0,0 +1,24 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<projectDescription>
++	<name>Cocos2dTest</name>
++	<comment></comment>
++	<projects>
++		<project>JavaScript</project>
++	</projects>
++	<buildSpec>
++		<buildCommand>
++			<name>com.aptana.ide.core.unifiedBuilder</name>
++			<arguments>
++			</arguments>
++		</buildCommand>
++	</buildSpec>
++	<natures>
++		<nature>com.aptana.projects.webnature</nature>
++	</natures>
++	<variableList>
++		<variable>
++			<name>Main</name>
++			<value>file:/D:/JavaScript/Aptana/Cocos2dTest</value>
++		</variable>
++	</variableList>
++</projectDescription>
+Index: Main.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Main.js	(revision )
++++ Main.js	(revision )
+@@ -0,0 +1,263 @@
++include('Classes/AppDelegate.js');
++//19
++include('Graphic/Event/Event.js');
++include('Graphic/Event/MouseEvent.js');
++include('Graphic/Basic/base.js');
++//19
++var main;
++var Main = cc.Layer.extend({
++    bIsMouseDown:false,
++    _m_tBeginPos:null,
++    helloImg:null,
++    helloLabel:null,
++    circle:null,
++    pSprite:null,
++    size:null,
++    Sprite:null,
++    Child:null,
++    Center:null,
++    pTheta:0,
++    ptheta:0,
++    cycle:null,
++    init:function () {
++        //////////////////////////////
++        // 1. super init first
++        this._super();
++        this.initLayer();
++        this.setIsTouchEnabled(true);
++        //this._position = this.getPosition();
++        return true;
++    },
++    ccTouchesBegan:function (pTouches, pEvent) {
++        if (!this.bIsMouseDown) {
++            this._m_tBeginPos = cc.ccp(pTouches[0].locationInView(0).x, pTouches[0].locationInView(0).y);
++            //this._m_tBeginPos = pTouches[0].locationInView(0).y;
++        }
++        this.bIsMouseDown = true;
++    },
++    ccTouchesMoved:function (pTouches, pEvent) {
++        if (this.bIsMouseDown) {
++            var touchLocation = pTouches[0].locationInView(0).y;
++            var nMoveY = touchLocation - this._m_tBeginPos;
++            var curPos = cc.ccp(this.getPosition().x, this.getPosition().y);
++            var nextPos = cc.ccp(curPos.x, curPos.y + nMoveY);
++            var winSize = cc.Director.sharedDirector().getWinSize();
++
++            if (nextPos.y < 0.0) {
++                return;
++            }
++            this._m_tBeginPos = cc.ccp(pTouches[0].locationInView(0).x, pTouches[0].locationInView(0).y);
++            s_tCurPos = nextPos;
++        }
++    },
++    ccTouchesEnded:function () {
++        this.bIsMouseDown = false;
++    },
++    closeCallback:function () {
++        history.go(-1);
++    },
++    update:null
++});
++//Main.bIsMouseDown = null;
++Main.prototype.initLayer = function () {
++    /////////////////////////////
++    // 2. add a menu item with "X" image, which is clicked to quit the program
++    //    you may modify it.
++    // ask director the window size
++    var size = this.size = cc.Director.sharedDirector().getWinSize();
++
++    this._m_tBeginPos = cc.PointZero();
++
++    // add a "close" icon to exit the progress. it's an autorelease object
++    var pCloseItem = cc.MenuItemImage.itemFromNormalImage("Resources/CloseNormal.png", "Resources/CloseSelected.png", this, this.closeCallback);
++    pCloseItem.setAnchorPoint(new cc.Point(0.5, 0.5));
++
++    var pMenu = cc.Menu.menuWithItems(pCloseItem, null);
++    pMenu.setPosition(cc.PointZero());
++    this.addChild(pMenu, 1);
++
++    pCloseItem.setPosition(new cc.Point(size.width - 30, 30));
++
++    /////////////////////////////
++    // 3. add your codes below...
++    // add a label shows "Hello World"
++    // create and initialize a label
++    this.helloLabel = cc.LabelTTF.labelWithString("Hello World", "Arial", 38);
++    // position the label on the center of the screen
++    this.helloLabel.setPosition(cc.ccp(size.width / 2, size.height - 40));
++    // add the label as a child to this layer
++    this.addChild(this.helloLabel, 5);
++
++    var lazyLayer = new cc.LazyLayer();
++    this.addChild(lazyLayer);
++
++    // add "HelloWorld" splash screen"
++    this.pSprite = cc.Sprite.spriteWithFile("Resources/HelloWorld.png");
++    this.pSprite.setAnchorPoint(cc.ccp(0.5, 0.5));
++    this.pSprite.setPosition(cc.ccp(size.width / 2, size.height / 2));
++    this.Center = new cc.Point(size.width / 2, size.height / 2);
++    this.Sprite = new Sprite();
++    this.Sprite.load("Resources/CloseNormal.png");
++
++    var Child = this.Child = new Sprite();
++    Child.load("Resources/CloseSelected.png");
++    Child.x = 40;
++    Child.y = 40;
++    this.Sprite.addChild(Child);
++    this.Sprite.addEventListener(Graphic.MouseEvent.MOUSE_OVER, test);
++    this.Sprite.addEventListener(Graphic.MouseEvent.MOUSE_OUT, test);
++
++    var color = [cc.RED(), cc.GREEN(), cc.BLUE()];
++    this.cycle = [];
++    this.pTheta = 0;
++    for (var i = 1, j = 1, k = 32; i < 115; i++) {
++
++        var pChild = new Sprite();
++        pChild.load("Resources/CloseSelected.png");
++        var point = Main.Recyle(this.pTheta);
++        pChild.x =20+ point.x * (j * 32);//(i + 10) / 10 * 32;
++        pChild.y =20+ point.y * (j * 32);
++        this.pTheta = (this.pTheta + k);
++        if (k > 0) {
++            k = this.pTheta > 360 ? k - 6 : k;
++            j = this.pTheta > 360 ? j + 1 : j;
++            if (this.pTheta > 360 || i == 1) {
++                Child = new Sprite();
++                Child.load("Resources/CloseSelected.png");
++                Child.x = size.width / 2;// + 20;
++                Child.y = size.height / 2;// + 20;
++                this.cycle.push(Child);
++                this.addChild(Child);
++            }
++        }
++        else k = 4;
++        this.pTheta %= 360;
++        Child.addChild(pChild);
++        //j=this.pTheta==0?j+1:j;
++        pChild.setTag("pChild_" + i);
++        pChild.addEventListener(Graphic.MouseEvent.MOUSE_OVER, test);
++        pChild.addEventListener(Graphic.MouseEvent.MOUSE_OUT, test);
++
++    }
++    //a.width = 100;
++    lazyLayer.addChild(this.pSprite, 0);
++    this.addChild(this.Sprite, 4);
++    cc.Director.sharedDirector().getScheduler().scheduleUpdateForTarget(this, 0, false);
++
++};
++var test = function (evt) {
++    //aptana.log("your log message");
++    var now = parseInt(evt.target.getCurrentPosition().x) + "," + parseInt(evt.target.getCurrentPosition().y);
++    now += "   " + evt.target.getTag() + ",(" + parseInt(evt.target.mouseX) + "," + parseInt(evt.target.mouseY);
++    now += ")   " + parseInt(evt.target._m_tBeginPos.x) + "," + parseInt(evt.target._m_tBeginPos.y);
++    //aptana.log(now);
++    evt.target.stage.helloLabel.setString(now);
++    var num = cc.ActionManager.sharedManager().numberOfRunningActionsInTarget(evt.target);
++    //if (num != 0)
++    //    return;
++    if (evt.target.actions == null) {
++        evt.target.actions = [];
++        var speed = 0.05;
++        evt.target.actionIndex = 0;
++        var actionTo = cc.ScaleTo.actionWithDuration(speed, 2);
++        var actionBy = cc.ScaleBy.actionWithDuration(speed, .5);
++        var actionBy2 = cc.ScaleBy.actionWithDuration(0, 2);
++
++        var actionByBack = actionBy.reverse();
++        var actionBy2Back = actionBy2.reverse();
++        evt.target.actions.push(actionTo);
++        evt.target.actions.push(actionBy);
++        evt.target.actions.push(actionBy2);
++    }
++    if (evt.type == Graphic.MouseEvent.MOUSE_OVER && evt.target.actionIndex == 0) {
++        if (num != 0) {
++            cc.ActionManager.sharedManager().removeAction(evt.target.actions[evt.target.actionIndex], evt.target);
++            evt.target.setScale(1);
++        }
++        cc.ActionManager.sharedManager().addAction(evt.target.actions[evt.target.actionIndex], evt.target);
++        // evt.target.runAction();
++        evt.target.actionIndex = 1;
++        //evt.target.runAction(evt.target.actions[1]);
++    }
++    if (evt.type == Graphic.MouseEvent.MOUSE_OUT && evt.target.actionIndex == 1) {
++        // evt.target.runAction(evt.target.actions[evt.target.actionIndex]);
++        if (num != 0) {
++            cc.ActionManager.sharedManager().removeAction(evt.target.actions[0], evt.target);
++            evt.target.setScale(2);
++        }
++        cc.ActionManager.sharedManager().addAction(evt.target.actions[evt.target.actionIndex], evt.target);
++        evt.target.actionIndex = 0;
++        //evt.target.runAction(evt.target.actions[2]);
++    }
++};
++
++Main.prototype.update = function () {
++    var string = ["H", "E", "L", "L", "O", " ", "W", "O", "R", "L", "D", "!"];
++    var time = cc.Director.sharedDirector().getTimeScale();
++    if (time == 1) {
++        //this.helloLabel.setPosition(cc.ccp(this.size.width / 2, this.size.height - (Math.random() * 100)));
++        /*
++         var now = "";//parseInt(this.Sprite.mouseX) + "," + parseInt(this.Sprite.mouseY);
++         now = this.helloLabel.getString();
++         var index = parseInt(this.pTheta / 10) % string.length;
++         if(index == 0)
++         now = "";
++         now = index != now.length ? now : now + string[index];
++         this.helloLabel.setString(now);
++         */
++    } else {
++
++    }
++    if (this.Sprite != null) {
++        var parent = this.Sprite.parent;
++        var point = Main.Recyle(this.pTheta);
++        this.pTheta = (this.pTheta + 1) % 360;
++        this.Sprite.x = Math.floor(this.Center.x + (point.x * 192));
++        //=this.a.x+1;
++        this.Sprite.y = Math.floor(this.Center.y + (point.y * 192));
++        this.Sprite.setRotation(this.pTheta);
++        point = Main.Recyle(this.ptheta);
++        this.ptheta = (this.ptheta + 5) % 360;
++        //this.Child.setPosition(cc.ccp((20+(point.x*30),20+(point.y*30))));
++        this.Child.x = Math.floor(this.Child.width / 2 + (point.x * (this.Child.width * 0.75)));
++        this.Child.y = Math.floor(this.Child.height / 2 + (point.y * (this.Child.height * 0.75)));
++        this.Child.setRotation(this.ptheta);
++        //for(var i = 0;i<this.cycle.length;i++)
++        //    this.cycle[i].setRotation(i%2==0?0:this.pTheta);
++    }
++
++};
++Main.Recyle = function (theta) {
++    var radians = theta * (Math.PI) / 180;
++    var point = new cc.Point();
++    point.x = Math.sin(radians);
++    point.y = Math.cos(radians);
++    return point;
++};
++Main.scene = function () {
++    // 'scene' is an autorelease object
++    var scene = cc.Scene.node();
++    // 'layer' is an autorelease object
++    var layer = this.node();
++    scene.addChild(layer);
++    return scene;
++};
++
++// implement the "static node()" method manually
++Main.node = function () {
++    var pRet = new Main();
++
++    // Init the Main display layer.
++    if (pRet && pRet.init()) {
++        main = pRet;
++        return pRet;
++    }
++
++    return null;
++};
++Main.sharedLayer = function () {
++    if (main != null)
++        return main;
++    else
++        return Main.node();
++};
+Index: index.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- index.html	(revision )
++++ index.html	(revision )
+@@ -0,0 +1,13 @@
++<!DOCTYPE HTML>
++<html>
++	<head>
++		<meta charset="utf-8">
++		<title>Cocos2d-HTML5 Hello World</title>
++	</head>
++	<body style="text-align: center;background: #f2f6f8;">
++		<div style="display:inline-block;width:auto; margin: 0 auto;  border:5px solid black; border-radius: 10px; box-shadow: 0 5px 50px #333">
++			<canvas id="gameCanvas" width="800" height="500"></canvas>
++		</div>
++		<script src="cocos2d.js"></script>
++	</body>
++</html>
+\ No newline at end of file
+Index: Graphic/Event/Event.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Graphic/Event/Event.js	(revision )
++++ Graphic/Event/Event.js	(revision )
+@@ -0,0 +1,27 @@
++/**
++ * @author Locke
++ */
++var Graphic = Graphic = Graphic || {};
++
++Graphic.Event = cc.Class.extend({
++    type:"Event",
++    triggerType:null
++});
++Graphic.Event.COMPLETE = "complete";
++Graphic.Event.ACTIVE = "active";
++Graphic.Event.CONNECT = "connect";
++Graphic.Event.ADD = "add";
++Graphic.Event.REMOVE = "remove";
++
++Graphic.Event.dispatchEvent = function (type, target) {
++    var evt = Graphic.Dispatcher(type, target);
++
++    target.Trigger[type.triggerType][type.type](evt);
++};
++
++Graphic.Dispatcher = function (_type, _target) {
++    return {
++        target:_target,
++        type:_type
++    };
++};
