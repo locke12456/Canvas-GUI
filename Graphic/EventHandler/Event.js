@@ -9,6 +9,10 @@ Graphic.Event = cc.Class.extend({
 });
 Graphic.Event.TriggerType = {};
 Graphic.Event.TriggerType.EVENT = "event";
+Graphic.Event.UPDATE = {
+    type:"update",
+    triggerType:Graphic.Event.TriggerType.EVENT
+};
 Graphic.Event.COMPLETE = {
     type:"complete",
     triggerType:Graphic.Event.TriggerType.EVENT

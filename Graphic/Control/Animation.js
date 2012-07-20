@@ -22,7 +22,7 @@ Graphic.Animation = cc.Class.extend({
     },
     AnimationStop:function () {
         this._m_tAnimationBegin = false;
-        ccc.Director.sharedDirector().getScheduler().unscheduleUpdateForTarget(this);
+        cc.Director.sharedDirector().getScheduler().unscheduleUpdateForTarget(this);
     },
     addTarget:function (target) {
         this._m_tQueue.push(target);
@@ -60,7 +60,11 @@ Graphic.Animation = cc.Class.extend({
                     recycle = true;
                     this._m_tQueue[i] = null;
                 } else {
-
+                    if (this._m_tQueue[i].type == Graphic.Event.UPDATE) {
+                        this._m_tQueue[i].target.elapsed = this._m_tQueue[i].action.getElapsed() / this._m_tQueue[i].action.getDuration();
+                        this.dispatch(this._m_tQueue[i]);
+                    }
+                    //console.log(this._m_tQueue[i].action.getElapsed());
                 }
             }
         }
@@ -69,8 +73,8 @@ Graphic.Animation = cc.Class.extend({
 });
 Graphic.Animation.prototype.add = function (action, dispatcher) {
     this.AnimationStart();
-
     cc.Director.sharedDirector().getActionManager().addAction(action, dispatcher.target);
+    dispatcher.action = action;
     this.addTarget(dispatcher);
 };
 Graphic.Animation.Queue = new Graphic.Animation();

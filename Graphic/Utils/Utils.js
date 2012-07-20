@@ -166,6 +166,19 @@ Graphic.Utils.Bezier = function (p1x, p1y, cx, cy, p2x, p2y, t) {
         y:p1y + t * (2 * (1 - t) * (cy - p1y) + t * (p2y - p1y))};
     // Quadratic Bezier spline
 };
+/*
+ * @param        {Array}             points
+ * @param        {Number}          height
+ */
+Graphic.Utils.PointsToCartesian = function (points, height) {
+    if (points instanceof Array) {
+        for (var i = 0; i < points.length; i++) {
+            points[i].y = height - points[i].y;
+        }
+    } else {
+        points.y = height - points.y;
+    }
+};
 Graphic.Utils.SpriteToImageData = function (sprite) {
     var canvas = document.createElement("canvas");
     var ctx = canvas.getContext("2d");

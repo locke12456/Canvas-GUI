@@ -24,6 +24,7 @@ Graphic.Sprite = cc.Sprite.extend({
     _listeningChildren:[],
     _sleeping:false,
     _main:false,
+    elapsed:null,
     touchPosition:null,
     Trigger:null,
     ctor:function (pFile) {

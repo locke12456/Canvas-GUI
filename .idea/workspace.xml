@@ -2,7 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="17158709-e975-470c-857b-70ed539afbba" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/rules.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Graphic/Basic/Sprite.js" afterPath="$PROJECT_DIR$/Graphic/Basic/Sprite.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Graphic/Control/Animation.js" afterPath="$PROJECT_DIR$/Graphic/Control/Animation.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Graphic/EventHandler/Event.js" afterPath="$PROJECT_DIR$/Graphic/EventHandler/Event.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Graphic/Utils/Utils.js" afterPath="$PROJECT_DIR$/Graphic/Utils/Utils.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main.js" afterPath="$PROJECT_DIR$/Main.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Ball.js" afterPath="$PROJECT_DIR$/src/Ball.js" />
     </list>
     <ignored path="Cocos2dTest.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -24,32 +31,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="CCLabelTTF.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/label_nodes/CCLabelTTF.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CCLabelBMFont.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/label_nodes/CCLabelBMFont.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="243" column="60" selection-start="7605" selection-end="7605" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Main.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Main.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="94" column="40" selection-start="3357" selection-end="3357" vertical-scroll-proportion="0.0">
+            <state line="56" column="0" selection-start="1890" selection-end="1890" vertical-scroll-proportion="0.8034188">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="rules.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rules.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="8" column="26" selection-start="205" selection-end="205" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -58,7 +52,16 @@
       <file leaf-file-name="Animation.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Graphic/Control/Animation.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="59" selection-start="1112" selection-end="1112" vertical-scroll-proportion="0.0">
+            <state line="66" column="22" selection-start="2492" selection-end="2492" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="include.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Graphic/Basic/include.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="11" column="0" selection-start="333" selection-end="333" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -67,34 +70,25 @@
       <file leaf-file-name="CCDirector.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/CCDirector.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1131" column="4" selection-start="34773" selection-end="34773" vertical-scroll-proportion="0.0">
+            <state line="1132" column="28" selection-start="34830" selection-end="34830" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CCActionManager.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/actions/CCActionManager.js">
+      <file leaf-file-name="Event.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Graphic/DOM/Event/Event.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="57" column="0" selection-start="2206" selection-end="2206" vertical-scroll-proportion="0.0">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Sprite.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Graphic/Basic/Sprite.js">
+      <file leaf-file-name="Event.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Graphic/EventHandler/Event.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="93" column="28" selection-start="2892" selection-end="2892" vertical-scroll-proportion="0.93504274">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Main_.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Main_.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="111" column="0" selection-start="3933" selection-end="3933" vertical-scroll-proportion="0.0">
+            <state line="12" column="16" selection-start="258" selection-end="258" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -103,16 +97,16 @@
       <file leaf-file-name="Ball.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Ball.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="28" selection-start="1588" selection-end="1813" vertical-scroll-proportion="-6.72">
+            <state line="93" column="0" selection-start="2895" selection-end="2895" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Utils.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Graphic/Utils/Utils.js">
+      <file leaf-file-name="CCActionInterval.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/actions/CCActionInterval.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="70" column="18" selection-start="2615" selection-end="2615" vertical-scroll-proportion="0.0">
+            <state line="1856" column="3" selection-start="47649" selection-end="47656" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -133,11 +127,12 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitLogSettings">
+    <option name="myStructureFilterPaths" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/lib/CCDirector.js" />
-        <option value="$PROJECT_DIR$/Classes/AppDelegate.js" />
         <option value="$PROJECT_DIR$/CSS/frame.css" />
         <option value="$PROJECT_DIR$/Graphic/com/TextInputBox.js" />
         <option value="$PROJECT_DIR$/Graphic/DOM/Event/Event.js" />
@@ -147,11 +142,13 @@
         <option value="$PROJECT_DIR$/cocos2d.js" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/io.js" />
-        <option value="$PROJECT_DIR$/src/Ball.js" />
         <option value="$PROJECT_DIR$/Graphic/Utils/Utils.js" />
-        <option value="$PROJECT_DIR$/Main.js" />
-        <option value="$PROJECT_DIR$/Graphic/Control/Animation.js" />
+        <option value="$PROJECT_DIR$/Graphic/EventHandler/Event.js" />
         <option value="$PROJECT_DIR$/Graphic/Basic/Sprite.js" />
+        <option value="$PROJECT_DIR$/src/rules.js" />
+        <option value="$PROJECT_DIR$/Graphic/Control/Animation.js" />
+        <option value="$PROJECT_DIR$/src/Ball.js" />
+        <option value="$PROJECT_DIR$/Main.js" />
       </list>
     </option>
   </component>
@@ -203,6 +200,16 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -349,6 +356,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="EventHandler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Display" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Cocos2dTest" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Graphic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="DOM" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -431,16 +456,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -452,7 +467,7 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="95" />
-    <property name="ChangesBrowser.SHOW_FLATTEN" value="true" />
+    <property name="ChangesBrowser.SHOW_FLATTEN" value="false" />
     <property name="options.lastSelected" value="project.propVCSSupport.VCSs.Git" />
     <property name="recentsLimit" value="5" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
@@ -563,7 +578,19 @@
       <created>1342774119224</created>
       <updated>1342774119224</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="'2012-07-21'">
+      <created>1342774188744</created>
+      <updated>1342774188744</updated>
+    </task>
+    <task id="LOCAL-00005" summary="'2012-07-23 Animation Update'">
+      <created>1343026005233</created>
+      <updated>1343026005233</updated>
+    </task>
+    <task id="LOCAL-00006" summary="'2012-07-23 Animation Update'">
+      <created>1343026100655</created>
+      <updated>1343026100655</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -590,14 +617,13 @@
     <frame x="-4" y="-4" width="1928" height="1060" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930845" sideWeight="0.4939378" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32930845" sideWeight="0.4960464" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32930845" sideWeight="0.4897206" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930845" sideWeight="0.49815497" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2529349" sideWeight="0.19209659" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13811281" sideWeight="0.67069155" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2349067" sideWeight="0.7785978" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14496574" sideWeight="0.67069155" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2349067" sideWeight="0.772272" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2529349" sideWeight="0.19209659" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32930845" sideWeight="0.5002636" order="11" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32930845" sideWeight="0.50658935" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="JsTestDriver Server" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32890365" sideWeight="0.4960464" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32821077" sideWeight="0.4960464" order="8" side_tool="false" content_ui="tabs" />
@@ -605,6 +631,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32821077" sideWeight="0.48550344" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930845" sideWeight="0.4939378" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2497332" sideWeight="0.4917673" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -647,7 +674,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="-m '2012-07-21'" />
+    <option name="LAST_COMMIT_MESSAGE" value="'2012-07-23 Animation Update'" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -661,6 +688,8 @@
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
     <MESSAGE value="-m '2012-07-21'" />
+    <MESSAGE value="'2012-07-21'" />
+    <MESSAGE value="'2012-07-23 Animation Update'" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -670,8 +699,8 @@
           <line>99</line>
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/Main.js</url>
-          <line>95</line>
+          <url>file://$PROJECT_DIR$/src/Ball.js</url>
+          <line>18</line>
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -689,110 +718,106 @@
     </PATH>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://C:/Program Files (x86)/Apache Software Foundation/Apache2.2/htdocs/test/Demo/NativeClientDemo/NaclModule/cocos2dnacl.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="19" selection-start="1836" selection-end="1836" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Program Files (x86)/Apache Software Foundation/Apache2.2/htdocs/test/Demo/NativeClientDemo/NativeClient.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="139" column="37" selection-start="4923" selection-end="4923" vertical-scroll-proportion="0.26268658">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CSS/frame.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/actions/CCAction.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/layers_scenes_transitions_nodes/CCScene.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="33" selection-start="2257" selection-end="2257" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/platform/CCCommon.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="113" column="8" selection-start="4244" selection-end="4265" vertical-scroll-proportion="0.0" />
+        <state line="39" column="37" selection-start="1597" selection-end="1597" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Main_.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="111" column="0" selection-start="3933" selection-end="3933" vertical-scroll-proportion="0.0">
+        <state line="172" column="37" selection-start="6385" selection-end="6391" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Ball.js">
+    <entry file="file://C:/Program Files (x86)/Apache Software Foundation/Apache2.2/htdocs/test/tests/Classes/tests/ActionsTest/ActionsTest.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="28" selection-start="1588" selection-end="1813" vertical-scroll-proportion="-6.72">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/label_nodes/CCLabelTTF.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/label_nodes/CCLabelBMFont.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="243" column="60" selection-start="7605" selection-end="7605" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="94" column="40" selection-start="3357" selection-end="3357" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="481" column="4" selection-start="15993" selection-end="15993" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/actions/CCActionManager.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="0" selection-start="2206" selection-end="2206" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Graphic/Control/Animation.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="59" selection-start="1112" selection-end="1112" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/CCDirector.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1131" column="4" selection-start="34773" selection-end="34773" vertical-scroll-proportion="0.0">
+        <state line="225" column="4" selection-start="7918" selection-end="7918" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Graphic/Utils/Utils.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="18" selection-start="2615" selection-end="2615" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="177" column="12" selection-start="7730" selection-end="7730" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Graphic/Basic/Sprite.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="93" column="28" selection-start="2892" selection-end="2892" vertical-scroll-proportion="0.93504274">
+        <state line="222" column="13" selection-start="7605" selection-end="7605" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Graphic/Control/Animation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="66" column="22" selection-start="2492" selection-end="2492" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Graphic/EventHandler/Event.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="16" selection-start="258" selection-end="258" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Graphic/DOM/Event/Event.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/CCDirector.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1132" column="28" selection-start="34830" selection-end="34830" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Graphic/Basic/include.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="0" selection-start="333" selection-end="333" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/actions/CCActionInterval.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1856" column="3" selection-start="47649" selection-end="47656" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rules.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="26" selection-start="205" selection-end="205" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ball.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="93" column="0" selection-start="2895" selection-end="2895" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_2012-07-23_Animation_Update_.patch">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="71" selection-start="46610" selection-end="46610" vertical-scroll-proportion="0.9300699">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="56" column="0" selection-start="1890" selection-end="1890" vertical-scroll-proportion="0.8034188">
           <folding />
         </state>
       </provider>
