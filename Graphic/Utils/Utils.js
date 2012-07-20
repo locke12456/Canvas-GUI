@@ -7,6 +7,165 @@
  */
 var Graphic = Graphic = Graphic || {};
 Graphic.Utils = {};
+/**
+ * Given the parameter object passed to this special property, return an array listing the properties that should be modified, and their parameters
+ *
+ * @param        p_obj                Object        Parameter passed to this property
+ * @return                            Array        Array listing name and parameter of each property
+ */
+Graphic.Utils.bezier_modifier = function (p_obj) {
+    var mList = []; // List of properties to be modified
+    var pList; // List of parameters passed, normalized as an array
+    if (typeof p_obj == Array) {
+        // Complex
+        pList = p_obj;
+    } else {
+        pList = [p_obj];
+    }
+
+    var i;
+    var istr;
+    var mListObj = {}; // Object describing each property name and parameter
+
+    for (i = 0; i < pList.length; i++) {
+        for (istr in pList[i]) {
+            if (mListObj[istr] == undefined) mListObj[istr] = [];
+            mListObj[istr].push(pList[i][istr]);
+        }
+    }
+    for (istr in mListObj) {
+        mList.push({name:istr, parameters:mListObj[istr]});
+    }
+    return mList;
+}
+/**
+ * Given tweening specifications (beging, end, t), applies the property parameter to it, returning new t
+ *
+ * @param        {cc.Point}               b                    Beginning value of the property
+ * @param        {cc.Point}               e                    Ending (desired) value of the property
+ * @param        {Array}                   p                    Array of parameters passed to this specific property
+ * @return        {Array}                                      New t, with the p parameters applied to it
+ */
+Graphic.Utils.bezier_Make = function (b, e, p) {
+    var startX = b.x;
+    var startY = b.y;
+    var endX, endY;
+    var thisPoint;
+    var nextPoint;
+    var Points = [];
+    for (i = 0; i < p.length - 1; i++) {
+        thisPoint = p[i];
+        nextPoint = p[i + 1];
+        endX = (thisPoint.x + nextPoint.x) / 2;
+        endY = (thisPoint.y + nextPoint.y) / 2;
+        // Draw curve points for reference
+        Points = Graphic.Utils.BezierCurvePoints(startX, startY, thisPoint.x, thisPoint.y, endX, endY, Points);
+        startX = endX;
+        startY = endY;
+    }
+    if (p.length > 0) {
+        // Normal curve
+        var lastPoint = p[p.length - 1];
+        Points = Graphic.Utils.BezierCurvePoints(startX, startY, lastPoint.x, lastPoint.y, e.x, e.y, Points);
+    }
+    return Points;
+};
+/**
+ * Given tweening specifications (beging, end, t), applies the property parameter to it, returning new t
+ *
+ * @param        {cc.Point}               b                    Beginning value of the property
+ * @param        {cc.Point}               e                    Ending (desired) value of the property
+ * @param        {Number}           t                    Current t of this tweening (0-1), after applying the easing equation
+ * @param        {Array}               p                    Array of parameters passed to this specific property
+ * @return        {cc.Point}                                      New t, with the p parameters applied to it
+ */
+Graphic.Utils.bezier_get_point = function (b, e, t, p) {
+    // This is based on Robert Penner's code
+    if (p.length == 1) {
+        // Simple curve with just one bezier control point
+        var x = b.x + t * (2 * (1 - t) * (p[0].x - b.x) + t * (e.x - b.x));
+        var y = b.y + t * (2 * (1 - t) * (p[0].y - b.y) + t * (e.y - b.y));
+        return cc.ccp(x, y);
+    } else {
+        // Array of bezier control points, must find the point between each pair of bezier points
+        var ip = Math.floor(t * p.length); // Position on the bezier list
+        var it = (t - (ip * (1 / p.length))) * p.length; // t inside this ip
+        var p1, p2;
+        var par = ["x", "y"];
+        var point = [];
+        for (var i = 0; i < par.length; i++) {
+            if (ip == 0) {
+                // First part: belongs to the first control point, find second midpoint
+                p1 = b[par[i]];
+                p2 = (p[0][par[i]] + p[1][par[i]]) / 2;
+            } else if (ip == p.length - 1) {
+                // Last part: belongs to the last control point, find first midpoint
+                p1 = (p[ip - 1][par[i]] + p[ip][par[i]]) / 2;
+                p2 = e[par[i]];
+            } else {
+                // Any middle part: find both midpoints
+                p1 = (p[ip - 1][par[i]] + p[ip][par[i]]) / 2;
+                p2 = (p[ip][par[i]] + p[ip + 1][par[i]]) / 2;
+            }
+            point[i] = p1[par[i]] + it * (2 * (1 - it) * (p[ip][par[i]] - p1[par[i]]) + it * (p2[par[i]] - p1[par[i]]));
+        }
+        return cc.ccp(point[0], point[1]);
+    }
+};
+/**
+ * Given tweening specifications (beging, end, t), applies the property parameter to it, returning new t
+ *
+ * @param        {Number}        b                    Beginning value of the property
+ * @param        {Number}        e                    Ending (desired) value of the property
+ * @param        {Number}        t                    Current t of this tweening (0-1), after applying the easing equation
+ * @param        {Array}               p                    Array of parameters passed to this specific property
+ * @return        {Number}                            New t, with the p parameters applied to it
+ */
+Graphic.Utils.bezier_get = function (b, e, t, p) {
+    // This is based on Robert Penner's code
+    if (p.length == 1) {
+        // Simple curve with just one bezier control point
+        return b + t * (2 * (1 - t) * (p[0] - b) + t * (e - b));
+    } else {
+        // Array of bezier control points, must find the point between each pair of bezier points
+        var ip = Math.floor(t * p.length); // Position on the bezier list
+        var it = (t - (ip * (1 / p.length))) * p.length; // t inside this ip
+        var p1, p2;
+        if (ip == 0) {
+            // First part: belongs to the first control point, find second midpoint
+            p1 = b;
+            p2 = (p[0] + p[1]) / 2;
+        } else if (ip == p.length - 1) {
+            // Last part: belongs to the last control point, find first midpoint
+            p1 = (p[ip - 1] + p[ip]) / 2;
+            p2 = e;
+        } else {
+            // Any middle part: find both midpoints
+            p1 = (p[ip - 1] + p[ip]) / 2;
+            p2 = (p[ip] + p[ip + 1]) / 2;
+        }
+        return p1 + it * (2 * (1 - it) * (p[ip] - p1) + it * (p2 - p1));
+    }
+};
+Graphic.Utils.BezierCurvePoints = function (px1, py1, cx, cy, px2, py2, Points) {
+    // Draws points on curves
+    var i;
+    Points = Points || [];
+    for (i = 0; i < 1; i += 1 / 10) {
+        var pt = Graphic.Utils.Bezier(px1, py1, cx, cy, px2, py2, i);
+        Points.push(pt);
+    }
+    return Points;
+}
+// http://ibiblio.org/e-notes/Splines/Bezier.htm
+Graphic.Utils.Bezier = function (p1x, p1y, cx, cy, p2x, p2y, t) {
+    // Returns the points on a bezier curve for a given time (t is 0-1);
+    // This is based on Robert Penner's Math.pointOnCurve() function
+    // More information: http://actionscript-toolbox.com/samplemx_pathguide.php
+    return {x:p1x + t * (2 * (1 - t) * (cx - p1x) + t * (p2x - p1x)),
+        y:p1y + t * (2 * (1 - t) * (cy - p1y) + t * (p2y - p1y))};
+    // Quadratic Bezier spline
+};
 Graphic.Utils.SpriteToImageData = function (sprite) {
     var canvas = document.createElement("canvas");
     var ctx = canvas.getContext("2d");
