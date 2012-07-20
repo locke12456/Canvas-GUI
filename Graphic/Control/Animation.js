@@ -33,7 +33,7 @@ Graphic.Animation = cc.Class.extend({
     },
     numActions:function (pTarget) {
         if (pTarget)
-            return cc.ActionManager.sharedManager().numberOfRunningActionsInTarget(pTarget.target);
+            return cc.Director.sharedDirector().getActionManager().numberOfRunningActionsInTarget(pTarget.target);
         else return 0;
     },
     dispatch:function (queue) {
@@ -59,6 +59,8 @@ Graphic.Animation = cc.Class.extend({
                     }
                     recycle = true;
                     this._m_tQueue[i] = null;
+                } else {
+
                 }
             }
         }
@@ -67,7 +69,8 @@ Graphic.Animation = cc.Class.extend({
 });
 Graphic.Animation.prototype.add = function (action, dispatcher) {
     this.AnimationStart();
-    cc.ActionManager.sharedManager().addAction(action, dispatcher.target);
+
+    cc.Director.sharedDirector().getActionManager().addAction(action, dispatcher.target);
     this.addTarget(dispatcher);
 };
 Graphic.Animation.Queue = new Graphic.Animation();

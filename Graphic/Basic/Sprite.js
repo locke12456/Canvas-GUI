@@ -85,13 +85,13 @@ Graphic.Sprite = cc.Sprite.extend({
     setScaleX:function (value) {
         this._super(value);
         this._m_tScaleX = value;
-        if (this.getTextureRect().size.width != 0)
+        if (this._m_tRect && this.getTextureRect().size.width != 0)
             this._m_tRect.size.width = Math.floor(this.getTextureRect().size.width * Math.abs(value));
     },
     setScaleY:function (value) {
         this._super(value);
         this._m_tScaleY = value;
-        if (this.getTextureRect().size.height != 0)
+        if (this._m_tRect && this.getTextureRect().size.height != 0)
             this._m_tRect.size.height = Math.floor(this.getTextureRect().size.height * Math.abs(value));
     },
     setOpacity:function (value) {
