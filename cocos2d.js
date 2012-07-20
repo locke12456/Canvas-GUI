@@ -79,21 +79,9 @@ cc.loadjs = function (filename) {
             };
             //preload ressources
             cc.Loader.shareLoader().preload([
-                {type:"image", src:"Resources/HelloWorld.png"},
-                {type:"image", src:"Resources/grossini_dance_07.png"},
-                {type:"image", src:"Resources/cocos64.png"},
-                {type:"image", src:"Resources/CloseNormal.png"},
-                {type:"image", src:"Resources/CloseSelected.png"},
-                {type:"image", src:"Resources/Button00_1.png"},
-                {type:"image", src:"Resources/Button01_1.png"},
-                {type:"image", src:"Resources/Button02_1.png"},
-                {type:"image", src:"Resources/Button03_1.png"},
-                {type:"image", src:"Resources/Button04_1.png"},
-                {type:"image", src:"Resources/Button05_1.png"},
-                {type:"image", src:"Resources/Button06_1.png"},
-                {type:"image", src:"Resources/Button07_1.png"},
-                {type:"image", src:"Resources/Button08_1.png"},
-                {type:"image", src:"Resources/Button09_1.png"}
+                {type:"image", src:"src/Image/Background.png"},
+                {type:"image", src:"src/Image/Basket.png"},
+                {type:"image", src:"src/Image/basketball.png"}
             ]);
         }
     };

@@ -9,7 +9,7 @@ var IO = IO = IO || {};
 IO.KeyCode = "";
 IO.KeyCodeToString = "";
 if (navigator.appName == 'Netscape') {
-    document.captureEvents(Event.KEYPRESS);
+//    document.captureEvents(Event.KEYPRESS);
 }
 if (navigator.appName != 'Microsoft Internet Explorer') {
     //var cav = document.body.getElementsByTagName("canvas")[0];
