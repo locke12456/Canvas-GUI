@@ -10,23 +10,45 @@ var Ball = Graphic.Sprite.extend({
     shooting:[],
     miss:[],
     sink:null,
+    isMiss:false,
+    BallPosition:null,
+    shootIndex:0,
+    gravity:0,
+    basket:null,
+    complete:true,
 
-    ctor:function (image) {
+    ctor:function (image, basket) {
         this._super(image);
+        //this.init(image);
         Ball.Init_BALL_Points(this);
+        this.basket = basket;
+        cc.Director.sharedDirector().getScheduler().scheduleUpdateForTarget(this, 1, false);
     },
-    init:function () {
-        this._super();
-
+    Shoot:function (miss) {
+        if (!miss) {
+            this.shootIndex = parseInt(Math.random() * this.shooting.length);
+            Graphic.Animation.Queue.add(cc.ScaleTo.create(0.7, 0.4, 0.4), Graphic.Animation.Dispatcher(this, Ball.onShooting, Ball.onShootComplete));
+        }
     },
-    initRules:function () {
+    update:function () {
+        if (this.complete)return;
 
+        this.y += this.gravity;
+
+        if (this.y < Ball.BOTTON) {
+            this.y = Ball.BOTTON;
+            this.gravity *= -0.4;
+        }
+        this.gravity -= 0.5;
+        if (Math.abs(this.gravity) < 0.1) {
+            console.log("complete");
+            this.complete = true;
+        }
     }
-
 });
 Ball.BALL_SIZE = 110;
 Ball.BALL_Bezier_Points = [];
-
+Ball.BOTTON = 261;
 Ball.Init_GetBall = function (ball) {
     var obj = {x:300, y:134, width:0.4, height:0.4, bezier:[
         {x:205, y:340},
@@ -106,4 +128,30 @@ Ball.BezierCreate = function (start, end, points) {
     Graphic.Utils.PointsToCartesian(end, height);
     Graphic.Utils.PointsToCartesian(points, height);
     return Graphic.Utils.bezier_Make(start, end, points);
+};
+Ball.onShooting = function (e) {
+    var point = e.target.shooting[e.target.shootIndex];
+    var time = parseInt((point.length - 1) * e.target.elapsed);
+    e.target.x = point[time].x;
+    e.target.y = point[time].y;
+};
+Ball.onShootComplete = function (e) {
+    Graphic.Animation.Queue.add(cc.RotateTo.create(0.7, 720), Graphic.Animation.Dispatcher(e.target, Ball.onSink, Ball.onSinkComplete));
+};
+Ball.onSink = function (e) {
+    var point = e.target.sink;
+    var time = parseInt((point.length - 1) * e.target.elapsed);
+    e.target.x = point[time].x;
+    e.target.y = point[time].y;
+    e.target.basket.setRotation(1 - Math.random() * 2);
+};
+Ball.onSinkComplete = function (e) {
+    e.target.gravity = -10;
+    e.target.complete = false;
+};
+Ball.onMiss = function (e) {
+
+};
+Ball.onMissComplete = function (e) {
+
 };

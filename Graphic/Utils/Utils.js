@@ -10,8 +10,8 @@ Graphic.Utils = {};
 /**
  * Given the parameter object passed to this special property, return an array listing the properties that should be modified, and their parameters
  *
- * @param        p_obj                Object        Parameter passed to this property
- * @return                            Array        Array listing name and parameter of each property
+ * @param        {Object}        p_obj                   Parameter passed to this property
+ * @return        {Array}                                    Array listing name and parameter of each property
  */
 Graphic.Utils.bezier_modifier = function (p_obj) {
     var mList = []; // List of properties to be modified
@@ -43,7 +43,7 @@ Graphic.Utils.bezier_modifier = function (p_obj) {
  *
  * @param        {cc.Point}               b                    Beginning value of the property
  * @param        {cc.Point}               e                    Ending (desired) value of the property
- * @param        {Array}                   p                    Array of parameters passed to this specific property
+ * @param        {Array}                  p                    Array of parameters passed to this specific property
  * @return        {Array}                                      New t, with the p parameters applied to it
  */
 Graphic.Utils.bezier_Make = function (b, e, p) {
@@ -73,11 +73,11 @@ Graphic.Utils.bezier_Make = function (b, e, p) {
 /**
  * Given tweening specifications (beging, end, t), applies the property parameter to it, returning new t
  *
- * @param        {cc.Point}               b                    Beginning value of the property
- * @param        {cc.Point}               e                    Ending (desired) value of the property
- * @param        {Number}           t                    Current t of this tweening (0-1), after applying the easing equation
- * @param        {Array}               p                    Array of parameters passed to this specific property
- * @return        {cc.Point}                                      New t, with the p parameters applied to it
+ * @param        {cc.Point}               b           Beginning value of the property
+ * @param        {cc.Point}               e           Ending (desired) value of the property
+ * @param        {Number}               t             Current t of this tweening (0-1), after applying the easing equation
+ * @param        {Array}                  p             Array of parameters passed to this specific property
+ * @return        {cc.Point}                              New t, with the p parameters applied to it
  */
 Graphic.Utils.bezier_get_point = function (b, e, t, p) {
     // This is based on Robert Penner's code
@@ -118,7 +118,7 @@ Graphic.Utils.bezier_get_point = function (b, e, t, p) {
  * @param        {Number}        b                    Beginning value of the property
  * @param        {Number}        e                    Ending (desired) value of the property
  * @param        {Number}        t                    Current t of this tweening (0-1), after applying the easing equation
- * @param        {Array}               p                    Array of parameters passed to this specific property
+ * @param        {Array}            p                    Array of parameters passed to this specific property
  * @return        {Number}                            New t, with the p parameters applied to it
  */
 Graphic.Utils.bezier_get = function (b, e, t, p) {

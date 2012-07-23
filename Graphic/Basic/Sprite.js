@@ -32,17 +32,16 @@ Graphic.Sprite = cc.Sprite.extend({
             this.initWithFile(pFile);
         else
             this.init();
-    },
-    init:function () {
-        this._super();
         this._sleeping = this._listening = false;
         this.setAnchorPoint(cc.ccp(0.5, 0.5));
-        //this._position = this.getPosition();
         this._m_tBeginPos = this._m_tParentPosition = cc.PointZero();
         this._m_tRect = this._m_tCurrentRect = new cc.Rect(0, 0, this.getTextureRect().size.width, this.getTextureRect().size.height);
         this._m_tScaleX = this._m_tScaleY = 1;
 
         this.Trigger = {};
+    },
+    init:function () {
+        this._super();
     },
     load:function (pFile) {
         if (pFile != null)

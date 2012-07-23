@@ -32,19 +32,35 @@ var Main = cc.Layer.extend({
         this.initLayer();
     },
     update:function () {
+        return;
         if (this.time == 0) {
-            this.ballPoints = this.ball.shooting[this.index];
-            this.index = (this.index + 1) % this.ball.shooting.length;
+
+            this.time = 1;
+
+            this.ballPoints = this.ball.shooting[this.index % this.ball.shooting.length];
+            this.index = (this.index + 1);// % this.ball.shooting.length;
+
             this.ball.setScale(1);
-            Graphic.Animation.Queue.add(cc.ScaleTo.create(0.7, 0.4, 0.4), Graphic.Dispatcher(Graphic.Event.UPDATE, this.ball, function (e) {
+            Graphic.Animation.Queue.add(cc.ScaleTo.create(0.7, 0.4, 0.4), Graphic.Animation.Dispatcher(this.ball, function (e) {
                 var stage = e.target.stage;
                 var point = stage.ballPoints;
                 var time = parseInt((stage.ballPoints.length - 1) * e.target.elapsed);
                 e.target.x = point[time].x;
                 e.target.y = point[time].y;
+            }, function (e) {
+                Graphic.Animation.Queue.add(cc.RotateTo.create(0.7, 720), Graphic.Animation.Dispatcher(e.target, function (e) {
+                    var stage = e.target.stage;
+                    var point = stage.ballGetPoints;
+                    var time = parseInt((stage.ballGetPoints.length - 1) * e.target.elapsed);
+                    e.target.x = point[time].x;
+                    e.target.y = point[time].y;
+                    e.target.stage.basket.setRotation(1 - Math.random() * 2);
+                }, function (e) {
+                    e.target.stage.time = 0;
+                }));
             }));
-
         }
+
         /*
          var percent = this.time / 33 * 0.6;
          var point = this.time < this.ballPoints.length ? this.ballPoints : this.ballGetPoints;
@@ -57,8 +73,8 @@ var Main = cc.Layer.extend({
 
          //this.label.setString(this.win.getScrollProgress());
          */
-        this.ball.setRotation(this.ball.getRotation() + 10);
-        this.time = (this.time + 1) % (this.ballPoints.length + this.ballGetPoints.length);
+        //this.ball.setRotation(this.ball.getRotation() + 10);
+        //this.time = (this.time + 1) % (this.ballPoints.length + this.ballGetPoints.length);
     },
     closeCallback:function () {
         history.go(-1);
@@ -78,14 +94,22 @@ Main.prototype.initLayer = function () {
     console.log(background.x);
     var lazyLayer = new cc.LazyLayer();
     this.addChild(lazyLayer);
-    this.basket = new Graphic.Sprite("src/Image/Basket.png");
+    this.basket = new Graphic.Sprite("src/Image/Basket.png", this.basket);
     this.basket.setAnchorPoint(cc.ccp(0.5, 0));
     this.basket.setPosition(cc.ccp(size.width / 2, size.height - 274));
     lazyLayer.addChild(this.basket);
-    this.ball = new Ball("src/Image/basketball.png");
+    this.ball = new Ball("src/Image/basketball.png", this.basket);
     this.ball.setAnchorPoint(cc.ccp(0.5, 0.5));
     this.ball.setPosition(cc.ccp(size.width / 2, 8));
+    this.ball.BallPosition = cc.ccp(size.width / 2, 8);
     lazyLayer.addChild(this.ball);
+    //this.ball.Shoot(false);
+    Ball.BOTTON = size.height - 261;
+    this.ball.addEventListener(Graphic.MouseEvent.MOUSE_CLICK, function (e) {
+        e.target.setPosition(e.target.BallPosition);
+        e.target.setScale(1);
+        e.target.Shoot(false);
+    });
     /*
      this.ball = new Graphic.Sprite("src/Image/basketball.png");
      this.ball.setAnchorPoint(cc.ccp(0.5, 0.5));

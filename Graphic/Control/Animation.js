@@ -36,9 +36,9 @@ Graphic.Animation = cc.Class.extend({
             return cc.Director.sharedDirector().getActionManager().numberOfRunningActionsInTarget(pTarget.target);
         else return 0;
     },
-    dispatch:function (queue) {
-        var evt = Graphic.Dispatcher(queue.type, queue.target);
-        queue.trigger(evt);
+    dispatch:function (queue, target) {
+        var evt = Graphic.Dispatcher(null, target);
+        queue(evt);
     },
     recycle:function () {
         for (var i = 0; i < this._m_tQueue.length; i++) {
@@ -52,17 +52,15 @@ Graphic.Animation = cc.Class.extend({
             if (this._m_tQueue[i]) {
                 var action = this.numActions(this._m_tQueue[i]);
                 if (action == 0) {
-                    if (this._m_tQueue[i].type == Graphic.Event.COMPLETE) {
-                        if (this._m_tQueue[i].trigger != null) {
-                            this.dispatch(this._m_tQueue[i]);
-                        }
+                    if (this._m_tQueue[i].complete) {
+                        this.dispatch(this._m_tQueue[i].complete, this._m_tQueue[i].target);
                     }
                     recycle = true;
                     this._m_tQueue[i] = null;
                 } else {
-                    if (this._m_tQueue[i].type == Graphic.Event.UPDATE) {
+                    if (this._m_tQueue[i].update) {
                         this._m_tQueue[i].target.elapsed = this._m_tQueue[i].action.getElapsed() / this._m_tQueue[i].action.getDuration();
-                        this.dispatch(this._m_tQueue[i]);
+                        this.dispatch(this._m_tQueue[i].update, this._m_tQueue[i].target);
                     }
                     //console.log(this._m_tQueue[i].action.getElapsed());
                 }
@@ -76,5 +74,13 @@ Graphic.Animation.prototype.add = function (action, dispatcher) {
     cc.Director.sharedDirector().getActionManager().addAction(action, dispatcher.target);
     dispatcher.action = action;
     this.addTarget(dispatcher);
+};
+Graphic.Animation.Dispatcher = function (_target, _update, _complete) {
+    return {
+        action:null,
+        update:_update,
+        complete:_complete,
+        target:_target
+    };
 };
 Graphic.Animation.Queue = new Graphic.Animation();
