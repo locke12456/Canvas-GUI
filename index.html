@@ -4,12 +4,33 @@
     <meta charset="utf-8">
     <title>Cocos2d-HTML5 Hello World</title>
 </head>
+<link rel="stylesheet" type="text/css" href="CSS/PowerBar.css"/>
 <body style="text-align: center;background: #f2f6f8;">
 
 <script src="jquery.min.js"></script>
 <script src="cocos2d.js"></script>
-<div style="display:inline-block;width:auto; margin: auto auto; border:5px solid black; border-radius: 1px; box-shadow: 0 5px 50px #333">
+<script type="text/javascript">
+    $(function () {
+        center("Power");
+        center("canvas");
+        //showInput();
+    });
+    function center(id) {
+        var item = $('#' + id);
+        var winWidth = $(window).width();
+        var winHeight = $(window).height();
+        var popwidth = item.width();
+        var popheight = item.height();
+        var left = winWidth / 2 - popwidth / 2;
+        var top = winHeight / 2 - popheight / 2;
+        $(item).css("left", left);
+        $(item).css("top", top);
+    }
+</script>
+<div id="canvas"
+     style="display:inline-block;width:auto; position: fixed; border-collapse: collapse; border:5px solid black; border-radius: 1px; box-shadow: 0 5px 50px #333;z-index:1">
     <canvas id="gameCanvas" width="550" height="400"></canvas>
 </div>
+
 </body>
 </html>

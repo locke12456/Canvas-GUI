@@ -94,6 +94,7 @@ cc.loadjs = function (filename) {
 include = function (path) {
     cc.loadjs(path);
 };
+var menuType = menuType || "DOM";
 var isDebugMode = true;
 if (!isDebugMode) {
     cc.loadjs('../lib/Cocos2d-html5-canvasmenu-min.js');
@@ -163,12 +164,18 @@ if (!isDebugMode) {
     cc.loadjs('lib/CCLoader.js');
     cc.loadjs('lib/CCDrawingPrimitives.js');
     cc.loadjs('lib/platform/AppControl.js');
+
     cc.loadjs('lib/platform/CCApplication.js');
     cc.loadjs('lib/platform/CCSAXParser.js');
 
-
-    cc.loadjs('lib/menu_nodes/CCMenuItem.js');
-    cc.loadjs('lib/menu_nodes/CCMenu.js');
+    if (menuType == "DOM") {
+        cc.loadjs('lib/base_nodes/CCdomNode.js');
+        cc.loadjs('lib/menu_nodes/CCdomMenuItem.js');
+        cc.loadjs('lib/menu_nodes/CCdomMenu.js');
+    } else {
+        cc.loadjs('lib/menu_nodes/CCMenuItem.js');
+        cc.loadjs('lib/menu_nodes/CCMenu.js');
+    }
 
     cc.loadjs('lib/tileMap_parallax_nodes/CCTMXTiledMap.js');
     cc.loadjs('lib/tileMap_parallax_nodes/CCTMXXMLParser.js');

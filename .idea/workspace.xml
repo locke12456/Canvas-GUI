@@ -2,11 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="17158709-e975-470c-857b-70ed539afbba" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CSS/PowerBar.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Graphic/DOM/DomSprite.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/UserInterface_PowerBar.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/UserInterface_Question.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Graphic/Basic/Sprite.js" afterPath="$PROJECT_DIR$/Graphic/Basic/Sprite.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Graphic/Control/Animation.js" afterPath="$PROJECT_DIR$/Graphic/Control/Animation.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Graphic/Utils/Utils.js" afterPath="$PROJECT_DIR$/Graphic/Utils/Utils.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main.js" afterPath="$PROJECT_DIR$/Main.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cocos2d.js" afterPath="$PROJECT_DIR$/cocos2d.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Ball.js" afterPath="$PROJECT_DIR$/src/Ball.js" />
     </list>
     <ignored path="Cocos2dTest.iws" />
@@ -29,55 +32,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Sprite.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Graphic/Basic/Sprite.js">
+      <file leaf-file-name="Main.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="260" column="0" selection-start="8786" selection-end="8786" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Animation.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Graphic/Control/Animation.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="73" column="8" selection-start="2643" selection-end="2690" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="include.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Graphic/Basic/include.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="0" selection-start="333" selection-end="333" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CCDirector.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/CCDirector.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1132" column="23" selection-start="34825" selection-end="34825" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Event.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Graphic/DOM/Event/Event.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Event.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Graphic/EventHandler/Event.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="0" selection-start="950" selection-end="1100" vertical-scroll-proportion="0.0">
+            <state line="68" column="6" selection-start="2165" selection-end="2165" vertical-scroll-proportion="0.4036827">
               <folding />
             </state>
           </provider>
@@ -86,34 +44,79 @@
       <file leaf-file-name="Ball.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Ball.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="53" column="19" selection-start="1501" selection-end="1501" vertical-scroll-proportion="0.0">
+            <state line="36" column="34" selection-start="950" selection-end="950" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Utils.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Utils.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Graphic/Utils/Utils.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="159" column="6" selection-start="6893" selection-end="6938" vertical-scroll-proportion="0.39595374">
+            <state line="70" column="0" selection-start="2611" selection-end="2611" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CCScheduler.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/CCScheduler.js">
+      <file leaf-file-name="CCMenuItem.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/menu_nodes/CCMenuItem.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="765" column="0" selection-start="25631" selection-end="25631" vertical-scroll-proportion="0.0">
+            <state line="171" column="12" selection-start="4377" selection-end="4377" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CCActionInterval.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/actions/CCActionInterval.js">
+      <file leaf-file-name="CCNode.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/base_nodes/CCNode.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1856" column="3" selection-start="47649" selection-end="47656" vertical-scroll-proportion="0.0">
+            <state line="345" column="4" selection-start="10361" selection-end="10361" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CCdomNode.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/base_nodes/CCdomNode.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="74" column="4" selection-start="3118" selection-end="3118" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cocos2d.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../cocos2d-cocos2d-html5-72fd976/tests/cocos2d.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="64" column="42" selection-start="2530" selection-end="2530" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="testbasic.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../cocos2d-cocos2d-html5-72fd976/tests/testbasic.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="91" column="0" selection-start="3702" selection-end="3702" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CCdomMenuItem.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/menu_nodes/CCdomMenuItem.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="53" column="62" selection-start="1979" selection-end="1979" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cocos2d.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cocos2d.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="80" column="43" selection-start="3025" selection-end="3025" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -140,30 +143,30 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/CSS/frame.css" />
-        <option value="$PROJECT_DIR$/Graphic/com/TextInputBox.js" />
-        <option value="$PROJECT_DIR$/Graphic/DOM/Event/Event.js" />
-        <option value="$PROJECT_DIR$/Graphic/DOM/com/Window.js" />
-        <option value="$PROJECT_DIR$/index_old.html" />
-        <option value="$PROJECT_DIR$/CSS/Window.css" />
-        <option value="$PROJECT_DIR$/cocos2d.js" />
-        <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/io.js" />
-        <option value="$PROJECT_DIR$/Graphic/EventHandler/Event.js" />
         <option value="$PROJECT_DIR$/src/rules.js" />
-        <option value="$PROJECT_DIR$/Graphic/Control/Animation.js" />
         <option value="$PROJECT_DIR$/Graphic/Basic/Sprite.js" />
-        <option value="$PROJECT_DIR$/Main.js" />
-        <option value="$PROJECT_DIR$/src/Ball.js" />
         <option value="$PROJECT_DIR$/Graphic/Utils/Utils.js" />
+        <option value="$PROJECT_DIR$/src/UserInterface_Question.js" />
+        <option value="$PROJECT_DIR$/Graphic/Control/Animation.js" />
+        <option value="$PROJECT_DIR$/src/UserInterfaace_PowerBar.js" />
+        <option value="$PROJECT_DIR$/src/UserInterface_PowerBar.js" />
+        <option value="$PROJECT_DIR$/CSS/frame.css" />
+        <option value="$PROJECT_DIR$/CSS/PowerBar.css" />
+        <option value="$PROJECT_DIR$/Graphic/Basic/DomSprite.js" />
+        <option value="$PROJECT_DIR$/../cocos2d-cocos2d-html5-72fd976/tests/cocos2d.js" />
+        <option value="$PROJECT_DIR$/cocos2d.js" />
+        <option value="$PROJECT_DIR$/Graphic/DOM/DomSprite.js" />
+        <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/src/Ball.js" />
+        <option value="$PROJECT_DIR$/Main.js" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-4" />
     <option name="y" value="-4" />
-    <option name="width" value="1374" />
-    <option name="height" value="748" />
+    <option name="width" value="1928" />
+    <option name="height" value="1060" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -207,6 +210,16 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -249,11 +262,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Image" />
+              <option name="myItemId" value="CSS" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -267,173 +276,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Display" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Cocos2dTest" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="label_nodes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Display" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Cocos2dTest" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="actions" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Display" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Cocos2dTest" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Graphic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Display" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Cocos2dTest" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Graphic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Utils" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Display" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Cocos2dTest" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Graphic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="EventHandler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Display" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Cocos2dTest" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Graphic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DOM" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Event" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Display" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Cocos2dTest" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Graphic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DOM" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Display" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Cocos2dTest" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Graphic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Control" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Display" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Cocos2dTest" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Graphic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Basic" />
+              <option name="myItemId" value="Classes" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -453,16 +296,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -475,7 +308,7 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="95" />
     <property name="ChangesBrowser.SHOW_FLATTEN" value="true" />
-    <property name="options.lastSelected" value="project.propVCSSupport.VCSs.Git" />
+    <property name="options.lastSelected" value="project.propDebugger" />
     <property name="recentsLimit" value="5" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
@@ -500,6 +333,7 @@
       <recent name="D:\JavaScript\Aptana\Cocos2dTest\Graphic\Animation" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\JavaScript\Aptana\Cocos2dTest\Graphic\DOM" />
       <recent name="D:\JavaScript\Aptana\Cocos2dTest\Resources" />
       <recent name="D:\JavaScript\Aptana\Cocos2dTest\src" />
     </key>
@@ -601,7 +435,11 @@
       <created>1343026442762</created>
       <updated>1343026442762</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="'2012-07-24 Animation Update'">
+      <created>1343094671621</created>
+      <updated>1343094671621</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -625,16 +463,16 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-4" y="-4" width="1374" height="748" extended-state="6" />
+    <frame x="-4" y="-4" width="1928" height="1060" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930845" sideWeight="0.4897206" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32888147" sideWeight="0.48696947" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930845" sideWeight="0.49815497" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2529349" sideWeight="0.19209659" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20476545" sideWeight="0.6427379" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34130782" sideWeight="0.7647059" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15" sideWeight="0.78205127" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21794872" sideWeight="0.87291664" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2529349" sideWeight="0.19209659" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3572621" sideWeight="0.2300819" order="11" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21794872" sideWeight="0.1234375" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="JsTestDriver Server" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32890365" sideWeight="0.4960464" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32821077" sideWeight="0.4960464" order="8" side_tool="false" content_ui="tabs" />
@@ -685,7 +523,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="'2012-07-23 Animation Update'" />
+    <option name="LAST_COMMIT_MESSAGE" value="'2012-07-24 Animation Update'" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -701,6 +539,7 @@
     <MESSAGE value="-m '2012-07-21'" />
     <MESSAGE value="'2012-07-21'" />
     <MESSAGE value="'2012-07-23 Animation Update'" />
+    <MESSAGE value="'2012-07-24 Animation Update'" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -733,88 +572,94 @@
     </PATH>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Main_.js">
+    <entry file="file://$PROJECT_DIR$/../cocos2d-cocos2d-html5-72fd976/tests/indexDom.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="172" column="37" selection-start="6385" selection-end="6391" vertical-scroll-proportion="0.0" />
+        <state line="18" column="7" selection-start="658" selection-end="658" vertical-scroll-proportion="-12.214286" />
       </provider>
     </entry>
-    <entry file="file://C:/Program Files (x86)/Apache Software Foundation/Apache2.2/htdocs/test/tests/Classes/tests/ActionsTest/ActionsTest.js">
+    <entry file="file://$PROJECT_DIR$/../cocos2d-cocos2d-html5-72fd976/tests/Classes/AppDelegate.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="481" column="4" selection-start="15993" selection-end="15993" vertical-scroll-proportion="0.0" />
+        <state line="34" column="22" selection-start="1568" selection-end="1568" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/actions/CCActionManager.js">
+    <entry file="file://$PROJECT_DIR$/lib/menu_nodes/CCdomMenu.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="225" column="4" selection-start="7918" selection-end="7918" vertical-scroll-proportion="0.0" />
+        <state line="53" column="0" selection-start="1687" selection-end="1687" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_2012-07-23_Animation_Update_.patch">
+    <entry file="file://$PROJECT_DIR$/lib/menu_nodes/CCMenu.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="71" selection-start="46610" selection-end="46610" vertical-scroll-proportion="0.9300699" />
+        <state line="54" column="0" selection-start="1819" selection-end="1819" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/rules.js">
+    <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="26" selection-start="205" selection-end="205" vertical-scroll-proportion="0.0" />
+        <state line="29" column="100" selection-start="937" selection-end="937" vertical-scroll-proportion="-16.75" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Main.js">
+    <entry file="file://$PROJECT_DIR$/Graphic/DOM/DomSprite.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="103" column="26" selection-start="3872" selection-end="3872" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Graphic/Basic/Sprite.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="260" column="0" selection-start="8786" selection-end="8786" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Graphic/Control/Animation.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="8" selection-start="2643" selection-end="2690" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Graphic/Basic/include.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="0" selection-start="333" selection-end="333" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/CCDirector.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1132" column="23" selection-start="34825" selection-end="34825" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Graphic/DOM/Event/Event.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Graphic/EventHandler/Event.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="0" selection-start="950" selection-end="1100" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/CCScheduler.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="765" column="0" selection-start="25631" selection-end="25631" vertical-scroll-proportion="0.0">
+        <state line="8" column="20" selection-start="219" selection-end="236" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/actions/CCActionInterval.js">
+    <entry file="file://$PROJECT_DIR$/lib/base_nodes/CCNode.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1856" column="3" selection-start="47649" selection-end="47656" vertical-scroll-proportion="0.0" />
+        <state line="345" column="4" selection-start="10361" selection-end="10361" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Ball.js">
+    <entry file="file://$PROJECT_DIR$/lib/base_nodes/CCdomNode.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="19" selection-start="1501" selection-end="1501" vertical-scroll-proportion="0.0">
+        <state line="74" column="4" selection-start="3118" selection-end="3118" vertical-scroll-proportion="0.0">
           <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/menu_nodes/CCdomMenuItem.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="53" column="62" selection-start="1979" selection-end="1979" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cocos2d.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="80" column="43" selection-start="3025" selection-end="3025" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Graphic/Utils/Utils.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="159" column="6" selection-start="6893" selection-end="6938" vertical-scroll-proportion="0.39595374">
+        <state line="70" column="0" selection-start="2611" selection-end="2611" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/menu_nodes/CCMenuItem.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="171" column="12" selection-start="4377" selection-end="4377" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../cocos2d-cocos2d-html5-72fd976/tests/testbasic.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="91" column="0" selection-start="3702" selection-end="3702" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../cocos2d-cocos2d-html5-72fd976/tests/cocos2d.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="64" column="42" selection-start="2530" selection-end="2530" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ball.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="34" selection-start="950" selection-end="950" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="68" column="6" selection-start="2165" selection-end="2165" vertical-scroll-proportion="0.4036827">
           <folding />
         </state>
       </provider>

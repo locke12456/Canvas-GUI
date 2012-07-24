@@ -33,48 +33,6 @@ var Main = cc.Layer.extend({
     },
     update:function () {
         return;
-        if (this.time == 0) {
-
-            this.time = 1;
-
-            this.ballPoints = this.ball.shooting[this.index % this.ball.shooting.length];
-            this.index = (this.index + 1);// % this.ball.shooting.length;
-
-            this.ball.setScale(1);
-            Graphic.Animation.Queue.add(cc.ScaleTo.create(0.7, 0.4, 0.4), Graphic.Animation.Dispatcher(this.ball, function (e) {
-                var stage = e.target.stage;
-                var point = stage.ballPoints;
-                var time = parseInt((stage.ballPoints.length - 1) * e.target.elapsed);
-                e.target.x = point[time].x;
-                e.target.y = point[time].y;
-            }, function (e) {
-                Graphic.Animation.Queue.add(cc.RotateTo.create(0.7, 720), Graphic.Animation.Dispatcher(e.target, function (e) {
-                    var stage = e.target.stage;
-                    var point = stage.ballGetPoints;
-                    var time = parseInt((stage.ballGetPoints.length - 1) * e.target.elapsed);
-                    e.target.x = point[time].x;
-                    e.target.y = point[time].y;
-                    e.target.stage.basket.setRotation(1 - Math.random() * 2);
-                }, function (e) {
-                    e.target.stage.time = 0;
-                }));
-            }));
-        }
-
-        /*
-         var percent = this.time / 33 * 0.6;
-         var point = this.time < this.ballPoints.length ? this.ballPoints : this.ballGetPoints;
-         var time = this.time < this.ballPoints.length ? this.time : this.time - this.ballPoints.length;
-         this.ball.x = point[time].x;
-         this.ball.y = point[time].y;
-         //if (this.time < 33) {
-         //     this.ball.setScale(1 - percent);
-         // if(this.time%4==0)this.basket.setRotation(1 - Math.random() * 2);
-
-         //this.label.setString(this.win.getScrollProgress());
-         */
-        //this.ball.setRotation(this.ball.getRotation() + 10);
-        //this.time = (this.time + 1) % (this.ballPoints.length + this.ballGetPoints.length);
     },
     closeCallback:function () {
         history.go(-1);
@@ -106,9 +64,8 @@ Main.prototype.initLayer = function () {
     //this.ball.Shoot(false);
     Ball.BOTTON = size.height - 261;
     this.ball.addEventListener(Graphic.MouseEvent.MOUSE_CLICK, function (e) {
-        e.target.setPosition(e.target.BallPosition);
-        e.target.setScale(1);
-        e.target.Shoot(false);
+        var miss = Math.random() * 2 < 1
+        e.target.Shoot(miss, (miss ? false : Math.random() * 2 < 1));
     });
     /*
      this.ball = new Graphic.Sprite("src/Image/basketball.png");
