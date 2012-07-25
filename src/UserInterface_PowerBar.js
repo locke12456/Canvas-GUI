@@ -5,7 +5,8 @@
  * Time: 下午 2:39
  * To change this template use File | Settings | File Templates.
  */
-var PowerBar = cc.Class.extend({
+var Graphic = Graphic = Graphic || {};
+var PowerBar = Graphic.Sprite.extend({
     ctor:function () {
 
     }
