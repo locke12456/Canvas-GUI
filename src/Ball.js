@@ -18,7 +18,7 @@ var Ball = Graphic.Sprite.extend({
     basket:null,
     complete:true,
     final:false,
-    IsAir:false,
+    IsSwish:false,
     ActionRunning:false,
     ctor:function (image, basket) {
         this._super(image);
@@ -28,14 +28,14 @@ var Ball = Graphic.Sprite.extend({
         this.scheduleUpdateWithPriority(1);
         this.pauseSchedulerAndActions();
     },
-    Shoot:function (miss, IsAir) {
+    Shoot:function (miss, IsSwish) {
         if (this.ActionRunning)return;
         console.log("touch");
         this.resumeSchedulerAndActions();
         this.final = false;
         this.complete = true;
         this.ActionRunning = true;
-        this.IsAir = !IsAir ? false : IsAir;
+        this.IsSwish = !IsSwish ? false : IsSwish;
         this.shootIndex = parseInt(Math.random() * this.shooting.length);
         if (!miss) {
             this.shift = this.shooting[this.shootIndex][0].x < this.BallPosition.x ? 1 : -1;
@@ -162,7 +162,7 @@ Ball.onShootComplete = function (e) {
     var point = e.target.shooting[e.target.shootIndex];
     e.target.x = point[point.length - 1].x;
     e.target.y = point[point.length - 1].y;
-    if (!e.target.IsAir)
+    if (!e.target.IsSwish)
         Graphic.Animation.Queue.add(cc.RotateTo.create(1.0, 720), Graphic.Animation.Dispatcher(e.target, Ball.onSink, Ball.onSinkComplete));
     else {
         Ball.onSinkComplete(e);

@@ -43,6 +43,10 @@ Graphic.Sprite = cc.Sprite.extend({
     init:function () {
         this._super();
     },
+    initMask:function () {
+        this._mask = new Graphic.Mask();
+        this._mask.show();
+    },
     load:function (pFile) {
         if (pFile != null)
             this.initWithFile(pFile);
@@ -230,11 +234,9 @@ Graphic.Sprite = cc.Sprite.extend({
                 }
             }
         }
-        if (this._maskShow) {
-            ctx.globalCompositeOperation = "destination-out";
-            if (this._mask) {
-                this._mask.visit(ctx);
-            }
+        if (this._mask && this._mask.IsMaskShow()) {
+            ctx.globalCompositeOperation = this._mask.getCompositeType();
+            this._mask.visit(ctx);
             ctx.globalCompositeOperation = "source-over";
         }
         if (this._grid && this._grid.isActive()) {

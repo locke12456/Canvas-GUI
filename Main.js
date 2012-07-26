@@ -19,6 +19,7 @@ var Main = cc.Layer.extend({
     ball:null,
     ballPoints:null,
     ballGetPoints:null,
+    powerBar:null,
     index:0,
     item:[],
     init:function () {
@@ -62,39 +63,15 @@ Main.prototype.initLayer = function () {
     this.ball.BallPosition = cc.ccp(size.width / 2, 8);
     lazyLayer.addChild(this.ball);
     //this.ball.Shoot(false);
+    this.powerBar = new PowerBar("src/Image/PowerBar/cover.png", "src/Image/PowerBar/bar.png", "src/Image/PowerBar/mask.png");
+    this.powerBar.setPosition(cc.ccp(size.width / 2 - 153, size.height / 2));
+    this.addChild(this.powerBar);
     Ball.BOTTON = size.height - 261;
     this.ball.addEventListener(Graphic.MouseEvent.MOUSE_CLICK, function (e) {
         var miss = Math.random() * 2 < 1
         e.target.Shoot(miss, (miss ? false : Math.random() * 2 < 1));
     });
-    /*
-     this.ball = new Graphic.Sprite("src/Image/basketball.png");
-     this.ball.setAnchorPoint(cc.ccp(0.5, 0.5));
-     this.ball.setPosition(cc.ccp(size.width / 2, 8));
-     lazyLayer.addChild(this.ball);
-     var p1 = {x:this.ball.x, y:this.ball.y};
-     var p2 = {x:277, y:this.size.height - 70};
-     var arr = [
-     {x:205, y:this.size.height - 340},
-     {x:207, y:this.size.height - 43.5},
-     {x:284.5, y:this.size.height - 36.25}
-     ];
-     this.ballPoints = Graphic.Utils.bezier_Make(p1, p2, arr);
-     p1 = {x:277, y:this.size.height - 70};
-     p2 = {x:276, y:this.size.height - 63};
-     arr = [
-     {x:270, y:this.size.height - 74.75},
-     {x:317.25, y:this.size.height - 72.5},
-     {x:296.25, y:this.size.height - 73.75},
-     {x:248.75, y:this.size.height - 74.25},
-     {x:213.5, y:this.size.height - 72.75}
-     ];
-     /*[
-     {x:205, y:this.size.height - 340},
-     {x:207, y:this.size.height - 43.5},
-     {x:284.5, y:this.size.height - 36.25}
-     ]*/
-    // this.ballGetPoints = Graphic.Utils.bezier_Make(p1, p2, arr);
+
     this.ballPoints = this.ball.shooting[1];
     this.ballGetPoints = this.ball.sink;
     console.log(this.ballPoints.length);

@@ -91,11 +91,8 @@ Graphic.Component.DataGrid.DataGridView = Graphic.Sprite.extend({
         this._rows = [];
     },
     initMask:function () {
+        this._super();
         var texture = Graphic.Utils.GradientTexture(cc.SizeMake(this._gridSize.width, this._columnSize.height), cc.ccc4(0, 0, 0, 255));
-
-        this._mask = new Graphic.Sprite();
-        this._maskShow = true;
-        //this.win._mask.setVisible(true);
         this._maskDown = new Graphic.Sprite();
         this._maskDown.initWithTexture(texture);
         this._maskDown.setPosition(cc.ccp(0, -(this._gridSize.height / 2 + this._columnSize.height / 2) + 1));

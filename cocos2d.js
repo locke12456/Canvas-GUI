@@ -81,7 +81,10 @@ cc.loadjs = function (filename) {
             cc.Loader.shareLoader().preload([
                 {type:"image", src:"src/Image/Background.png"},
                 {type:"image", src:"src/Image/Basket.png"},
-                {type:"image", src:"src/Image/basketball.png"}
+                {type:"image", src:"src/Image/basketball.png"},
+                {type:"image", src:"src/Image/PowerBar/bar.png"},
+                {type:"image", src:"src/Image/PowerBar/cover.png"},
+                {type:"image", src:"src/Image/PowerBar/mask.png"}
             ]);
         }
     };
