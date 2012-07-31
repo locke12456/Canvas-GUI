@@ -20,6 +20,7 @@ var Main = cc.Layer.extend({
     ballPoints:null,
     ballGetPoints:null,
     powerBar:null,
+    step:0,
     index:0,
     item:[],
     init:function () {
@@ -31,6 +32,30 @@ var Main = cc.Layer.extend({
     onEnter:function () {
         this._super();
         this.initLayer();
+
+    },
+    ccTouchesBegan:function (pTouches, pEvent) {
+
+    },
+    ccTouchesMoved:function (pTouches, pEvent) {
+
+    },
+    ccTouchesEnded:function (pTouches, pEvent) {
+        switch (this.step) {
+            case 0:
+                if (this.ball.ActionRunning)return;
+                this.powerBar.play();
+                this.step = 1;
+                break
+            case 1:
+                this.powerBar.stop();
+                var miss = !this.powerBar.isHitLine();
+                console.log(miss ? "MISS" : "HIT");
+                this.ball.Shoot(miss, (miss ? false : Math.random() * 2 < 1));
+                this.step = 0;
+
+                break;
+        }
     },
     update:function () {
         return;
@@ -67,14 +92,12 @@ Main.prototype.initLayer = function () {
     this.powerBar.setPosition(cc.ccp(size.width / 2 - 153, size.height / 2));
     this.addChild(this.powerBar);
     Ball.BOTTON = size.height - 261;
-    this.ball.addEventListener(Graphic.MouseEvent.MOUSE_CLICK, function (e) {
-        var miss = Math.random() * 2 < 1
-        e.target.Shoot(miss, (miss ? false : Math.random() * 2 < 1));
-    });
+
 
     this.ballPoints = this.ball.shooting[1];
     this.ballGetPoints = this.ball.sink;
     console.log(this.ballPoints.length);
+    cc.Director.sharedDirector().getTouchDispatcher().addStandardDelegate(this, 1);
     cc.Director.sharedDirector().getScheduler().scheduleUpdateForTarget(this, 0, false);
 
 };

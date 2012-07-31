@@ -195,13 +195,12 @@ Ball.onMissComplete = function (e) {
 Ball.onFinalUpdateComplete = function (e) {
     var size = cc.Director.sharedDirector().getWinSize();
     e.target.setPosition(cc.ccp(size.width, 0));
-    //e.target.runAction();
     Graphic.Animation.Queue.add(cc.MoveTo.create(0.4, e.target.BallPosition), Graphic.Animation.Dispatcher(e.target, Ball.onUpdate, Ball.onUpdateComplete));
     // e.target.runAction(cc.FadeTo.create(0.4,1));
 };
 Ball.onUpdate = function (e) {
     e.target.setScale(e.target.elapsed);
-    e.target.setRotation(e.target.getRotation() + 2);
+    e.target.setRotation(e.target.getRotation() - e.target.getRotation() / 10);
     e.target.setOpacity(e.target.elapsed * 255);
 };
 Ball.onUpdateComplete = function (e) {

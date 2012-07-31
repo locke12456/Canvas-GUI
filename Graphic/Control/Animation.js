@@ -24,6 +24,17 @@ Graphic.Animation = cc.Class.extend({
         this._m_tAnimationBegin = false;
         cc.Director.sharedDirector().getScheduler().unscheduleUpdateForTarget(this);
     },
+    remove:function (target) {
+        var recycle = false;
+        for (var v in this._m_tQueue) {
+            if (v != null && this._m_tQueue[v].target === target) {
+                cc.Director.sharedDirector().getActionManager().removeAction(this._m_tQueue[v].action);
+                this._m_tQueue[v] = null;
+                recycle = true;
+            }
+        }
+        if (recycle)this.recycle();
+    },
     addTarget:function (target) {
         this._m_tQueue.push(target);
     },
