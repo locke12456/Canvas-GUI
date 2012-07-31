@@ -4,17 +4,32 @@
     <meta charset="utf-8">
     <title>Cocos2d-HTML5 Hello World</title>
 </head>
-<link rel="stylesheet" type="text/css" href="CSS/PowerBar.css"/>
+<link rel="stylesheet" type="text/css" href="CSS/ScoreBoard.css"/>
 <body style="text-align: center;background: #f2f6f8;">
 
 <script src="jquery.min.js"></script>
 <script src="cocos2d.js"></script>
 <script type="text/javascript">
     $(function () {
-        center("Power");
         center("canvas");
+        setPostion("Score", $("#canvas").css("left"), $("#canvas").css("top"));
+        var x = parseInt($("#canvas").css("left")) + 20;
+        var y = parseInt($("#canvas").css("top")) - 4;
+        setPostion("ScoreText", x, y);
+        var x = parseInt($("#canvas").css("left")) + 128;
+        var y = parseInt($("#canvas").css("top")) + 4;
+        setPostion("TimeText", x, y);
+        setTime("60");
+        setScore("000");
         //showInput();
     });
+    function setPostion(id, offsetX, offsetY) {
+        var item = $('#' + id);
+        var left = parseInt(offsetX);
+        var top = parseInt(offsetY);
+        $(item).css("left", left);
+        $(item).css("top", top);
+    }
     function center(id) {
         var item = $('#' + id);
         var winWidth = $(window).width();
@@ -26,11 +41,23 @@
         $(item).css("left", left);
         $(item).css("top", top);
     }
+    function setTime(value) {
+        var item = $('#TimeText');
+        item.text(value);
+    }
+    function setScore(value) {
+        var item = $('#ScoreText');
+        item.text(value);
+    }
 </script>
 <div id="canvas"
      style="display:inline-block;width:auto; position: fixed; border-collapse: collapse; border:5px solid black; border-radius: 1px; box-shadow: 0 5px 50px #333;z-index:1">
     <canvas id="gameCanvas" width="550" height="400"></canvas>
 </div>
+<div id="Score" class="ScoreBoard">
+    <p id="ScoreText" class="Score">123</p>
 
+    <p id="TimeText" class="Time">99</p>
+</div>
 </body>
 </html>

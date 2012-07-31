@@ -1,0 +1,29 @@
+@font-face {
+    font-family: Ni7;
+    src: url(Font/Ni7seg.ttf);
+}
+
+.ScoreBoard {
+    position: fixed;
+    border-collapse: collapse;
+    background-image: url("images/ScoreBoard.png");
+    width: 200px;
+    height: 84px;
+    z-index: 2;
+}
+
+.Score {
+    position: fixed;
+    border-collapse: collapse;
+    font-family: Ni7;
+    font-size: 40px;
+    color: yellow;
+}
+
+.Time {
+    position: fixed;
+    border-collapse: collapse;
+    font-family: Ni7;
+    font-size: 36px;
+    color: yellow;
+}

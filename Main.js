@@ -32,7 +32,6 @@ var Main = cc.Layer.extend({
     onEnter:function () {
         this._super();
         this.initLayer();
-
     },
     ccTouchesBegan:function (pTouches, pEvent) {
 
@@ -51,9 +50,8 @@ var Main = cc.Layer.extend({
                 this.powerBar.stop();
                 var miss = !this.powerBar.isHitLine();
                 console.log(miss ? "MISS" : "HIT");
-                this.ball.Shoot(miss, (miss ? false : Math.random() * 2 < 1));
+                this.ball.Shoot(miss, (miss ? false : this.powerBar.isHitCenter()));
                 this.step = 0;
-
                 break;
         }
     },
@@ -99,7 +97,7 @@ Main.prototype.initLayer = function () {
     console.log(this.ballPoints.length);
     cc.Director.sharedDirector().getTouchDispatcher().addStandardDelegate(this, 1);
     cc.Director.sharedDirector().getScheduler().scheduleUpdateForTarget(this, 0, false);
-
+    var b = new ScoreBoard();
 };
 Main.scene = function () {
     // 'scene' is an autorelease object

@@ -1,9 +1,0 @@
-.PowerBar {
-    position: fixed;
-    border-collapse: collapse;
-    background-color: #ff0000;
-    width: 305px;
-    height: 50px;
-    -webkit-mask-box-image: url(../src/Image/PowerBar/mask.png);
-    z-index: 2;
-}

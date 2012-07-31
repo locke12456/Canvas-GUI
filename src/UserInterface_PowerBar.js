@@ -11,6 +11,7 @@ var PowerBar = Graphic.Sprite.extend({
     _barLine:null,
     _cover:null,
     _progressLine:null,
+    _LinePosition:null,
     ctor:function (cover, bar, mask) {
         this._super();
         //cover
@@ -33,9 +34,10 @@ var PowerBar = Graphic.Sprite.extend({
         this.addChild(this._bar);
 
         var texture = Graphic.Utils.GradientTexture(cc.SizeMake(12, this._cover.height - 4), cc.ccc4(0, 255, 0, 255));
+        this._LinePosition = 0.8;
         this._barLine = new Graphic.Sprite();
         this._barLine.initWithTexture(texture);
-        this._barLine.x = this._cover.width / 2;
+        this._barLine.x = this._cover.width * this._LinePosition;
         this.addChild(this._barLine);
         this.addChild(this._cover);
         this.setVisible(false);
@@ -57,8 +59,20 @@ var PowerBar = Graphic.Sprite.extend({
         Graphic.Animation.Queue.add(cc.FadeOut.create(1), Graphic.Animation.Dispatcher(this, null, PowerBar.FadeComplete));
     },
     isHitLine:function () {
-        console.log(this._progressLine.getScaleX() > 0.45 && this._progressLine.getScaleX() < 0.55 ? "in range" : "out of range");
-        return this._progressLine.getScaleX() > 0.45 && this._progressLine.getScaleX() < 0.55;
+        return this.__inRange(0.05);
+    },
+    isHitCenter:function () {
+        return this.__inRange(0.025);
+    },
+    __inRange:function (shift) {
+        var range_left = this._LinePosition - shift;
+        var range_right = this._LinePosition + shift;
+        /*
+         console.log("position:"+this._progressLine.getScaleX());
+         console.log("target:"+range_left);
+         console.log(this._progressLine.getScaleX() > range_left && this._progressLine.getScaleX() < range_right ? "in range" : "out of range");
+         */
+        return this._progressLine.getScaleX() > range_left && this._progressLine.getScaleX() < range_right;
     }
 });
 PowerBar.PROGRESS_REPEAT = function (e) {
