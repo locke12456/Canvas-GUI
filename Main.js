@@ -22,6 +22,7 @@ var Main = cc.Layer.extend({
     ballGetPoints:null,
     scoreBoard:null,
     powerBar:null,
+    coin:5,
     step:0,
     index:0,
     item:[],
@@ -42,6 +43,7 @@ var Main = cc.Layer.extend({
 
     },
     ccTouchesEnded:function (pTouches, pEvent) {
+        if (cc.Director.sharedDirector().isPaused())return;
         switch (this.step) {
             case 0:
                 if (this.ball.ActionRunning)return;
@@ -64,8 +66,20 @@ var Main = cc.Layer.extend({
         if (target.powerBar.isHitLine())
             target.scoreBoard.addScore(30);
     },
+    subCoin:function () {
+        if (this.coin > 0) {
+            if (this.scoreBoard.addTime(30))
+                $("#CoinText").text(Graphic.Utils.AutoZeros(1, --this.coin, true));
+        }
+    },
     closeCallback:function () {
         history.go(-1);
+    },
+    pause:function () {
+        cc.Director.sharedDirector().pause();
+    },
+    resume:function () {
+        cc.Director.sharedDirector().resume();
     }
 });
 //Main.bIsMouseDown = null;
@@ -73,7 +87,7 @@ Main.prototype.initLayer = function () {
     var size = this.size = cc.Director.sharedDirector().getWinSize();
     var lazyLayer = new cc.LazyLayer();
     this.addChild(lazyLayer);
-
+    this.scoreBoard = new ScoreBoard(0, 30);
     //init background
     var background = cc.Sprite.create("src/Image/Background.png");
     background.setAnchorPoint(cc.ccp(0.5, 0.5));
@@ -100,10 +114,15 @@ Main.prototype.initLayer = function () {
 
     this.ballPoints = this.ball.shooting[1];
     this.ballGetPoints = this.ball.sink;
+    this.subCoin();
     console.log(this.ballPoints.length);
     cc.Director.sharedDirector().getTouchDispatcher().addStandardDelegate(this, 1);
     cc.Director.sharedDirector().getScheduler().scheduleUpdateForTarget(this, 0, false);
-    this.scoreBoard = new ScoreBoard();
+
+};
+Main.subCoin = function () {
+    if (main)
+        main.subCoin();
 };
 Main.scene = function () {
     // 'scene' is an autorelease object

@@ -216,5 +216,4 @@ Ball.onUpdateComplete = function (e) {
     e.target.setScale(1);
     e.target.setRotation(0);
     e.target.pauseSchedulerAndActions();
-
 };

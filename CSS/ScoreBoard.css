@@ -27,3 +27,20 @@
     font-size: 36px;
     color: yellow;
 }
+
+button.Coin {
+    position: fixed;
+    border-collapse: collapse;
+    background-image: url("images/Coin.png");
+    width: 64px;
+    height: 143px;
+    z-index: 2;
+}
+
+.CoinText {
+    position: fixed;
+    border-collapse: collapse;
+    font-family: Ni7;
+    font-size: 24px;
+    color: yellow;
+}

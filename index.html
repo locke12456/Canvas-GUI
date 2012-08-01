@@ -16,9 +16,18 @@
         var x = parseInt($("#canvas").css("left")) + 20;
         var y = parseInt($("#canvas").css("top")) - 6;
         setPostion("ScoreText", x, y);
-        var x = parseInt($("#canvas").css("left")) + 128;
-        var y = parseInt($("#canvas").css("top")) + 3;
+        x = parseInt($("#canvas").css("left")) + 128;
+        y = parseInt($("#canvas").css("top")) + 3;
         setPostion("TimeText", x, y);
+
+        x = parseInt($("#canvas").css("left")) + parseInt($("#canvas").width()) - parseInt($("#Coin").width()) - 12;
+        y = parseInt($("#canvas").css("top")) + parseInt($("#canvas").height()) - parseInt($("#Coin").height());
+        setPostion("Coin", x, y);
+
+        setPostion("CoinText", x + 17, y - 8);
+
+        $("#Score").hide();
+
         //setTime("60");
         //setScore("000");
         //showInput();
@@ -60,5 +69,8 @@
 
     <p id="TimeText" class="Time">00</p>
 </div>
+<button id="Coin" class="Coin" onclick="Main.subCoin()">
+    <p id="CoinText" class="CoinText">00</p>
+</button>
 </body>
 </html>

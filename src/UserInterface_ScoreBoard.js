@@ -14,15 +14,22 @@ var ScoreBoard = cc.Class.extend({
     score:0,
     currentScore:0,
     ctor:function (score, time) {
-        this.time = time || this.time;
-        this.addTime(60);
+        this.addScore(score);
+        this.addTime(time);
         Graphic.Animation.Queue.add(new Graphic.Utils.Timer(1), Graphic.Animation.Dispatcher(this, ScoreBoard.onUpdate, ScoreBoard.onTimerUpdateComplete));
-
+        $("#Score").show();
         // cc.Timer.timerWithTarget(this, "Update", 1);
     },
     addTime:function (value) {
+        if (this.currentTime + value > 100)return false;
+        if (this.currentTime == 0) {
+            Main.sharedLayer().resume();
+            var time = Graphic.Utils.AutoZeros(1, value, true);
+            ScoreBoard.setTime(time);
+        }
         this._addTime = value;
-        this.currentTime = this.time + value;
+        this.currentTime = this.currentTime + value;
+        return true;
     },
     addScore:function (value) {
         this._addScore = value;
@@ -64,8 +71,11 @@ ScoreBoard.onUpdate = function (e) {
     }
 };
 ScoreBoard.onTimerUpdateComplete = function (e) {
-    if (e.target.currentTime == 0)return;
-    var time = Graphic.Utils.AutoZeros(1, --e.target.currentTime, true);
+    if (e.target.currentTime == 0) {
+        Main.sharedLayer().pause();
+        var time = Graphic.Utils.AutoZeros(1, 0, true);
+    } else
+        var time = Graphic.Utils.AutoZeros(1, --e.target.currentTime, true);
     ScoreBoard.setTime(time);
     Graphic.Animation.Queue.add(new Graphic.Utils.Timer(1), Graphic.Animation.Dispatcher(e.target, ScoreBoard.onUpdate, ScoreBoard.onTimerUpdateComplete));
 };
