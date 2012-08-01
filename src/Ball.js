@@ -19,6 +19,8 @@ var Ball = Graphic.Sprite.extend({
     complete:true,
     final:false,
     IsSwish:false,
+    _callback:null,
+    _target:null,
     ActionRunning:false,
     ctor:function (image, basket) {
         this._super(image);
@@ -28,8 +30,10 @@ var Ball = Graphic.Sprite.extend({
         this.scheduleUpdateWithPriority(1);
         this.pauseSchedulerAndActions();
     },
-    Shoot:function (miss, IsSwish) {
+    Shoot:function (miss, IsSwish, callback, target) {
         if (this.ActionRunning)return;
+        this._callback = callback;
+        this._target = target;
         console.log("touch");
         this.resumeSchedulerAndActions();
         this.final = false;
@@ -178,6 +182,7 @@ Ball.onSink = function (e) {
 Ball.onSinkComplete = function (e) {
     e.target.gravity = -6;
     e.target.complete = false;
+    e.target._callback(e.target._target);
 };
 Ball.onMiss = function (e) {
     var point = e.target.miss[e.target.shootIndex % (e.target.miss.length - 1)];
@@ -211,4 +216,5 @@ Ball.onUpdateComplete = function (e) {
     e.target.setScale(1);
     e.target.setRotation(0);
     e.target.pauseSchedulerAndActions();
+
 };

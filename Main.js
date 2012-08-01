@@ -3,6 +3,7 @@ include('Classes/AppDelegate.js');
 include('Graphic/EventHandler/include.js');
 include('Graphic/Control/include.js');
 include('Graphic/Utils/Utils.js');
+include('Graphic/Utils/Timer.js');
 include('Graphic/Effect/Convolution.js');
 include('Graphic/Basic/include.js');
 include('Graphic/com/include.js');
@@ -19,6 +20,7 @@ var Main = cc.Layer.extend({
     ball:null,
     ballPoints:null,
     ballGetPoints:null,
+    scoreBoard:null,
     powerBar:null,
     step:0,
     index:0,
@@ -50,13 +52,17 @@ var Main = cc.Layer.extend({
                 this.powerBar.stop();
                 var miss = !this.powerBar.isHitLine();
                 console.log(miss ? "MISS" : "HIT");
-                this.ball.Shoot(miss, (miss ? false : this.powerBar.isHitCenter()));
+                this.ball.Shoot(miss, (miss ? false : this.powerBar.isHitCenter()), this.addScore, this);
                 this.step = 0;
                 break;
         }
     },
     update:function () {
         return;
+    },
+    addScore:function (target) {
+        if (target.powerBar.isHitLine())
+            target.scoreBoard.addScore(30);
     },
     closeCallback:function () {
         history.go(-1);
@@ -97,7 +103,7 @@ Main.prototype.initLayer = function () {
     console.log(this.ballPoints.length);
     cc.Director.sharedDirector().getTouchDispatcher().addStandardDelegate(this, 1);
     cc.Director.sharedDirector().getScheduler().scheduleUpdateForTarget(this, 0, false);
-    var b = new ScoreBoard();
+    this.scoreBoard = new ScoreBoard();
 };
 Main.scene = function () {
     // 'scene' is an autorelease object

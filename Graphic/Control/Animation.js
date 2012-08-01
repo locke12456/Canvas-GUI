@@ -27,7 +27,7 @@ Graphic.Animation = cc.Class.extend({
     remove:function (target) {
         var recycle = false;
         for (var v in this._m_tQueue) {
-            if (v != null && this._m_tQueue[v].target === target) {
+            if (this._m_tQueue[v] != null && this._m_tQueue[v].target === target) {
                 cc.Director.sharedDirector().getActionManager().removeAction(this._m_tQueue[v].action);
                 this._m_tQueue[v] = null;
                 recycle = true;

@@ -7,6 +7,41 @@
  */
 var Graphic = Graphic = Graphic || {};
 Graphic.Utils = {};
+Graphic.Utils.AutoZeros = function (maxChar, value, conect) {
+
+    var hex = 10, count = maxChar;
+    value = value instanceof String ? parseInt(value) : value;
+    while (value % hex != value) {
+        hex *= 10;
+        count--;
+        if (count == 0) {
+            break;
+        }
+    }
+    var text = "";
+    for (var i = 0; i < count; i++) {
+        text += "0";
+    }
+    return (conect) ? text + (value).toString() : text;
+}
+Graphic.Utils.AutoZeros_float = function (maxChar, value, conect) {
+    /*
+     var hex = 10 ^ maxChar, count = maxChar;
+     value = value instanceof String ? parseFloat(value) : value;
+     while (value % hex != value) {
+     hex *= 10;
+     count--;
+     if (count == 0) {
+     break;
+     }
+     }
+     var text = "";
+     for (var i = 0; i < count; i++) {
+     text += "0";
+     }
+     return (conect) ? text + (value).toString() : text;
+     */
+}
 /**
  * Given the parameter object passed to this special property, return an array listing the properties that should be modified, and their parameters
  *

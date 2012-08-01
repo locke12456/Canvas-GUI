@@ -14,13 +14,13 @@
         center("canvas");
         setPostion("Score", $("#canvas").css("left"), $("#canvas").css("top"));
         var x = parseInt($("#canvas").css("left")) + 20;
-        var y = parseInt($("#canvas").css("top")) - 4;
+        var y = parseInt($("#canvas").css("top")) - 6;
         setPostion("ScoreText", x, y);
         var x = parseInt($("#canvas").css("left")) + 128;
-        var y = parseInt($("#canvas").css("top")) + 4;
+        var y = parseInt($("#canvas").css("top")) + 3;
         setPostion("TimeText", x, y);
-        setTime("60");
-        setScore("000");
+        //setTime("60");
+        //setScore("000");
         //showInput();
     });
     function setPostion(id, offsetX, offsetY) {
@@ -41,11 +41,12 @@
         $(item).css("left", left);
         $(item).css("top", top);
     }
-    function setTime(value) {
+    var ScoreBoard = ScoreBoard || {};
+    ScoreBoard.setTime = function (value) {
         var item = $('#TimeText');
         item.text(value);
     }
-    function setScore(value) {
+    ScoreBoard.setScore = function (value) {
         var item = $('#ScoreText');
         item.text(value);
     }
@@ -55,9 +56,9 @@
     <canvas id="gameCanvas" width="550" height="400"></canvas>
 </div>
 <div id="Score" class="ScoreBoard">
-    <p id="ScoreText" class="Score">123</p>
+    <p id="ScoreText" class="Score">000</p>
 
-    <p id="TimeText" class="Time">99</p>
+    <p id="TimeText" class="Time">00</p>
 </div>
 </body>
 </html>
