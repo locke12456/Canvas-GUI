@@ -31,6 +31,9 @@ var ScoreBoard = cc.Class.extend({
         this.currentTime = this.currentTime + value;
         return true;
     },
+    getScore:function () {
+        return this.currentScore;
+    },
     addScore:function (value) {
         this._addScore = value;
         this.currentScore = this.score + value;

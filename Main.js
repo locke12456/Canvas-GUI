@@ -10,19 +10,48 @@ include('Graphic/com/include.js');
 include('src/rules.js');
 include('io.js');
 //19
-
+var ProcessManager = cc.Layer.extend({
+    Level:-1,
+    Score:0,
+    ctor:function () {
+        this._super();
+    },
+    getLevel:function (score) {
+        this.Score = score;
+        if (score < ProcessManager.LEVEL_1) return -1;
+        if (score >= ProcessManager.LEVEL_5)return 1;
+        if (score >= ProcessManager.LEVEL_4)return .75;
+        if (score >= ProcessManager.LEVEL_3)return .5;
+        if (score >= ProcessManager.LEVEL_2)return .25;
+        if (score >= ProcessManager.LEVEL_1)return 0;
+    },
+    isLevelUP:function (level) {
+        if (level != this.Level) {
+            this.Level = level;
+            return true;
+        }
+        return false;
+    }
+});
+ProcessManager.LEVEL_1 = 300;
+ProcessManager.LEVEL_2 = 450;
+ProcessManager.LEVEL_3 = 600;
+ProcessManager.LEVEL_4 = 750;
+ProcessManager.LEVEL_5 = 900;
 var main;
-var Main = cc.Layer.extend({
+var Main = ProcessManager.extend({
     bIsMouseDown:false,
     size:null,
     time:0,
+    label:null,
     basket:null,
     ball:null,
     ballPoints:null,
     ballGetPoints:null,
     scoreBoard:null,
     powerBar:null,
-    coin:5,
+    coin:11,
+    ADD_TIME_COST:15,
     step:0,
     index:0,
     item:[],
@@ -44,10 +73,11 @@ var Main = cc.Layer.extend({
     },
     ccTouchesEnded:function (pTouches, pEvent) {
         if (cc.Director.sharedDirector().isPaused())return;
+        var level = this.getLevel(this.scoreBoard.getScore());
         switch (this.step) {
             case 0:
                 if (this.ball.ActionRunning)return;
-                this.powerBar.play();
+                this.powerBar.play(level);
                 this.step = 1;
                 break
             case 1:
@@ -62,13 +92,25 @@ var Main = cc.Layer.extend({
     update:function () {
         return;
     },
-    addScore:function (target) {
-        if (target.powerBar.isHitLine())
-            target.scoreBoard.addScore(30);
+    addScore:function (target, sink) {
+        if (sink) {
+            var text = target.powerBar.isHitCenter() ? "Exelent" : Math.random() * 2 > 1 ? "Great" : "Good";
+            target.label.showTextByName(text);
+            target.scoreBoard.addScore(text == "Exelent" ? 30 : 20);
+            var level = target.getLevel(target.scoreBoard.getScore());
+            var result = target.isLevelUP(level);
+            if (result) {
+                target.addCoin();
+            }
+        } else
+            target.label.showTextByName("Miss");
+    },
+    addCoin:function () {
+        $("#CoinText").text(Graphic.Utils.AutoZeros(1, ++this.coin, true));
     },
     subCoin:function () {
         if (this.coin > 0) {
-            if (this.scoreBoard.addTime(30))
+            if (this.scoreBoard.addTime(this.ADD_TIME_COST))
                 $("#CoinText").text(Graphic.Utils.AutoZeros(1, --this.coin, true));
         }
     },
@@ -88,6 +130,8 @@ Main.prototype.initLayer = function () {
     var lazyLayer = new cc.LazyLayer();
     this.addChild(lazyLayer);
     this.scoreBoard = new ScoreBoard(0, 30);
+    this.subCoin();
+    $("#Coin").show();
     //init background
     var background = cc.Sprite.create("src/Image/Background.png");
     background.setAnchorPoint(cc.ccp(0.5, 0.5));
@@ -111,11 +155,15 @@ Main.prototype.initLayer = function () {
     this.addChild(this.powerBar);
     Ball.BOTTON = size.height - 261;
 
-
     this.ballPoints = this.ball.shooting[1];
     this.ballGetPoints = this.ball.sink;
-    this.subCoin();
+
     console.log(this.ballPoints.length);
+    this.label = new CSSTextDraw("Null", "BigBlocko", 56);
+    this.label.setPosition(cc.ccp(size.width / 2, size.height - 64));
+    //this.label.setAnchorPoint(cc.ccp(0.5, 0.5));
+    // add the label as a child to this layer
+    this.addChild(this.label, 5);
     cc.Director.sharedDirector().getTouchDispatcher().addStandardDelegate(this, 1);
     cc.Director.sharedDirector().getScheduler().scheduleUpdateForTarget(this, 0, false);
 

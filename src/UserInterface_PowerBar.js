@@ -12,6 +12,9 @@ var PowerBar = Graphic.Sprite.extend({
     _cover:null,
     _progressLine:null,
     _LinePosition:null,
+    SPEED:3,
+    DEFAULT_SPEED:3,
+    shift:0,
     ctor:function (cover, bar, mask) {
         this._super();
         //cover
@@ -43,7 +46,7 @@ var PowerBar = Graphic.Sprite.extend({
         this.setVisible(false);
         // this.play();
     },
-    play:function () {
+    play:function (barMove) {
         this.setVisible(true);
         this.setOpacity(255);
         var action = cc.Sequence.create(
@@ -53,8 +56,14 @@ var PowerBar = Graphic.Sprite.extend({
         this._progressLine.runAction(action);
         this._progressLine.setScaleX(0);
         Graphic.Animation.Queue.add(cc.ScaleTo.create(2, 1, 1), Graphic.Animation.Dispatcher(this._progressLine, null, PowerBar.PROGRESS_REPEAT));
+        if (barMove >= 0) {
+            this.SPEED = this.DEFAULT_SPEED - barMove;
+            Graphic.Animation.Queue.add(new Graphic.Utils.Timer(this.SPEED), Graphic.Animation.Dispatcher(this, PowerBar.onBarUpdate, PowerBar.onBarUpdateComplete));
+        }
     },
     stop:function () {
+        this.shift = this.shift == 1 ? 0 : 1;
+        Graphic.Animation.Queue.remove(this);
         Graphic.Animation.Queue.remove(this._progressLine);
         Graphic.Animation.Queue.add(cc.FadeOut.create(1), Graphic.Animation.Dispatcher(this, null, PowerBar.FadeComplete));
     },
@@ -75,6 +84,15 @@ var PowerBar = Graphic.Sprite.extend({
         return this._progressLine.getScaleX() > range_left && this._progressLine.getScaleX() < range_right;
     }
 });
+PowerBar.onBarUpdate = function (e) {
+    var shift = e.target.shift == 1 ? (e.target.shift - e.target.elapsed) : e.target.elapsed;
+    e.target._LinePosition = (shift) * 0.7 + 0.15;
+    e.target._barLine.x = e.target._cover.width * e.target._LinePosition;
+};
+PowerBar.onBarUpdateComplete = function (e) {
+    e.target.shift = e.target.shift == 1 ? 0 : 1;
+    Graphic.Animation.Queue.add(new Graphic.Utils.Timer(e.target.SPEED), Graphic.Animation.Dispatcher(e.target, PowerBar.onBarUpdate, PowerBar.onBarUpdateComplete));
+};
 PowerBar.PROGRESS_REPEAT = function (e) {
     Graphic.Animation.Queue.add(cc.ScaleTo.create(2, e.target.getScaleX() == 0 ? 1 : 0, 1), Graphic.Animation.Dispatcher(e.target, null, PowerBar.PROGRESS_REPEAT));
 };

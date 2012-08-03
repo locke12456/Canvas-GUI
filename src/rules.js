@@ -6,6 +6,8 @@
  * To change this template use File | Settings | File Templates.
  */
 var Path = "src/";
+//include(Path + 'ProcessManager.js');
 include(Path + 'Ball.js');
+include(Path + 'CSSTextDraw.js');
 include(Path + 'UserInterface_PowerBar.js');
 include(Path + 'UserInterface_ScoreBoard.js');

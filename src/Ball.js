@@ -46,6 +46,7 @@ var Ball = Graphic.Sprite.extend({
             Graphic.Animation.Queue.add(cc.ScaleTo.create(0.6, 0.4, 0.4), Graphic.Animation.Dispatcher(this, Ball.onShooting, Ball.onShootComplete));
         } else {
             this.shift = this.miss[this.shootIndex % (this.miss.length - 1)][this.miss[this.shootIndex % (this.miss.length - 1)].length - 1].x > this.BallPosition.x ? 1 : -1;
+            this.shootIndex %= (this.miss.length - 1);
             Graphic.Animation.Queue.add(cc.ScaleTo.create(0.4, 0.4, 0.4), Graphic.Animation.Dispatcher(this, Ball.onMiss, Ball.onMissComplete));
         }
     },
@@ -135,7 +136,8 @@ Ball.Init_BALL_Points = function (ball) {
     obj.bezier[3].y += 5;
     obj.bezier[4].x += 10;
     obj.bezier[4].y -= 10;
-    obj.x = obj.x + 40;
+    obj.x = obj.x + 52;
+    obj.y += 10;
     obj.time = 0.4;
     //init shooting
     for (var i = 0; i < 5; i++) {
@@ -166,8 +168,16 @@ Ball.onShootComplete = function (e) {
     var point = e.target.shooting[e.target.shootIndex];
     e.target.x = point[point.length - 1].x;
     e.target.y = point[point.length - 1].y;
-    if (!e.target.IsSwish)
-        Graphic.Animation.Queue.add(cc.RotateTo.create(1.0, 720), Graphic.Animation.Dispatcher(e.target, Ball.onSink, Ball.onSinkComplete));
+    if (!e.target.IsSwish) {
+        var speed = Math.random() * 2 > 1.2 ? 1.0 : 0.4;
+        if (speed == 1.0)
+            Graphic.Animation.Queue.add(cc.RotateTo.create(speed, 720), Graphic.Animation.Dispatcher(e.target, Ball.onSink, Ball.onSinkComplete));
+        else {
+            e.target.shootIndex = 2;
+            e.target.shift = 1;
+            Graphic.Animation.Queue.add(cc.RotateTo.create(speed, 720), Graphic.Animation.Dispatcher(e.target, Ball.onSinkMiss, Ball.onMissComplete));
+        }
+    }
     else {
         Ball.onSinkComplete(e);
     }
@@ -180,12 +190,22 @@ Ball.onSink = function (e) {
     e.target.basket.setRotation(1 - Math.random() * 2);
 };
 Ball.onSinkComplete = function (e) {
+    var point = e.target.sink;
+    e.target.x = point[point.length - 1].x;
+    e.target.y = point[point.length - 1].y;
     e.target.gravity = -6;
     e.target.complete = false;
-    e.target._callback(e.target._target);
+    e.target._callback(e.target._target, true);
+};
+Ball.onSinkMiss = function (e) {
+    var point = e.target.miss[2];
+    var time = parseInt((point.length - 1) * e.target.elapsed);
+    e.target.x = point[time].x;
+    e.target.y = point[time].y;
+    e.target.basket.setRotation(1 - Math.random() * 2);
 };
 Ball.onMiss = function (e) {
-    var point = e.target.miss[e.target.shootIndex % (e.target.miss.length - 1)];
+    var point = e.target.miss[e.target.shootIndex];
     var time = parseInt((point.length - 1) * e.target.elapsed);
     e.target.x = point[time].x;
     e.target.y = point[time].y;
@@ -193,8 +213,12 @@ Ball.onMiss = function (e) {
         e.target.basket.setRotation(1 - Math.random() * 2);
 };
 Ball.onMissComplete = function (e) {
-    e.target.gravity = -8;
+    e.target.gravity = e.target.shootIndex == 2 ? 3.1 : -8;
     e.target.complete = false;
+    var point = e.target.miss[e.target.shootIndex];
+    e.target.x = point[point.length - 1].x;
+    e.target.y = point[point.length - 1].y;
+    e.target._callback(e.target._target, false);
 };
 
 Ball.onFinalUpdateComplete = function (e) {
