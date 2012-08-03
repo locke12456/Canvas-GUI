@@ -215,4 +215,28 @@ Ball.onMiss = function (e) {
 Ball.onMissComplete = function (e) {
     e.target.gravity = e.target.shootIndex == 2 ? 3.1 : -8;
     e.target.complete = false;
+    var point = e.target.miss[e.target.shootIndex];
+    e.target.x = point[point.length - 1].x;
+    e.target.y = point[point.length - 1].y;
+    e.target._callback(e.target._target, false);
+};
+
+Ball.onFinalUpdateComplete = function (e) {
+    var size = cc.Director.sharedDirector().getWinSize();
+    e.target.setPosition(cc.ccp(size.width, 0));
+    Graphic.Animation.Queue.add(cc.MoveTo.create(0.4, e.target.BallPosition), Graphic.Animation.Dispatcher(e.target, Ball.onUpdate, Ball.onUpdateComplete));
+};
+Ball.onUpdate = function (e) {
+    e.target.setScale(e.target.elapsed);
+    e.target.setRotation(e.target.getRotation() - e.target.getRotation() / 10);
+    e.target.setOpacity(e.target.elapsed * 255);
+};
+Ball.onUpdateComplete = function (e) {
+    e.target.final = true;
+    e.target.complete = false;
+    e.target.ActionRunning = false;
+    e.target.setOpacity(255);
+    e.target.setScale(1);
+    e.target.setRotation(0);
+    e.target.pauseSchedulerAndActions();
 };
