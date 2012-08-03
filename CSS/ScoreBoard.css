@@ -3,6 +3,11 @@
     src: url(Font/Ni7seg.ttf);
 }
 
+@font-face {
+    font-family: BigBlocko;
+    src: url(Font/BigBlocko.ttf);
+}
+
 .ScoreBoard {
     position: fixed;
     border-collapse: collapse;

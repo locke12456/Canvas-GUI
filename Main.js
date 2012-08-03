@@ -16,6 +16,7 @@ var Main = cc.Layer.extend({
     bIsMouseDown:false,
     size:null,
     time:0,
+    label:null,
     basket:null,
     ball:null,
     ballPoints:null,
@@ -63,8 +64,12 @@ var Main = cc.Layer.extend({
         return;
     },
     addScore:function (target) {
-        if (target.powerBar.isHitLine())
+        if (target.powerBar.isHitLine()) {
+
+            target.label.showTextByName(target.powerBar.isHitCenter() ? "Exelent" : Math.random() * 2 > 1 ? "Great" : "Good");
             target.scoreBoard.addScore(30);
+        } else
+            target.label.showTextByName("Miss");
     },
     subCoin:function () {
         if (this.coin > 0) {
@@ -88,6 +93,8 @@ Main.prototype.initLayer = function () {
     var lazyLayer = new cc.LazyLayer();
     this.addChild(lazyLayer);
     this.scoreBoard = new ScoreBoard(0, 30);
+    this.subCoin();
+    $("#Coin").show();
     //init background
     var background = cc.Sprite.create("src/Image/Background.png");
     background.setAnchorPoint(cc.ccp(0.5, 0.5));
@@ -114,8 +121,13 @@ Main.prototype.initLayer = function () {
 
     this.ballPoints = this.ball.shooting[1];
     this.ballGetPoints = this.ball.sink;
-    this.subCoin();
+
     console.log(this.ballPoints.length);
+    this.label = new CSSTextDraw("Null", "BigBlocko", 56);
+    this.label.setPosition(cc.ccp(size.width / 2, size.height - 64));
+    //this.label.setAnchorPoint(cc.ccp(0.5, 0.5));
+    // add the label as a child to this layer
+    this.addChild(this.label, 5);
     cc.Director.sharedDirector().getTouchDispatcher().addStandardDelegate(this, 1);
     cc.Director.sharedDirector().getScheduler().scheduleUpdateForTarget(this, 0, false);
 

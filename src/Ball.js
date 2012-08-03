@@ -195,6 +195,7 @@ Ball.onMiss = function (e) {
 Ball.onMissComplete = function (e) {
     e.target.gravity = -8;
     e.target.complete = false;
+    e.target._callback(e.target._target);
 };
 
 Ball.onFinalUpdateComplete = function (e) {

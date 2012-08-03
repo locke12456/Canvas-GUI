@@ -7,5 +7,6 @@
  */
 var Path = "src/";
 include(Path + 'Ball.js');
+include(Path + 'CSSTextDraw.js');
 include(Path + 'UserInterface_PowerBar.js');
 include(Path + 'UserInterface_ScoreBoard.js');
