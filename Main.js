@@ -49,7 +49,9 @@ var ProcessManager = cc.Layer.extend({
         }));
     },
     TimesUp:function () {
-        this.showHitPoint("Time's ", cc.ccc3(0xff, 0xff, 0), 64, "UP!", cc.ccc3(0xff, 0xff, 0), 64, "AR", 0.5);
+        if (this.coin != 0) {
+            this.showHitPoint("Time's ", cc.ccc3(0xff, 0xff, 0), 64, "UP!", cc.ccc3(0xff, 0xff, 0), 64, "AR", 0.5);
+        } else ScoreBoard.showCalcBoard();
     },
     gameOverBackCounter:function (e) {
 
@@ -122,13 +124,30 @@ var Main = ProcessManager.extend({
             var text = target.powerBar.isHitCenter() ? "Excellent" : Math.random() * 2 > 1 ? "Great" : "Good";
             target.label.showTextByName(text);
             target.scoreBoard.addScore(text == "Excellent" ? 15 : 10);
+
             var level = target.getLevel(target.scoreBoard.getScore());
             var result = target.isLevelUP(level);
             if (result) {
                 target.addCoin();
             }
-        } else
-            target.label.showTextByName("Miss");
+        } else {
+            var text = "Miss";
+            target.label.showTextByName(text);
+        }
+        switch (text) {
+            case "Excellent":
+                ScoreBoard.addExcellentCount();
+                break;
+            case "Great":
+                ScoreBoard.addGreatCount();
+                break;
+            case "Good":
+                ScoreBoard.addGoodCount();
+                break;
+            case "Miss":
+                ScoreBoard.addMissCount();
+                break;
+        }
     },
     addCoin:function () {
         $("#CoinText").text(Graphic.Utils.AutoZeros(1, ++this.coin, true));

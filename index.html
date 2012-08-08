@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <title>Cocos2d-HTML5 Hello World</title>
@@ -12,6 +12,7 @@
 <script type="text/javascript">
     $(function () {
         center("canvas");
+        center("ScoreCalc");
         setPostion("Score", $("#canvas").css("left"), $("#canvas").css("top"));
         var x = parseInt($("#canvas").css("left")) + 20;
         var y = parseInt($("#canvas").css("top")) - 6;
@@ -28,6 +29,8 @@
 
         $("#Score").hide();
         $("#Coin").hide();
+
+        // $("#ScoreCalc").hide();
         //setTime("60");
         //setScore("000");
         //showInput();
@@ -60,10 +63,44 @@
         item.text(value);
     }
 </script>
-<div><p class="HeaderText">123</p></div>
 <div id="canvas"
-     style="display:inline-block;width:auto; position: fixed; border-collapse: collapse; border:5px solid black; border-radius: 1px; box-shadow: 0 5px 50px #333;z-index:1">
+     style="display:inline-block;width:auto; position: fixed; border-collapse: collapse; border:1px solid black; border-radius: 1px; box-shadow: 0 5px 50px #333;z-index:1">
     <canvas id="gameCanvas" width="550" height="400"></canvas>
+</div>
+<div id="ScoreCalc" class="ScoreCalcBoard">
+    <p class="HeaderText">Your Score</p>
+    <table align="center">
+        <tr>
+            <td class="ScoreExcellent">Excellent</td>
+            <td class="ScoreExcellent">x</td>
+            <td id="ScoreExcellent" class="CoinText">00</td>
+        </tr>
+        <tr>
+            <td class="ScoreGreat">Great</td>
+            <td class="ScoreExcellent">x</td>
+            <td id="ScoreGreat" class="CoinText">00</td>
+        </tr>
+        <tr>
+            <td class="ScoreGood">Good</td>
+            <td class="ScoreExcellent">x</td>
+            <td id="ScoreGood" class="CoinText">00</td>
+        </tr>
+        <tr>
+            <td class="ScoreMiss">Miss</td>
+            <td class="ScoreExcellent">x</td>
+            <td id="ScoreMiss" class="CoinText">00</td>
+        </tr>
+        <tr>
+            <td class="ScoreExtra">Extra</td>
+            <td class="ScoreExcellent"></td>
+            <td id="ScoreExtra" class="CoinText"></td>
+        </tr>
+        <tr>
+            <td class="ScoreTotal">Total</td>
+            <td class="ScoreExcellent">：</td>
+            <td id="ScoreTotal" class="CoinText" style="font-size: 32px">999</td>
+        </tr>
+    </table>
 </div>
 <div id="Score" class="ScoreBoard">
     <p id="ScoreText" class="Score">000</p>

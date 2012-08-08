@@ -22,6 +22,18 @@
     z-index: 2;
 }
 
+.ScoreCalcBoard {
+    position: fixed;
+    border-collapse: collapse;
+    background-color: #a52a2a;
+    border-radius: 5px;
+    box-shadow: 0 5px 50px #333;
+    opacity: 0.8;
+    width: 312px;
+    height: 384px;
+    z-index: 3;
+}
+
 .Score {
     position: fixed;
     border-collapse: collapse;
@@ -56,9 +68,49 @@ button.Coin {
 }
 
 .HeaderText {
-    position: fixed;
-    border-collapse: collapse;
     font-family: AR;
     font-size: 24px;
     color: #000000;
+}
+
+.ScoreExcellent {
+    font-family: BigBlocko;
+    font-size: 30px;
+    color: yellow;
+}
+
+.ScoreGreat {
+    font-family: BigBlocko;
+    font-size: 30px;
+    color: blue;
+}
+
+.ScoreGood {
+    font-family: BigBlocko;
+    font-size: 30px;
+    color: #8a2be2;
+}
+
+.ScoreMiss {
+    font-family: BigBlocko;
+    font-size: 30px;
+    color: red;
+}
+
+.ScoreExtra {
+    font-family: BigBlocko;
+    font-size: 30px;
+    color: yellow;
+}
+
+.ScoreTotal {
+    font-family: BigBlocko;
+    font-size: 36px;
+    color: yellow;
+}
+
+td.CoinText {
+    font-family: Ni7;
+    font-size: 28px;
+    color: yellow;
 }

@@ -36,7 +36,7 @@ var PowerBar = Graphic.Sprite.extend({
         this._bar._mask.getChildAt(0).setAnchorPoint(cc.ccp(0, 0.5));
         this.addChild(this._bar);
 
-        var texture = Graphic.Utils.GradientTexture(cc.SizeMake(12, this._cover.height - 4), cc.ccc4(0, 255, 0, 255));
+        var texture = Graphic.Utils.GradientTexture(cc.SizeMake(this._cover.width * PowerBar.BAR_WIDTH, this._cover.height - 4), cc.ccc4(0, 255, 0, 255));
         this._LinePosition = 0.8;
         this._barLine = new Graphic.Sprite();
         this._barLine.initWithTexture(texture);
@@ -68,10 +68,10 @@ var PowerBar = Graphic.Sprite.extend({
         Graphic.Animation.Queue.add(cc.FadeOut.create(0.5), Graphic.Animation.Dispatcher(this, null, PowerBar.FadeComplete));
     },
     isHitLine:function () {
-        return this.__inRange(0.05);
+        return this.__inRange(PowerBar.BAR_WIDTH);
     },
     isHitCenter:function () {
-        return this.__inRange(0.025);
+        return this.__inRange(PowerBar.BAR_CENTER);
     },
     __inRange:function (shift) {
         var range_left = this._LinePosition - shift;
@@ -99,3 +99,5 @@ PowerBar.PROGRESS_REPEAT = function (e) {
 PowerBar.FadeComplete = function (e) {
     e.target.setVisible(false);
 };
+PowerBar.BAR_WIDTH = 0.05;
+PowerBar.BAR_CENTER = 0.025;

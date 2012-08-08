@@ -48,6 +48,29 @@ ScoreBoard.setScore = function (value) {
     var item = $('#ScoreText');
     item.text(value);
 };
+ScoreBoard.addExcellentCount = function () {
+    var item = $('#ScoreExcellent');
+    var value = parseInt(item.text()) + 1;
+    item.text(Graphic.Utils.AutoZeros(1, value, true));
+};
+ScoreBoard.addGreatCount = function () {
+    var item = $('#ScoreGreat');
+    var value = parseInt(item.text()) + 1;
+    item.text(Graphic.Utils.AutoZeros(1, value, true));
+};
+ScoreBoard.addGoodCount = function () {
+    var item = $('#ScoreGood');
+    var value = parseInt(item.text()) + 1;
+    item.text(Graphic.Utils.AutoZeros(1, value, true));
+};
+ScoreBoard.addMissCount = function () {
+    var item = $('#ScoreMiss');
+    var value = parseInt(item.text()) + 1;
+    item.text(Graphic.Utils.AutoZeros(1, value, true));
+};
+ScoreBoard.showCalcBoard = function () {
+    $("#ScoreCalc").show();
+};
 ScoreBoard.onUpdate = function (e) {
     if (e.target._addScore == 0 && e.target._addTime == 0)return;
     if (e.target.score < e.target.currentScore) {
