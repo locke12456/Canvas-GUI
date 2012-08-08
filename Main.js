@@ -15,6 +15,7 @@ var ProcessManager = cc.Layer.extend({
     TTFText:null,
     Level:-1,
     Score:0,
+    backCount:10,
     ctor:function () {
         this._super();
     },
@@ -30,20 +31,28 @@ var ProcessManager = cc.Layer.extend({
     isLevelUP:function (level) {
         if (level != this.Level) {
             this.Level = level;
-            this.showHitPoint("Level ", cc.ccc3(0xff, 0, 0), 70, "UP!", cc.ccc3(0xff, 0xff, 0), 78);
+            this.showHitPoint("Level ", cc.ccc3(0xff, 0, 0), 52, "UP!", cc.ccc3(0xff, 0xff, 0), 52, "AR");
             return true;
         }
         return false;
     },
-    showHitPoint:function (text01, color01, size01, text02, color02, size02, font) {
+    showHitPoint:function (text01, color01, size01, text02, color02, size02, font, time) {
         if (!font)font = "BigBlocko";
+        if (!time)
+            time = 1;
         this.TTFText.setVisible(true);
         this.TTFText.setOpacity(255);
         this.TTFText.setTextByIndex(0, text01, font, size01, color01);
         this.TTFText.setTextByIndex(1, text02, font, size02, color02);
-        Graphic.Animation.Queue.add(cc.FadeOut.create(1), Graphic.Animation.Dispatcher(this.TTFText, null, function (e) {
+        Graphic.Animation.Queue.add(cc.FadeOut.create(time), Graphic.Animation.Dispatcher(this.TTFText, null, function (e) {
             e.target.setVisible(false);
         }));
+    },
+    TimesUp:function () {
+        this.showHitPoint("Time's ", cc.ccc3(0xff, 0xff, 0), 64, "UP!", cc.ccc3(0xff, 0xff, 0), 64, "AR", 0.5);
+    },
+    gameOverBackCounter:function (e) {
+
     }
 });
 ProcessManager.LEVEL_1 = 200;
@@ -68,6 +77,9 @@ var Main = ProcessManager.extend({
     step:0,
     index:0,
     item:[],
+    ctor:function () {
+        this._super();
+    },
     init:function () {
         //////////////////////////////
         // 1. super init first
@@ -107,9 +119,9 @@ var Main = ProcessManager.extend({
     },
     addScore:function (target, sink) {
         if (sink) {
-            var text = target.powerBar.isHitCenter() ? "Exelent" : Math.random() * 2 > 1 ? "Great" : "Good";
+            var text = target.powerBar.isHitCenter() ? "Excellent" : Math.random() * 2 > 1 ? "Great" : "Good";
             target.label.showTextByName(text);
-            target.scoreBoard.addScore(text == "Exelent" ? 30 : 20);
+            target.scoreBoard.addScore(text == "Excellent" ? 15 : 10);
             var level = target.getLevel(target.scoreBoard.getScore());
             var result = target.isLevelUP(level);
             if (result) {
@@ -131,7 +143,7 @@ var Main = ProcessManager.extend({
         history.go(-1);
     },
     pause:function () {
-        this.showHitPoint("Time's ", cc.ccc3(0, 0, 0), 64, "UP!", cc.ccc3(0, 0, 0), 64, "AR");
+        this.TimesUp();
         cc.Director.sharedDirector().pause();
     },
     resume:function () {

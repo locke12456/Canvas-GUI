@@ -13,6 +13,8 @@ Graphic.CustomSizeTTF = cc.LabelTTF.extend({
     _textIndex:0,
     _textTable:[],
     _textKey:{},
+    _IsBackgroundVisible:false,
+    _background:null,
     /**
      * renders the label
      * @param {CanvasContext|Null} ctx
@@ -24,6 +26,7 @@ Graphic.CustomSizeTTF = cc.LabelTTF.extend({
     description:function () {
         return "";// "<cc.LabelTTF | FontName =" + this._fontName + " FontSize = " + this._fontSize.toFixed(1) + ">";
     },
+
     addText:function (text, font, size, color) {
         var new_text = new Graphic.CustomSizeTTF.TTF_TYPE();
         new_text.initWithString(arguments);
@@ -48,6 +51,13 @@ Graphic.CustomSizeTTF = cc.LabelTTF.extend({
     },
     getTextIndex:function (text) {
         return this._textKey[text];
+    },
+    setShowBackground:function (value) {
+        if (this._IsBackgroundVisible != value) {
+            this._IsBackgroundVisible = value;
+            if (text._string.length > 0)
+                this._updateOffset();
+        }
     },
     /**
      * changes the string to render
@@ -187,16 +197,22 @@ Graphic.CustomSizeTTF = cc.LabelTTF.extend({
     draw:function (ctx) {
         var index = 0;
         var shift = this._offsetX;
+        var context = ctx || cc.renderContext;
+        if (this._flipX) {
+            context.scale(-1, 1);
+        }
+        if (this._flipY) {
+            context.scale(1, -1);
+        }
+        if (this._IsBackgroundVisible) {
+            //ctx.globalCompositeOperation = Graphic.Mask.Type.Source_Over;
+            //Graphic.Utils.FillRect(ctx, this._background, cc.ccc4(0, 0, 0, 255));
+            //ctx.globalCompositeOperation = Graphic.Mask.Type.Source_Atop;
+        }
         do {
             var text = this._textTable[index++];
             if (cc.renderContextType == cc.CANVAS) {
-                var context = ctx || cc.renderContext;
-                if (this._flipX) {
-                    context.scale(-1, 1);
-                }
-                if (this._flipY) {
-                    context.scale(1, -1);
-                }
+
                 //this is fillText for canvas
                 context.fillStyle = "rgba(" + text._color.r + "," + text._color.g + "," + text._color.b + ", " + this._opacity / 255 + ")";
 
@@ -250,6 +266,7 @@ Graphic.CustomSizeTTF = cc.LabelTTF.extend({
                 }
             }
         } while (index < this._textTable.length);
+        ctx.globalCompositeOperation = Graphic.Mask.Type.Source_Over;
     },
     _updateTTF:function (index) {
         var text = this._textTable[index];
@@ -273,6 +290,8 @@ Graphic.CustomSizeTTF = cc.LabelTTF.extend({
         } while (index < this._textTable.length);
         this._offsetX = -shift / 2;
         this._offsetY = y / 2;
+        if (this._IsBackgroundVisible)
+            this._background = cc.RectMake(this._offsetX, -this._offsetY, shift, y);
     }
 });
 Graphic.CustomSizeTTF.TTF_TYPE = cc.Class.extend({

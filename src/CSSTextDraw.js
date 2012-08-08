@@ -33,7 +33,7 @@ var CSSTextDraw = Graphic.Sprite.extend({
         this.addToTextTable("Miss", 64, cc.ccc3(255, 0, 0));
         this.addToTextTable("Good", 64, cc.ccc3(0x66, 0, 0xcc));
         this.addToTextTable("Great", 64, cc.ccc3(0, 0x66, 0xff));
-        this.addToTextTable("Exelent", 64, cc.ccc3(0xF1, 0xDF, 0x41));
+        this.addToTextTable("Excellent", 64, cc.ccc3(0xF1, 0xDF, 0x41));
     },
     setPosition:function (pos) {
         this._super(pos);

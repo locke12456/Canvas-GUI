@@ -65,7 +65,7 @@ var PowerBar = Graphic.Sprite.extend({
         this.shift = this.shift == 1 ? 0 : 1;
         Graphic.Animation.Queue.remove(this);
         Graphic.Animation.Queue.remove(this._progressLine);
-        Graphic.Animation.Queue.add(cc.FadeOut.create(1), Graphic.Animation.Dispatcher(this, null, PowerBar.FadeComplete));
+        Graphic.Animation.Queue.add(cc.FadeOut.create(0.5), Graphic.Animation.Dispatcher(this, null, PowerBar.FadeComplete));
     },
     isHitLine:function () {
         return this.__inRange(0.05);
