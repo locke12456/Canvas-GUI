@@ -9,10 +9,12 @@ var CSSTextType = cc.Class.extend({
     text:null,
     size:null,
     color:null,
-    ctor:function (value, size, color) {
+    position:null,
+    ctor:function (value, size, color, position) {
         this.text = value;
         this.size = size;
         this.color = color;
+        this.position = position;
     }
 });
 var CSSTextDraw = Graphic.Sprite.extend({
@@ -60,3 +62,49 @@ CSSTextDraw.onUpdateComplete = function (e) {
     e.target.setOpacity(255);
     e.target.setPosition(cc.ccp(0, 0));
 };
+var TextAnimationType = cc.Class.extend({
+    text:null,
+    MAX:null,
+    MIN:null,
+    Color:null,
+    ctor:function (value, min, max, color) {
+        this.text = value;
+        this.MIN = min;
+        this.MAX = max;
+        this.color = color;
+    }
+});
+var TextAnimation = Graphic.CustomSizeTTF.extend({
+    animationTable:[],
+    animationIndex:0,
+    setTextAnimation:function (text, transform) {
+        var index = this.getTextIndex(text);
+        this.animationTable[index] = transform;
+    },
+    play:function (index) {
+        this.animationIndex = index ? index : this.animationIndex + 1;
+
+        Graphic.Animation.Queue.add(new Graphic.Utils.Timer(1), Graphic.Animation.Dispatcher(this, TextAnimation.onUpdate, TextAnimation.onUpdateComplete));
+    },
+    _updateOffset:function () {
+        var index = 0;
+        var shift = 0;
+        var y = 0;
+        do {
+            var text = this._textTable[index++];
+            shift += text._contentSize.width;
+        } while (index < this._textTable.length);
+        this._offsetX = -shift / 2;
+    }
+});
+TextAnimation.onUpdate = function (e) {
+    var transform = e.target.animationTable[e.target.animationIndex];
+    e.target.setFontSize(transform.MIN + (parseInt((transform.MAX - transform.MIN) * (1 - e.target.elapsed))), e.target.getStringByIndex(transform.text));
+};
+TextAnimation.onUpdateComplete = function (e) {
+    //e.target._parent.setVisible(false);
+    if (e.target.animationIndex + 1 < e.target.animationTable.length)
+        e.target.play();
+    else e.target.animationIndex = 0;
+};
+

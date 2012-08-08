@@ -12,6 +12,7 @@ include('src/rules.js');
 include('io.js');
 //19
 var ProcessManager = cc.Layer.extend({
+    TTFText:null,
     Level:-1,
     Score:0,
     ctor:function () {
@@ -29,16 +30,27 @@ var ProcessManager = cc.Layer.extend({
     isLevelUP:function (level) {
         if (level != this.Level) {
             this.Level = level;
+            this.showHitPoint("Level ", cc.ccc3(0xff, 0, 0), 70, "UP!", cc.ccc3(0xff, 0xff, 0), 78);
             return true;
         }
         return false;
+    },
+    showHitPoint:function (text01, color01, size01, text02, color02, size02, font) {
+        if (!font)font = "BigBlocko";
+        this.TTFText.setVisible(true);
+        this.TTFText.setOpacity(255);
+        this.TTFText.setTextByIndex(0, text01, font, size01, color01);
+        this.TTFText.setTextByIndex(1, text02, font, size02, color02);
+        Graphic.Animation.Queue.add(cc.FadeOut.create(1), Graphic.Animation.Dispatcher(this.TTFText, null, function (e) {
+            e.target.setVisible(false);
+        }));
     }
 });
-ProcessManager.LEVEL_1 = 300;
-ProcessManager.LEVEL_2 = 450;
-ProcessManager.LEVEL_3 = 600;
-ProcessManager.LEVEL_4 = 750;
-ProcessManager.LEVEL_5 = 900;
+ProcessManager.LEVEL_1 = 200;
+ProcessManager.LEVEL_2 = 350;
+ProcessManager.LEVEL_3 = 500;
+ProcessManager.LEVEL_4 = 650;
+ProcessManager.LEVEL_5 = 800;
 var main;
 var Main = ProcessManager.extend({
     bIsMouseDown:false,
@@ -119,6 +131,7 @@ var Main = ProcessManager.extend({
         history.go(-1);
     },
     pause:function () {
+        this.showHitPoint("Time's ", cc.ccc3(0, 0, 0), 64, "UP!", cc.ccc3(0, 0, 0), 64, "AR");
         cc.Director.sharedDirector().pause();
     },
     resume:function () {
@@ -153,7 +166,7 @@ Main.prototype.initLayer = function () {
     //this.ball.Shoot(false);
     this.powerBar = new PowerBar("src/Image/PowerBar/cover.png", "src/Image/PowerBar/bar.png", "src/Image/PowerBar/mask.png");
     this.powerBar.setPosition(cc.ccp(size.width / 2 - 153, size.height / 2));
-    this.addChild(this.powerBar);
+    lazyLayer.addChild(this.powerBar);
     Ball.BOTTON = size.height - 261;
 
     this.ballPoints = this.ball.shooting[1];
@@ -165,6 +178,15 @@ Main.prototype.initLayer = function () {
     //this.label.setAnchorPoint(cc.ccp(0.5, 0.5));
     // add the label as a child to this layer
     this.addChild(this.label, 5);
+    var text = this.TTFText = new Graphic.CustomSizeTTF();
+
+    text.setPosition(cc.ccp(size.width / 2, size.height / 2));
+    text.addText("Game ", "BigBlocko", 70, cc.ccc3(0xff, 0, 0));
+    text.addText("Start", "BigBlocko", 70, cc.ccc3(0xff, 0, 0));
+    Graphic.Animation.Queue.add(cc.FadeOut.create(1), Graphic.Animation.Dispatcher(this.TTFText, null, function (e) {
+        e.target.setVisible(false);
+    }));
+    lazyLayer.addChild(text);
     cc.Director.sharedDirector().getTouchDispatcher().addStandardDelegate(this, 1);
     cc.Director.sharedDirector().getScheduler().scheduleUpdateForTarget(this, 0, false);
 

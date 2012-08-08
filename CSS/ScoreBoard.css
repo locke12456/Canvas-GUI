@@ -8,6 +8,11 @@
     src: url(Font/BigBlocko.ttf);
 }
 
+@font-face {
+    font-family: AR;
+    src: url(Font/agent-red.ttf);
+}
+
 .ScoreBoard {
     position: fixed;
     border-collapse: collapse;
@@ -48,4 +53,12 @@ button.Coin {
     font-family: Ni7;
     font-size: 24px;
     color: yellow;
+}
+
+.HeaderText {
+    position: fixed;
+    border-collapse: collapse;
+    font-family: AR;
+    font-size: 24px;
+    color: #000000;
 }

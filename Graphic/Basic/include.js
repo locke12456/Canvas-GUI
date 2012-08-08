@@ -12,3 +12,4 @@ Graphic.Basic = Graphic.lib_path + "Graphic/Basic/";
 include(Graphic.Basic + 'Sprite.js');
 include(Graphic.Basic + 'Mask.js');
 include(Graphic.Basic + 'ColorSprite.js');
+include(Graphic.Basic + 'CustomSizeTTF.js');
