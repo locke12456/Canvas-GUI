@@ -16,6 +16,7 @@ var ProcessManager = cc.Layer.extend({
     Level:-1,
     Score:0,
     backCount:10,
+    GameOver:false,
     ctor:function () {
         this._super();
     },
@@ -46,12 +47,17 @@ var ProcessManager = cc.Layer.extend({
         this.TTFText.setTextByIndex(1, text02, font, size02, color02);
         Graphic.Animation.Queue.add(cc.FadeOut.create(time), Graphic.Animation.Dispatcher(this.TTFText, null, function (e) {
             e.target.setVisible(false);
+            if (main.GameOver) {
+                ScoreBoard.showCalcBoard();
+            }
         }));
     },
     TimesUp:function () {
-        if (this.coin != 0) {
-            this.showHitPoint("Time's ", cc.ccc3(0xff, 0xff, 0), 64, "UP!", cc.ccc3(0xff, 0xff, 0), 64, "AR", 0.5);
-        } else ScoreBoard.showCalcBoard();
+        if (this.coin == 0) {
+            this.stopAll();
+            this.GameOver = true;
+        }
+        this.showHitPoint("Time's ", cc.ccc3(0xff, 0xff, 0), 64, "UP!", cc.ccc3(0xff, 0xff, 0), 64, "AR", 0.5);
     },
     gameOverBackCounter:function (e) {
 
@@ -99,7 +105,7 @@ var Main = ProcessManager.extend({
 
     },
     ccTouchesEnded:function (pTouches, pEvent) {
-        if (cc.Director.sharedDirector().isPaused())return;
+        if (cc.Director.sharedDirector().isPaused() || this.GameOver)return;
         var level = this.getLevel(this.scoreBoard.getScore());
         switch (this.step) {
             case 0:
@@ -123,7 +129,7 @@ var Main = ProcessManager.extend({
         if (sink) {
             var text = target.powerBar.isHitCenter() ? "Excellent" : Math.random() * 2 > 1 ? "Great" : "Good";
             target.label.showTextByName(text);
-            target.scoreBoard.addScore(text == "Excellent" ? 15 : 10);
+            target.scoreBoard.addScore(text == "Excellent");
 
             var level = target.getLevel(target.scoreBoard.getScore());
             var result = target.isLevelUP(level);
@@ -153,6 +159,7 @@ var Main = ProcessManager.extend({
         $("#CoinText").text(Graphic.Utils.AutoZeros(1, ++this.coin, true));
     },
     subCoin:function () {
+        //ScoreBoard.showCalcBoard();
         if (this.coin > 0) {
             if (this.scoreBoard.addTime(this.ADD_TIME_COST))
                 $("#CoinText").text(Graphic.Utils.AutoZeros(1, --this.coin, true));
@@ -162,11 +169,19 @@ var Main = ProcessManager.extend({
         history.go(-1);
     },
     pause:function () {
+        if (this.GameOver)return;
         this.TimesUp();
+        if (this.GameOver)return;
         cc.Director.sharedDirector().pause();
     },
     resume:function () {
         cc.Director.sharedDirector().resume();
+    },
+    stopAll:function () {
+        this.ball.stop();
+        this.powerBar.stop();
+        this.label.stop();
+        this.scoreBoard.stop();
     }
 });
 //Main.bIsMouseDown = null;
@@ -220,7 +235,7 @@ Main.prototype.initLayer = function () {
     lazyLayer.addChild(text);
     cc.Director.sharedDirector().getTouchDispatcher().addStandardDelegate(this, 1);
     cc.Director.sharedDirector().getScheduler().scheduleUpdateForTarget(this, 0, false);
-
+    //ScoreBoard.showCalcBoard();
 };
 Main.subCoin = function () {
     if (main)

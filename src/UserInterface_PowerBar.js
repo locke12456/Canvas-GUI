@@ -85,15 +85,18 @@ var PowerBar = Graphic.Sprite.extend({
     }
 });
 PowerBar.onBarUpdate = function (e) {
+    if (main.GameOver)return;
     var shift = e.target.shift == 1 ? (e.target.shift - e.target.elapsed) : e.target.elapsed;
     e.target._LinePosition = (shift) * 0.7 + 0.15;
     e.target._barLine.x = e.target._cover.width * e.target._LinePosition;
 };
 PowerBar.onBarUpdateComplete = function (e) {
+    if (main.GameOver)return;
     e.target.shift = e.target.shift == 1 ? 0 : 1;
     Graphic.Animation.Queue.add(new Graphic.Utils.Timer(e.target.SPEED), Graphic.Animation.Dispatcher(e.target, PowerBar.onBarUpdate, PowerBar.onBarUpdateComplete));
 };
 PowerBar.PROGRESS_REPEAT = function (e) {
+    if (main.GameOver)return;
     Graphic.Animation.Queue.add(cc.ScaleTo.create(2, e.target.getScaleX() == 0 ? 1 : 0, 1), Graphic.Animation.Dispatcher(e.target, null, PowerBar.PROGRESS_REPEAT));
 };
 PowerBar.FadeComplete = function (e) {

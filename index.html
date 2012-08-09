@@ -30,10 +30,7 @@
         $("#Score").hide();
         $("#Coin").hide();
 
-        // $("#ScoreCalc").hide();
-        //setTime("60");
-        //setScore("000");
-        //showInput();
+        $("#ScoreCalc").hide();
     });
     function setPostion(id, offsetX, offsetY) {
         var item = $('#' + id);
@@ -69,36 +66,31 @@
 </div>
 <div id="ScoreCalc" class="ScoreCalcBoard">
     <p class="HeaderText">Your Score</p>
-    <table align="center">
-        <tr>
+    <table align="left" class="Board">
+        <tr id="ScoreCalc_T1">
             <td class="ScoreExcellent">Excellent</td>
             <td class="ScoreExcellent">x</td>
             <td id="ScoreExcellent" class="CoinText">00</td>
         </tr>
-        <tr>
+        <tr id="ScoreCalc_T2">
             <td class="ScoreGreat">Great</td>
             <td class="ScoreExcellent">x</td>
             <td id="ScoreGreat" class="CoinText">00</td>
         </tr>
-        <tr>
+        <tr id="ScoreCalc_T3">
             <td class="ScoreGood">Good</td>
             <td class="ScoreExcellent">x</td>
             <td id="ScoreGood" class="CoinText">00</td>
         </tr>
-        <tr>
+        <tr id="ScoreCalc_T4">
             <td class="ScoreMiss">Miss</td>
             <td class="ScoreExcellent">x</td>
             <td id="ScoreMiss" class="CoinText">00</td>
         </tr>
-        <tr>
-            <td class="ScoreExtra">Extra</td>
-            <td class="ScoreExcellent"></td>
-            <td id="ScoreExtra" class="CoinText"></td>
-        </tr>
-        <tr>
+        <tr id="ScoreCalc_T5">
             <td class="ScoreTotal">Total</td>
             <td class="ScoreExcellent">：</td>
-            <td id="ScoreTotal" class="CoinText" style="font-size: 32px">999</td>
+            <td id="ScoreTotal" class="CoinText" style="font-size: 35px;height: auto;">000</td>
         </tr>
     </table>
 </div>

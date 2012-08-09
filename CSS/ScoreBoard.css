@@ -13,6 +13,14 @@
     src: url(Font/agent-red.ttf);
 }
 
+body {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
 .ScoreBoard {
     position: fixed;
     border-collapse: collapse;
@@ -20,12 +28,14 @@
     width: 200px;
     height: 84px;
     z-index: 2;
+
 }
 
 .ScoreCalcBoard {
     position: fixed;
     border-collapse: collapse;
     background-color: #a52a2a;
+    border: 2px solid black;
     border-radius: 5px;
     box-shadow: 0 5px 50px #333;
     opacity: 0.8;
@@ -74,43 +84,70 @@ button.Coin {
 }
 
 .ScoreExcellent {
+    background-color: #000000;
+    border: 2px solid #ff0600;
+    border-radius: 5px;
     font-family: BigBlocko;
     font-size: 30px;
     color: yellow;
 }
 
 .ScoreGreat {
+    background-color: #000000;
+    border: 2px solid #ff0600;
+    border-radius: 5px;
     font-family: BigBlocko;
     font-size: 30px;
     color: blue;
 }
 
 .ScoreGood {
+    background-color: #000000;
+    border: 2px solid #ff0600;
+    border-radius: 5px;
     font-family: BigBlocko;
     font-size: 30px;
     color: #8a2be2;
 }
 
 .ScoreMiss {
+    background-color: #000000;
+    border: 2px solid #ff0600;
+    border-radius: 5px;
     font-family: BigBlocko;
     font-size: 30px;
     color: red;
 }
 
 .ScoreExtra {
+    background-color: #000000;
+    border: 2px solid #ff0600;
+    border-radius: 5px;
     font-family: BigBlocko;
     font-size: 30px;
     color: yellow;
 }
 
 .ScoreTotal {
+    background-color: #000000;
+    border: 2px solid #ff0600;
+    border-radius: 5px;
     font-family: BigBlocko;
     font-size: 36px;
     color: yellow;
 }
 
+table.Board {
+    width: 200px;
+}
+
 td.CoinText {
+    background-color: #000000;
+    border: 2px solid #ff0600;
+    border-radius: 5px;
     font-family: Ni7;
     font-size: 28px;
     color: yellow;
+    height: 31px;
+    width: 108px;
 }

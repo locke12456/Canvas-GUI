@@ -68,6 +68,10 @@ var Ball = Graphic.Sprite.extend({
                 this.complete = true;
             }
         }
+    },
+    stop:function () {
+        Graphic.Animation.Queue.remove(this);
+        this.complete = true;
     }
 });
 Ball.BALL_SIZE = 110;

@@ -30,7 +30,7 @@ var CSSTextDraw = Graphic.Sprite.extend({
         this.setVisible(false);
     },
     initText:function () {
-        this.addToTextTable("Miss", 64, cc.ccc3(255, 0, 0));
+        this.addToTextTable("Miss", 64, cc.ccc3(0xff, 0, 0));
         this.addToTextTable("Good", 64, cc.ccc3(0x66, 0, 0xcc));
         this.addToTextTable("Great", 64, cc.ccc3(0, 0x66, 0xff));
         this.addToTextTable("Excellent", 64, cc.ccc3(0xF1, 0xDF, 0x41));
@@ -51,6 +51,9 @@ var CSSTextDraw = Graphic.Sprite.extend({
             this.font.setFontSize(text.size);
         }
         Graphic.Animation.Queue.add(cc.MoveTo.create(1, cc.ccp(0, 56)), Graphic.Animation.Dispatcher(this.font, CSSTextDraw.onUpdate, CSSTextDraw.onUpdateComplete));
+    },
+    stop:function () {
+        Graphic.Animation.Queue.remove(this.font);
     }
 
 });

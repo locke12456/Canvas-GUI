@@ -24,6 +24,10 @@ Graphic.Animation = cc.Class.extend({
         this._m_tAnimationBegin = false;
         cc.Director.sharedDirector().getScheduler().unscheduleUpdateForTarget(this);
     },
+    removeAll:function () {
+        cc.Director.sharedDirector().getActionManager().removeAllActions();
+        this._m_tQueue = [];
+    },
     remove:function (target) {
         var recycle = false;
         for (var v in this._m_tQueue) {
@@ -48,11 +52,16 @@ Graphic.Animation = cc.Class.extend({
         else return 0;
     },
     dispatch:function (queue, target) {
-        var evt = Graphic.Dispatcher(null, target);
-        queue(evt);
+        var result = queue != null;
+        if (result) {
+            var evt = Graphic.Dispatcher(null, target);
+            queue(evt);
+            return true;
+        }
+        return false;
     },
     recycle:function () {
-        for (var i = 0; i < this._m_tQueue.length; i++) {
+        for (var i = this._m_tQueue.length - 1; i >= 0; i--) {
             if (this._m_tQueue[i] == null)this.removeTarget(this._m_tQueue[i]);
         }
         if (this._m_tQueue.length == 0)this.AnimationStop();
@@ -63,11 +72,14 @@ Graphic.Animation = cc.Class.extend({
             if (this._m_tQueue[i]) {
                 var action = this.numActions(this._m_tQueue[i]);
                 if (action == 0) {
-                    if (this._m_tQueue[i].complete) {
-                        this.dispatch(this._m_tQueue[i].complete, this._m_tQueue[i].target);
-                    }
+                    var result = this._m_tQueue[i].complete != null;
+                    var result2 = this.dispatch(this._m_tQueue[i].complete, this._m_tQueue[i].target);
+
                     recycle = true;
                     this._m_tQueue[i] = null;
+                    if (result != result2) {
+                        console.log("trace");
+                    }
                 } else {
                     if (this._m_tQueue[i].update) {
                         this._m_tQueue[i].target.elapsed = this._m_tQueue[i].action.getElapsed() / this._m_tQueue[i].action.getDuration();
