@@ -27,6 +27,7 @@ var CSSTextDraw = Graphic.Sprite.extend({
         this.font = cc.LabelTTF.create(value, font, size);
         this.font.setVerticalAlignment(cc.TEXT_ALIGNMENT_CENTER);
         this.addChild(this.font);
+        this.setText(this.textTable["Excellent"]);
         this.setVisible(false);
     },
     initText:function () {
@@ -34,6 +35,12 @@ var CSSTextDraw = Graphic.Sprite.extend({
         this.addToTextTable("Good", 64, cc.ccc3(0x66, 0, 0xcc));
         this.addToTextTable("Great", 64, cc.ccc3(0, 0x66, 0xff));
         this.addToTextTable("Excellent", 64, cc.ccc3(0xF1, 0xDF, 0x41));
+
+    },
+    getRange:function () {
+        var size = this.font.getContentSize();
+        size.height *= 2;
+        return size;
     },
     setPosition:function (pos) {
         this._super(pos);
@@ -42,15 +49,19 @@ var CSSTextDraw = Graphic.Sprite.extend({
     addToTextTable:function (value, size, color) {
         this.textTable[value] = (new CSSTextType(value, size, color));
     },
+    setText:function (text) {
+        this.font.setString(text.text);
+        this.font.setColor(text.color);
+        this.font.setFontSize(text.size);
+        this.font.setPosition(cc.ccp(0, 64));
+    },
     showTextByName:function (name) {
         this.setVisible(true);
         var text = this.textTable[name];
         if (this.font.getString() != text.text) {
-            this.font.setString(text.text);
-            this.font.setColor(text.color);
-            this.font.setFontSize(text.size);
+            this.setText(text);
         }
-        Graphic.Animation.Queue.add(cc.MoveTo.create(1, cc.ccp(0, 56)), Graphic.Animation.Dispatcher(this.font, CSSTextDraw.onUpdate, CSSTextDraw.onUpdateComplete));
+        Graphic.Animation.Queue.add(cc.MoveTo.create(1, cc.ccp(0, 128)), Graphic.Animation.Dispatcher(this.font, CSSTextDraw.onUpdate, CSSTextDraw.onUpdateComplete));
     },
     stop:function () {
         Graphic.Animation.Queue.remove(this.font);
@@ -63,7 +74,7 @@ CSSTextDraw.onUpdate = function (e) {
 CSSTextDraw.onUpdateComplete = function (e) {
     e.target._parent.setVisible(false);
     e.target.setOpacity(255);
-    e.target.setPosition(cc.ccp(0, 0));
+    e.target.setPosition(cc.ccp(0, 64));
 };
 var TextAnimationType = cc.Class.extend({
     text:null,
@@ -86,7 +97,6 @@ var TextAnimation = Graphic.CustomSizeTTF.extend({
     },
     play:function (index) {
         this.animationIndex = index ? index : this.animationIndex + 1;
-
         Graphic.Animation.Queue.add(new Graphic.Utils.Timer(1), Graphic.Animation.Dispatcher(this, TextAnimation.onUpdate, TextAnimation.onUpdateComplete));
     },
     _updateOffset:function () {

@@ -38,7 +38,7 @@ body {
     border: 2px solid black;
     border-radius: 5px;
     box-shadow: 0 5px 50px #333;
-    opacity: 0.8;
+    opacity: 0;
     width: 312px;
     height: 384px;
     z-index: 3;

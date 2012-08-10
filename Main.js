@@ -85,6 +85,7 @@ var Main = ProcessManager.extend({
     step:0,
     index:0,
     item:[],
+    Layers:[],
     ctor:function () {
         this._super();
     },
@@ -93,6 +94,15 @@ var Main = ProcessManager.extend({
         // 1. super init first
         this._super();
         return true;
+    },
+    createDinamicLayer:function (id, size) {
+        var layer = new Graphic.DynamicLayer(size, id);
+        this.addChild(layer);
+        this.Layers.push(layer);
+        return layer;
+    },
+    getLazyLayerByIndex:function (index) {
+        return index && index >= 0 && index < this.Layers.length ? this.Layers[index] : null;
     },
     onEnter:function () {
         this._super();
@@ -187,8 +197,7 @@ var Main = ProcessManager.extend({
 //Main.bIsMouseDown = null;
 Main.prototype.initLayer = function () {
     var size = this.size = cc.Director.sharedDirector().getWinSize();
-    var lazyLayer = new cc.LazyLayer();
-    this.addChild(lazyLayer);
+    var backgroundLayer = this.createDinamicLayer("backgroundLayer");
     this.scoreBoard = new ScoreBoard(0, 30);
     this.subCoin();
     $("#Coin").show();
@@ -196,43 +205,43 @@ Main.prototype.initLayer = function () {
     var background = cc.Sprite.create("src/Image/Background.png");
     background.setAnchorPoint(cc.ccp(0.5, 0.5));
     background.setPosition(cc.ccp(size.width / 2, size.height / 2));
-    lazyLayer.addChild(background, 4);
-    console.log(background.x);
-    var lazyLayer = new cc.LazyLayer();
-    this.addChild(lazyLayer);
+    backgroundLayer.addChild(background);
+
+    var gameObjectsLayer = this.createDinamicLayer("gameObjectsLayer");
     this.basket = new Graphic.Sprite("src/Image/Basket.png", this.basket);
     this.basket.setAnchorPoint(cc.ccp(0.5, 0));
     this.basket.setPosition(cc.ccp(size.width / 2, size.height - 274));
-    lazyLayer.addChild(this.basket);
+    gameObjectsLayer.addChild(this.basket);
     this.ball = new Ball("src/Image/basketball.png", this.basket);
     this.ball.setAnchorPoint(cc.ccp(0.5, 0.5));
     this.ball.setPosition(cc.ccp(size.width / 2, 8));
     this.ball.BallPosition = cc.ccp(size.width / 2, 8);
-    lazyLayer.addChild(this.ball);
-    //this.ball.Shoot(false);
-    this.powerBar = new PowerBar("src/Image/PowerBar/cover.png", "src/Image/PowerBar/bar.png", "src/Image/PowerBar/mask.png");
-    this.powerBar.setPosition(cc.ccp(size.width / 2 - 153, size.height / 2));
-    lazyLayer.addChild(this.powerBar);
+    gameObjectsLayer.addChild(this.ball);
     Ball.BOTTON = size.height - 261;
-
     this.ballPoints = this.ball.shooting[1];
     this.ballGetPoints = this.ball.sink;
 
-    console.log(this.ballPoints.length);
-    this.label = new CSSTextDraw("Null", "BigBlocko", 56);
-    this.label.setPosition(cc.ccp(size.width / 2, size.height - 64));
-    //this.label.setAnchorPoint(cc.ccp(0.5, 0.5));
-    // add the label as a child to this layer
-    this.addChild(this.label, 5);
-    var text = this.TTFText = new Graphic.CustomSizeTTF();
+    this.powerBar = new PowerBar("src/Image/PowerBar/cover.png", "src/Image/PowerBar/bar.png", "src/Image/PowerBar/mask.png");
+    this.powerBar.setPosition(cc.ccp(0, this.powerBar.height / 2));
+    var UILayer_PowerBar = this.createDinamicLayer("UILayer_PowerBar", cc.SizeMake(this.powerBar.width, this.powerBar.height));
+    UILayer_PowerBar.setPosition(cc.ccp(size.width / 2 - 153, size.height / 2));
+    UILayer_PowerBar.addChild(this.powerBar);
 
-    text.setPosition(cc.ccp(size.width / 2, size.height / 2));
+    this.label = new CSSTextDraw("Null", "BigBlocko", 56);
+    this.label.setPosition(cc.ccp(this.label.getRange().width / 2, 0));
+    var UILayer_HitPoint = this.createDinamicLayer("UILayer_HitPoint", this.label.getRange());
+    UILayer_HitPoint.setPosition(cc.ccp(size.width / 2 - this.label.getRange().width / 2, 0));
+    UILayer_HitPoint.addChild(this.label);
+    var UILayer = this.createDinamicLayer("UILayer", cc.SizeMake(cc.canvas.width, 128));
+    var text = this.TTFText = new Graphic.CustomSizeTTF();
+    UILayer.setPosition(cc.ccp(0, size.height / 2 - 32));
+    text.setPosition(cc.ccp(size.width / 2, 64));
     text.addText("Game ", "BigBlocko", 70, cc.ccc3(0xff, 0, 0));
     text.addText("Start", "BigBlocko", 70, cc.ccc3(0xff, 0, 0));
     Graphic.Animation.Queue.add(cc.FadeOut.create(1), Graphic.Animation.Dispatcher(this.TTFText, null, function (e) {
         e.target.setVisible(false);
     }));
-    lazyLayer.addChild(text);
+    UILayer.addChild(text);
     cc.Director.sharedDirector().getTouchDispatcher().addStandardDelegate(this, 1);
     cc.Director.sharedDirector().getScheduler().scheduleUpdateForTarget(this, 0, false);
     //ScoreBoard.showCalcBoard();

@@ -99,6 +99,7 @@ ScoreBoard.showCalcBoard = function () {
     $("#ScoreCalc").show();
     Graphic.Animation.Queue.add(new Graphic.Utils.Timer(0.5), Graphic.Animation.Dispatcher(that, null, ScoreBoard.NextTD));
     $('#ScoreCalc_T1').show();
+    ScoreBoard.PositionUpdate();
 };
 ScoreBoard.onUpdate = function (e) {
     if (e.target._addScore == 0 && e.target._addTime == 0)return;
@@ -153,6 +154,7 @@ ScoreBoard.onScoreCalcComplete = function (e) {
     if (that.Index < that.value.length)
         Graphic.Animation.Queue.add(new Graphic.Utils.Timer(1), Graphic.Animation.Dispatcher(that, ScoreBoard.onScoreCalcUpdate, ScoreBoard.onScoreCalcComplete));
 };
+
 ScoreBoard.NextTD = function (e) {
     var that = e.target;
     that.Index++;
@@ -163,4 +165,13 @@ ScoreBoard.NextTD = function (e) {
         that.Index = 0;
         Graphic.Animation.Queue.add(new Graphic.Utils.Timer(1), Graphic.Animation.Dispatcher(that, ScoreBoard.onScoreCalcUpdate, ScoreBoard.onScoreCalcComplete));
     }
+};
+ScoreBoard.PositionUpdate = function () {
+    var item = $("#ScoreCalc");
+    var left = parseInt(item.css('left'));
+    item.css('left', left + 320);
+    item.animate({
+        left:left,
+        opacity:0.8
+    }, 1000);
 };

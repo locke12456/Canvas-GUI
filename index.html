@@ -21,8 +21,8 @@
         y = parseInt($("#canvas").css("top")) + 3;
         setPostion("TimeText", x, y);
 
-        x = parseInt($("#canvas").css("left")) + parseInt($("#canvas").width()) - parseInt($("#Coin").width()) - 12;
-        y = parseInt($("#canvas").css("top")) + parseInt($("#canvas").height()) - parseInt($("#Coin").height());
+        x = parseInt($("#canvas").css("left")) + parseInt($("#canvas").width()) - parseInt($("#Coin").width()) - 15;
+        y = parseInt($("#canvas").css("top")) + parseInt($("#canvas").height()) - parseInt($("#Coin").height()) - 5;
         setPostion("Coin", x, y);
 
         setPostion("CoinText", x + 17, y - 8);
@@ -61,7 +61,7 @@
     }
 </script>
 <div id="canvas"
-     style="display:inline-block;width:auto; position: fixed; border-collapse: collapse; border:1px solid black; border-radius: 1px; box-shadow: 0 5px 50px #333;z-index:1">
+     style="display:inline-block;height:400px; position: fixed; border-collapse: collapse; border:3px solid black; border-radius: 5px; box-shadow: 0 5px 50px #333;z-index:1">
     <canvas id="gameCanvas" width="550" height="400"></canvas>
 </div>
 <div id="ScoreCalc" class="ScoreCalcBoard">
