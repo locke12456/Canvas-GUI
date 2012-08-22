@@ -17,8 +17,10 @@ var ProcessManager = cc.Layer.extend({
     Score:0,
     backCount:10,
     GameOver:false,
+    Ranking:null,
     ctor:function () {
         this._super();
+        this.Ranking = new Ranking();
     },
     getLevel:function (score) {
         this.Score = score;
@@ -48,7 +50,7 @@ var ProcessManager = cc.Layer.extend({
         Graphic.Animation.Queue.add(cc.FadeOut.create(time), Graphic.Animation.Dispatcher(this.TTFText, null, function (e) {
             e.target.setVisible(false);
             if (main.GameOver) {
-                ScoreBoard.showCalcBoard();
+
             }
         }));
     },
@@ -56,8 +58,10 @@ var ProcessManager = cc.Layer.extend({
         if (this.coin == 0) {
             this.stopAll();
             this.GameOver = true;
-        }
-        this.showHitPoint("Time's ", cc.ccc3(0xff, 0xff, 0), 64, "UP!", cc.ccc3(0xff, 0xff, 0), 64, "AR", 0.5);
+            this.showHitPoint("Time's ", cc.ccc3(0xff, 0xff, 0), 64, "UP!", cc.ccc3(0xff, 0xff, 0), 64, "AR", 2);
+            ScoreBoard.showCalcBoard();
+        } else
+            this.showHitPoint("Time's ", cc.ccc3(0xff, 0xff, 0), 64, "UP!", cc.ccc3(0xff, 0xff, 0), 64, "AR", 0.5);
     },
     gameOverBackCounter:function (e) {
 
@@ -108,6 +112,7 @@ var Main = ProcessManager.extend({
         this._super();
         this.initLayer();
     },
+
     ccTouchesBegan:function (pTouches, pEvent) {
 
     },
@@ -232,9 +237,9 @@ Main.prototype.initLayer = function () {
     var UILayer_HitPoint = this.createDinamicLayer("UILayer_HitPoint", this.label.getRange());
     UILayer_HitPoint.setPosition(cc.ccp(size.width / 2 - this.label.getRange().width / 2, 0));
     UILayer_HitPoint.addChild(this.label);
-    var UILayer = this.createDinamicLayer("UILayer", cc.SizeMake(cc.canvas.width, 128));
+    var UILayer = this.createDinamicLayer("UILayer_UIText", cc.SizeMake(cc.canvas.width, 128));
     var text = this.TTFText = new Graphic.CustomSizeTTF();
-    UILayer.setPosition(cc.ccp(0, size.height / 2 - 32));
+    UILayer.setPosition(cc.ccp(0, size.height / 2 - 64));
     text.setPosition(cc.ccp(size.width / 2, 64));
     text.addText("Game ", "BigBlocko", 70, cc.ccc3(0xff, 0, 0));
     text.addText("Start", "BigBlocko", 70, cc.ccc3(0xff, 0, 0));

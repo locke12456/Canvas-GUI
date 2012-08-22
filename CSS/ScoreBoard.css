@@ -151,3 +151,71 @@ td.CoinText {
     height: 31px;
     width: 108px;
 }
+
+.RankingBoardDiv {
+    position: fixed;
+    border-collapse: collapse;
+    background-color: #a52a2a;
+    border: 2px solid black;
+    border-radius: 5px;
+    box-shadow: 0 5px 50px #333;
+    opacity: 0.8;
+    width: 420px;
+    height: 384px;
+    z-index: 3;
+}
+
+.RankingRank {
+    background-color: #000000;
+    border: 2px solid #ff0600;
+    border-radius: 5px;
+    font-family: BigBlocko;
+    font-size: 24px;
+    color: yellow;
+    width: 20%;
+}
+
+.RankingNickname {
+    background-color: #000000;
+    border: 2px solid #ff0600;
+    border-radius: 5px;
+    font-family: BigBlocko;
+    font-size: 24px;
+    color: yellow;
+    width: 50%;
+}
+
+.RankingScore {
+    background-color: #000000;
+    border: 2px solid #ff0600;
+    border-radius: 5px;
+    font-family: BigBlocko;
+    font-size: 24px;
+    color: yellow;
+    width: 30%;
+}
+
+.RankingRank:hover {
+    border: 2px solid yellow;
+    color: white;
+}
+
+.RankingNickname:hover {
+    border: 2px solid yellow;
+    color: white;
+}
+
+.RankingScore:hover {
+    border: 2px solid yellow;
+    color: white;
+}
+
+table.RankingBoard {
+    left: 10px;
+    top: 32px;
+    width: 400px;
+    position: absolute;
+
+}
+
+

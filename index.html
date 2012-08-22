@@ -10,9 +10,11 @@
 <script src="jquery.min.js"></script>
 <script src="cocos2d.js"></script>
 <script type="text/javascript">
+    var STATIC_HOST = "Rank/";
     $(function () {
         center("canvas");
         center("ScoreCalc");
+        center("Ranking");
         setPostion("Score", $("#canvas").css("left"), $("#canvas").css("top"));
         var x = parseInt($("#canvas").css("left")) + 20;
         var y = parseInt($("#canvas").css("top")) - 6;
@@ -31,6 +33,10 @@
         $("#Coin").hide();
 
         $("#ScoreCalc").hide();
+
+        //$("#RankingTable").append('<tr id="Ranking_T2"><td class="RankingRank">001</td><td class="RankingNickname">Guest000000</td><td class="RankingScore">700</td></tr>');
+        //var a = $("#Ranking_T2").children('td');
+        //a[0].textContent="002";
     });
     function setPostion(id, offsetX, offsetY) {
         var item = $('#' + id);
@@ -63,6 +69,11 @@
 <div id="canvas"
      style="display:inline-block;height:400px; position: fixed; border-collapse: collapse; border:3px solid black; border-radius: 5px; box-shadow: 0 5px 50px #333;z-index:1">
     <canvas id="gameCanvas" width="550" height="400"></canvas>
+</div>
+<div id="Ranking" class="RankingBoardDiv">
+    <table id="RankingTable" class="RankingBoard">
+
+    </table>
 </div>
 <div id="ScoreCalc" class="ScoreCalcBoard">
     <p class="HeaderText">Your Score</p>
