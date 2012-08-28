@@ -5,7 +5,7 @@
 	
 	$gid = !empty($_POST['gid'])?$_POST['gid']:null;
 	$uid = !empty($_POST['uid'])?$_POST['uid']:null;//time()%100000;
-	$nickname = !empty($_POST['nickname'])?$_POST['nickname']:null;//'Guest'.(time()%100000);
+	$nickname = !empty($_POST['nickname'])?$_POST['nickname']:'null';//'Guest'.(time()%100000);
 	$total = !empty($_POST['total'])?$_POST['total']:null;
 	$score = !empty($_POST['score'])?$_POST['score']:null;
 	/*
@@ -16,6 +16,6 @@
 	$score = !empty($_GET['score'])?$_GET['score']:null;*/
 	$rank = new Ranking();
 	//print_r($_GET);
-	echo $uid;
+	//echo $uid;
 	$rank->UpdateScore($gid, $uid, $nickname, $total, $score);
 ?>

@@ -11,6 +11,9 @@ include('Graphic/com/include.js');
 include('src/rules.js');
 include('io.js');
 //19
+var TotalScore = TotalScore || 0;
+var Record = Record || "";
+
 var ProcessManager = cc.Layer.extend({
     TTFText:null,
     Level:-1,
@@ -201,6 +204,8 @@ var Main = ProcessManager.extend({
 });
 //Main.bIsMouseDown = null;
 Main.prototype.initLayer = function () {
+
+    //cc.AudioManager.sharedEngine().playEffect("Audio/bounce.mp3");
     var size = this.size = cc.Director.sharedDirector().getWinSize();
     var backgroundLayer = this.createDinamicLayer("backgroundLayer");
     this.scoreBoard = new ScoreBoard(0, 30);

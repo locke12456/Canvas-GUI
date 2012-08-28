@@ -85,6 +85,10 @@ cc.loadjs = function (filename) {
                 {type:"image", src:"src/Image/PowerBar/bar.png"},
                 {type:"image", src:"src/Image/PowerBar/cover.png"},
                 {type:"image", src:"src/Image/PowerBar/mask.png"}
+
+                //{type:"effect", src:"Audio/bounce.mp3"}
+                /*{type:"effect", src:"Audio/shoot_in.mp3"},
+                 {type:"effect", src:"Audio/sink.mp3"}*/
             ]);
         }
     };

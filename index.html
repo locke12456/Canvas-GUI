@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
-    <title>Cocos2d-HTML5 Hello World</title>
+    <title>Sport Game Basketball</title>
 </head>
 <link rel="stylesheet" type="text/css" href="CSS/ScoreBoard.css"/>
 <body style="text-align: center;background: #f2f6f8;">
@@ -15,6 +15,7 @@
         center("canvas");
         center("ScoreCalc");
         center("Ranking");
+        center("SetNickname");
         setPostion("Score", $("#canvas").css("left"), $("#canvas").css("top"));
         var x = parseInt($("#canvas").css("left")) + 20;
         var y = parseInt($("#canvas").css("top")) - 6;
@@ -26,17 +27,12 @@
         x = parseInt($("#canvas").css("left")) + parseInt($("#canvas").width()) - parseInt($("#Coin").width()) - 15;
         y = parseInt($("#canvas").css("top")) + parseInt($("#canvas").height()) - parseInt($("#Coin").height()) - 5;
         setPostion("Coin", x, y);
-
         setPostion("CoinText", x + 17, y - 8);
-
         $("#Score").hide();
         $("#Coin").hide();
-
+        $("#Ranking").hide();
         $("#ScoreCalc").hide();
-
-        //$("#RankingTable").append('<tr id="Ranking_T2"><td class="RankingRank">001</td><td class="RankingNickname">Guest000000</td><td class="RankingScore">700</td></tr>');
-        //var a = $("#Ranking_T2").children('td');
-        //a[0].textContent="002";
+        $("#SetNickname").hide();
     });
     function setPostion(id, offsetX, offsetY) {
         var item = $('#' + id);
@@ -68,7 +64,19 @@
 </script>
 <div id="canvas"
      style="display:inline-block;height:400px; position: fixed; border-collapse: collapse; border:3px solid black; border-radius: 5px; box-shadow: 0 5px 50px #333;z-index:1">
+    <div id="SetNickname" class="SetNickname">
+        <table class="SetNicknameInput">
+            <tr>
+                <td class="RankingNickname" style="width: 100%;font-size: 16px;">暱稱：<input id="Input">
+                    <button class="SetNicknameButton" onclick="Ranking.UpdateScore()">確定</button>
+                </td>
+            </tr>
+        </table>
+    </div>
     <canvas id="gameCanvas" width="550" height="400"></canvas>
+</div>
+<div>
+    <audio id="bounce" src="Audio/bounce.mp3"></audio>
 </div>
 <div id="Ranking" class="RankingBoardDiv">
     <table id="RankingTable" class="RankingBoard">

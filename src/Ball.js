@@ -6,6 +6,17 @@
  * To change this template use File | Settings | File Templates.
  */
 var Graphic = Graphic = Graphic || {};
+var Sound_On = false;
+var Bounce = document.createElement('audio');
+Bounce.setAttribute('src', 'Audio/bounce.mp3');
+var Sink = document.createElement('audio');
+Sink.setAttribute('src', 'Audio/sink.mp3');
+var Miss = document.createElement('audio');
+Miss.setAttribute('src', 'Audio/sink02.mp3');
+var Swish = document.createElement('audio');
+Swish.setAttribute('src', 'Audio/swish.mp3');
+var Shoot = document.createElement('audio');
+Shoot.setAttribute('src', 'Audio/shoot_in.mp3');
 var Ball = Graphic.Sprite.extend({
     shooting:[],
     miss:[],
@@ -14,6 +25,7 @@ var Ball = Graphic.Sprite.extend({
     BallPosition:null,
     shootIndex:0,
     shift:0,
+    SinkSpeed:0,
     gravity:0,
     basket:null,
     complete:true,
@@ -39,15 +51,19 @@ var Ball = Graphic.Sprite.extend({
         this.final = false;
         this.complete = true;
         this.ActionRunning = true;
+        this.SinkSpeed = Math.random() * 2 > 1.2 ? 1.0 : 0.4;
         this.IsSwish = !IsSwish ? false : IsSwish;
         this.shootIndex = parseInt(Math.random() * this.shooting.length);
+
         if (!miss) {
+            if (!IsSwish && this.SinkSpeed == 0.4)Graphic.Animation.Queue.add(new Graphic.Utils.Timer(0.2), Graphic.Animation.Dispatcher(this, null, Ball.SinkSoundPlay));
             this.shift = this.shooting[this.shootIndex][0].x < this.BallPosition.x ? 1 : -1;
             Graphic.Animation.Queue.add(cc.ScaleTo.create(0.6, 0.4, 0.4), Graphic.Animation.Dispatcher(this, Ball.onShooting, Ball.onShootComplete));
         } else {
             this.shift = this.miss[this.shootIndex % (this.miss.length - 1)][this.miss[this.shootIndex % (this.miss.length - 1)].length - 1].x > this.BallPosition.x ? 1 : -1;
             this.shootIndex %= (this.miss.length - 1);
             Graphic.Animation.Queue.add(cc.ScaleTo.create(0.4, 0.4, 0.4), Graphic.Animation.Dispatcher(this, Ball.onMiss, Ball.onMissComplete));
+            //Ball.SinkSoundPlay();
         }
     },
     update:function () {
@@ -61,6 +77,7 @@ var Ball = Graphic.Sprite.extend({
             if (this.y < Ball.BOTTON) {
                 this.y = Ball.BOTTON;
                 this.gravity *= -0.4;
+                Ball.BounceSoundPlay();
             }
             if (Math.abs(this.gravity) < 0.05) {
                 console.log(Math.abs(this.gravity));
@@ -173,10 +190,13 @@ Ball.onShootComplete = function (e) {
     e.target.x = point[point.length - 1].x;
     e.target.y = point[point.length - 1].y;
     if (!e.target.IsSwish) {
-        var speed = Math.random() * 2 > 1.2 ? 1.0 : 0.4;
-        if (speed == 1.0)
+        var speed = e.target.SinkSpeed;
+        if (speed == 1.0) {
+            Ball.SwishSoundPlay();
             Graphic.Animation.Queue.add(cc.RotateTo.create(speed, 720), Graphic.Animation.Dispatcher(e.target, Ball.onSink, Ball.onSinkComplete));
+        }
         else {
+            //Ball.SinkSoundPlay();
             e.target.shootIndex = 2;
             e.target.shift = 1;
             Graphic.Animation.Queue.add(cc.RotateTo.create(speed, 720), Graphic.Animation.Dispatcher(e.target, Ball.onSinkMiss, Ball.onMissComplete));
@@ -184,7 +204,9 @@ Ball.onShootComplete = function (e) {
     }
     else {
         Ball.onSinkComplete(e);
+        Ball.ShootSoundPlay();
     }
+
 };
 Ball.onSink = function (e) {
     var point = e.target.sink;
@@ -200,6 +222,8 @@ Ball.onSinkComplete = function (e) {
     e.target.gravity = -6;
     e.target.complete = false;
     e.target._callback(e.target._target, true);
+    Ball.SwishSoundPlay();
+    Ball.ShootSoundPlay();
 };
 Ball.onSinkMiss = function (e) {
     var point = e.target.miss[2];
@@ -213,8 +237,9 @@ Ball.onMiss = function (e) {
     var time = parseInt((point.length - 1) * e.target.elapsed);
     e.target.x = point[time].x;
     e.target.y = point[time].y;
-    if (e.target.elapsed > 0.8)
+    if (e.target.elapsed > 0.8) {
         e.target.basket.setRotation(1 - Math.random() * 2);
+    }
 };
 Ball.onMissComplete = function (e) {
     e.target.gravity = e.target.shootIndex == 2 ? 3.1 : -8;
@@ -223,6 +248,7 @@ Ball.onMissComplete = function (e) {
     e.target.x = point[point.length - 1].x;
     e.target.y = point[point.length - 1].y;
     e.target._callback(e.target._target, false);
+    Ball.MissSoundPlay();
 };
 
 Ball.onFinalUpdateComplete = function (e) {
@@ -244,3 +270,23 @@ Ball.onUpdateComplete = function (e) {
     e.target.setRotation(0);
     e.target.pauseSchedulerAndActions();
 };
+Ball.SinkSoundPlay = function (e) {
+    if (!Sound_On)return;
+    Sink.play();
+}
+Ball.ShootSoundPlay = function (e) {
+    if (!Sound_On)return;
+    Shoot.play();
+}
+Ball.SwishSoundPlay = function (e) {
+    if (!Sound_On)return;
+    Swish.play();
+}
+Ball.MissSoundPlay = function (e) {
+    if (!Sound_On)return;
+    Miss.play();
+}
+Ball.BounceSoundPlay = function (e) {
+    if (!Sound_On)return;
+    Bounce.play();
+}

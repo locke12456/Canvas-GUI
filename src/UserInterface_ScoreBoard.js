@@ -6,6 +6,8 @@
  * To change this template use File | Settings | File Templates.
  */
 //var ScoreBoard = ScoreBoard || {};
+var TotalScore = TotalScore || 0;
+var Record = Record || "";
 var ScoreBoard = cc.Class.extend({
     _addTime:0,
     time:0,
@@ -56,6 +58,7 @@ ScoreBoard.setTime = function (value) {
 ScoreBoard.setScore = function (value) {
     var item = $('#ScoreText');
     item.text(value);
+
 };
 ScoreBoard.getTargetValue = function (target) {
     var item = $('#' + target);
@@ -92,10 +95,16 @@ ScoreBoard.showCalcBoard = function () {
         Score:[ScoreBoard.Excellent, ScoreBoard.Normal, ScoreBoard.Normal, 0],
         now:0, nowScore:0};
     var target = ["ScoreExcellent", "ScoreGreat", "ScoreGood", "ScoreMiss", "ScoreTotal"];
+    var value = ["Excellent", "Great", "Good", "Miss"];
     that.show = target;
+    var record = {};
     for (var i = 0; i < target.length; i++) {
+        if (i < target.length)
+            record[value[i]] = that.value[i];
         $("#ScoreCalc_T" + (i + 1).toString()).hide();
     }
+    Record = JSON.stringify(record);
+    console.log(Record);
     $("#ScoreCalc").show();
     Graphic.Animation.Queue.add(new Graphic.Utils.Timer(0.5), Graphic.Animation.Dispatcher(that, null, ScoreBoard.NextTD));
     $('#ScoreCalc_T1').show();
@@ -151,8 +160,14 @@ ScoreBoard.onScoreCalcComplete = function (e) {
     that.nowScore += that.value[that.Index] * that.Score[that.Index];
     $('#ScoreTotal').text(Graphic.Utils.AutoZeros(2, that.nowScore, true));
     while (that.value[++that.Index] == 0 && that.Index < that.value.length);//console.log(that.Index);
-    if (that.Index < that.value.length)
+    if (that.Index < that.value.length) {
         Graphic.Animation.Queue.add(new Graphic.Utils.Timer(1), Graphic.Animation.Dispatcher(that, ScoreBoard.onScoreCalcUpdate, ScoreBoard.onScoreCalcComplete));
+    }
+    else {
+        TotalScore = parseInt(that.nowScore);
+        $("#SetNickname").show('slow');
+        $("#ScoreCalc").fadeOut(300);
+    }
 };
 
 ScoreBoard.NextTD = function (e) {

@@ -161,7 +161,7 @@ td.CoinText {
     box-shadow: 0 5px 50px #333;
     opacity: 0.8;
     width: 420px;
-    height: 384px;
+    height: 400px;
     z-index: 3;
 }
 
@@ -169,30 +169,80 @@ td.CoinText {
     background-color: #000000;
     border: 2px solid #ff0600;
     border-radius: 5px;
-    font-family: BigBlocko;
-    font-size: 24px;
+    font-family: Ni7;
+    font-size: 22px;
     color: yellow;
-    width: 20%;
+    width: 15%;
 }
 
 .RankingNickname {
     background-color: #000000;
     border: 2px solid #ff0600;
     border-radius: 5px;
-    font-family: BigBlocko;
+    font-family: Arial;
     font-size: 24px;
     color: yellow;
-    width: 50%;
+    width: 60%;
 }
 
 .RankingScore {
     background-color: #000000;
     border: 2px solid #ff0600;
     border-radius: 5px;
-    font-family: BigBlocko;
-    font-size: 24px;
+    font-family: Ni7;
+    font-size: 22px;
     color: yellow;
-    width: 30%;
+    width: 25%;
+}
+
+.RankingSRank {
+    background-color: red;
+    border: 2px solid black;
+    border-radius: 5px;
+    font-family: Ni7;
+    font-size: 22px;
+    color: white;
+    width: 15%;
+}
+
+.RankingSNickname {
+    background-color: red;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    font-family: Arial;
+    font-size: 24px;
+    color: white;
+    width: 60%;
+}
+
+.RankingSScore {
+    background-color: red;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    font-family: Ni7;
+    font-size: 22px;
+    color: white;
+    width: 25%;
+}
+
+.RankingTop9 {
+    background-color: red;
+    border: 2px solid white;
+    border-radius: 5px;
+    font-family: Arial;
+    font-size: 22px;
+    color: yellow;
+    width: 50%;
+}
+
+.RankingSelf {
+    background-color: red;
+    border: 2px solid white;
+    border-radius: 5px;
+    font-family: Arial;
+    font-size: 22px;
+    color: yellow;
+    width: 50%;
 }
 
 .RankingRank:hover {
@@ -210,12 +260,82 @@ td.CoinText {
     color: white;
 }
 
+.RankingSRank:hover {
+    border: 2px solid yellow;
+    color: white;
+}
+
+.RankingSNickname:hover {
+    border: 2px solid yellow;
+    color: white;
+}
+
+.RankingSScore:hover {
+    border: 2px solid yellow;
+    color: white;
+}
+
+.RankingTop9:hover {
+    background-color: #000000;
+    border: 2px solid red;
+    color: white;
+}
+
+.RankingSelf:hover {
+    background-color: #000000;
+    border: 2px solid red;
+    color: white;
+}
+
 table.RankingBoard {
     left: 10px;
-    top: 32px;
+    top: 38px;
     width: 400px;
     position: absolute;
+}
 
+.SetNickname {
+    position: fixed;
+    border-collapse: collapse;
+    background-color: #a52a2a;
+    border: 2px solid black;
+    border-radius: 5px;
+    box-shadow: 0 5px 50px #333;
+    opacity: 0.8;
+    z-index: 3;
+    height: 92px;
+    width: 284px;
+}
+
+.SetNicknameButton {
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 5px;
+    border-radius: 2px;
+
+    -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.6);
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.6);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.6);
+
+    background: -moz-linear-gradient(19% 75% 90deg, #FF4D01, #FF8924);
+
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FF8924), to(#FF4D01));
+
+    color: #fff;
+    font-family: arial, helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 6px 8px;
+}
+
+.SetNicknameButton:hover {
+    background: -moz-linear-gradient(19% 75% 90deg, #EB4701, #F58423);
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#F58423), to(#EB4701));
+}
+
+table.SetNicknameInput {
+    top: 24px;
+    width: 280px;
+    position: absolute;
 }
 
 
